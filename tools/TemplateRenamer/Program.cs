@@ -31,15 +31,15 @@
             }
 
             Console.WriteLine("Renaming directories...");
-            RenameDirectories(Environment.CurrentDirectory, oldName, newName);
+            RenameDirectories(@"D:\Programs\Repos\src", oldName, newName);
             Console.WriteLine("Directories renamed.");
 
             Console.WriteLine("Renaming files...");
-            RenameFiles(Environment.CurrentDirectory, oldName, newName);
+            RenameFiles(@"D:\Programs\Repos\src", oldName, newName);
             Console.WriteLine("Files renamed.");
 
             Console.WriteLine("Renaming file contents...");
-            RenameFileContents(Environment.CurrentDirectory, oldName, newName);
+            RenameFileContents(@"D:\Programs\Repos\src", oldName, newName);
             Console.WriteLine("File contents renamed.");
 
             Console.WriteLine("Done!");

@@ -5,14 +5,14 @@
     using System.IO;
     using System.Threading.Tasks;
 
-    using AspNetCoreTemplate.Data;
-    using AspNetCoreTemplate.Data.Common;
-    using AspNetCoreTemplate.Data.Common.Repositories;
-    using AspNetCoreTemplate.Data.Models;
-    using AspNetCoreTemplate.Data.Repositories;
-    using AspNetCoreTemplate.Data.Seeding;
-    using AspNetCoreTemplate.Services.Data;
-    using AspNetCoreTemplate.Services.Messaging;
+    using ShishaProject.Data;
+    using ShishaProject.Data.Common;
+    using ShishaProject.Data.Common.Repositories;
+    using ShishaProject.Data.Models;
+    using ShishaProject.Data.Repositories;
+    using ShishaProject.Data.Seeding;
+    using ShishaProject.Services.Data;
+    using ShishaProject.Services.Messaging;
 
     using CommandLine;
 
