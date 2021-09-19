@@ -18,4 +18,9 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\ShishaProject.Common\ShishaProject.Common.csproj" />
+    <ProjectReference Include="..\ShishaProject.Services.Data\ShishaProject.Services.Data.csproj" />
+  </ItemGroup>
+
 </Project>

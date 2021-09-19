@@ -5,10 +5,19 @@
     using ShishaProject.Web.ViewModels;
 
     using Microsoft.AspNetCore.Mvc;
+    using ShishaProject.Services.Interfaces;
+    using System.Threading.Tasks;
 
     public class HomeController : BaseController
     {
-        public IActionResult Index()
+        private readonly IProductsService productsService;
+
+        public HomeController(IProductsService productsService)
+        {
+            this.productsService = productsService;
+        }
+
+        public async Task<IActionResult> Index()
         {
             return this.View();
         }

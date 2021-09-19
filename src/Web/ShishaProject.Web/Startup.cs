@@ -21,6 +21,9 @@
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
+    using ShishaProject.Services.Interfaces;
+    using ExampleAPIClient.Client;
+    using ShishaProject.Services;
 
     public class Startup
     {
@@ -65,6 +68,12 @@
             // Application services
             services.AddTransient<IEmailSender, NullMessageSender>();
             services.AddTransient<ISettingsService, SettingsService>();
+
+            //Http
+            services.AddTransient<IRestClient, RestClient>();
+
+            //Products
+            services.AddTransient<IProductsService, ProductsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
