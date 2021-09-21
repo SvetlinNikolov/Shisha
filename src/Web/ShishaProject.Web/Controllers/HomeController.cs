@@ -7,6 +7,7 @@
     using Microsoft.AspNetCore.Mvc;
     using ShishaProject.Services.Interfaces;
     using System.Threading.Tasks;
+    using System.Net.NetworkInformation;
 
     public class HomeController : BaseController
     {
@@ -19,6 +20,7 @@
 
         public async Task<IActionResult> Index()
         {
+            var prods = await this.productsService.GetAllCategories();
             return this.View();
         }
 

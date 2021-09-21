@@ -1,18 +1,9 @@
 ﻿namespace ShishaProject.Web
 {
+    using System.IO;
     using System.Reflection;
 
-    using ShishaProject.Data;
-    using ShishaProject.Data.Common;
-    using ShishaProject.Data.Common.Repositories;
-    using ShishaProject.Data.Models;
-    using ShishaProject.Data.Repositories;
-    using ShishaProject.Data.Seeding;
-    using ShishaProject.Services.Data;
-    using ShishaProject.Services.Mapping;
-    using ShishaProject.Services.Messaging;
-    using ShishaProject.Web.ViewModels;
-
+    using ExampleAPIClient.Client;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
@@ -21,17 +12,31 @@
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
-    using ShishaProject.Services.Interfaces;
-    using ExampleAPIClient.Client;
+    using ShishaProject.Data;
+    using ShishaProject.Data.Common;
+    using ShishaProject.Data.Common.Repositories;
+    using ShishaProject.Data.Models;
+    using ShishaProject.Data.Repositories;
+    using ShishaProject.Data.Seeding;
     using ShishaProject.Services;
+    using ShishaProject.Services.Data;
+    using ShishaProject.Services.Data.Models.Configs;
+    using ShishaProject.Services.Interfaces;
+    using ShishaProject.Services.Mapping;
+    using ShishaProject.Services.Messaging;
+    using ShishaProject.Web.ViewModels;
 
     public class Startup
     {
         private readonly IConfiguration configuration;
 
-        public Startup(IConfiguration configuration)
+        public Startup()
         {
-            this.configuration = configuration;
+            this.configuration = new ConfigurationBuilder()
+          .SetBasePath(Directory.GetCurrentDirectory())
+          .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+          .AddJsonFile("endpoints.json", optional: false, reloadOnChange: false)
+          .Build();
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -65,14 +70,18 @@
             services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
             services.AddScoped<IDbQueryRunner, DbQueryRunner>();
 
+            // Config Registration
+            services.AddOptions();
+            services.Configure<EndpointConfig>(this.configuration.GetSection("Endpoints"));
+
             // Application services
             services.AddTransient<IEmailSender, NullMessageSender>();
             services.AddTransient<ISettingsService, SettingsService>();
 
-            //Http
-            services.AddTransient<IRestClient, RestClient>();
+            // Http
+            services.AddTransient<IRestClient, RestClientService>();
 
-            //Products
+            // Products
             services.AddTransient<IProductsService, ProductsService>();
         }
 

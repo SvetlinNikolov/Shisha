@@ -1,5 +1,4 @@
-﻿
-namespace ExampleAPIClient.Client
+﻿namespace ExampleAPIClient.Client
 {
     using System;
     using System.Collections.Generic;
@@ -14,13 +13,13 @@ namespace ExampleAPIClient.Client
     using ShishaProject.Common.Utils;
     using ShishaProject.Services.Interfaces;
 
-    public class RestClient : HttpClient, IRestClient
+    public class RestClientService : HttpClient, IRestClient
     {
         private string baseUri = "http://shisha_project.localhost/api/";
 
         private TokenResponse token;
 
-        public RestClient()
+        public RestClientService()
         {
             this.token = new TokenResponse();
             this.InitializeTlsProtocol();
@@ -30,11 +29,11 @@ namespace ExampleAPIClient.Client
         {
             await this.SetTokenAsync();
 
-            DefaultRequestHeaders.Clear();
-            DefaultRequestHeaders.CacheControl = new CacheControlHeaderValue() { NoCache = true };
-            DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token.AccessToken);
+            this.DefaultRequestHeaders.Clear();
+            this.DefaultRequestHeaders.CacheControl = new CacheControlHeaderValue() { NoCache = true };
+            this.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token.AccessToken);
 
-            using (HttpResponseMessage response = await this.GetAsync(RestClientUtils.AddQueryString(baseUri + url, query)))
+            using (HttpResponseMessage response = await this.GetAsync(RestClientUtils.AddQueryString(this.baseUri + url, query)))
             {
                 if (response.IsSuccessStatusCode)
                 {
@@ -66,15 +65,15 @@ namespace ExampleAPIClient.Client
 
         public async Task<T> PostAsync<T>(string url, string data)
         {
-            await SetTokenAsync();
+            await this.SetTokenAsync();
 
-            DefaultRequestHeaders.Clear();
-            DefaultRequestHeaders.CacheControl = new CacheControlHeaderValue() { NoCache = true };
-            DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token.AccessToken);
+            this.DefaultRequestHeaders.Clear();
+            this.DefaultRequestHeaders.CacheControl = new CacheControlHeaderValue() { NoCache = true };
+            this.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", this.token.AccessToken);
 
             var content = new StringContent(data, Encoding.UTF8, "application/json");
 
-            using (HttpResponseMessage response = await PostAsync(baseUri + url, content))
+            using (HttpResponseMessage response = await this.PostAsync(this.baseUri + url, content))
             {
                 if (response.IsSuccessStatusCode)
                 {
@@ -112,14 +111,14 @@ namespace ExampleAPIClient.Client
         public async Task SetTokenAsync()
         {
             return;
-            if (token == null || token.Expiration > DateTime.Now)
+            if (this.token == null || this.token.Expiration > DateTime.Now)
             {
-                DefaultRequestHeaders.Clear();
-                DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", "SOME CREDENTIAL SCHEME");
+                this.DefaultRequestHeaders.Clear();
+                this.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", "SOME CREDENTIAL SCHEME");
 
                 var content = new StringContent("grant_type=client_credentials", Encoding.UTF8, "application/x-www-form-urlencoded");
 
-                using (HttpResponseMessage response = await PostAsync(baseUri + "/some-path-to-get/token", content))
+                using (HttpResponseMessage response = await this.PostAsync(this.baseUri + "/some-path-to-get/token", content))
                 {
                     if (response.IsSuccessStatusCode)
                     {

@@ -1,0 +1,9 @@
+{
+  "Endpoints": {
+    "GetAllFlavours": "get-all-flavours",
+    "GetFlavourByCategoryId": "get-by-category",
+    "GetFlavourById": "get-flavour-by-id",
+    "GetFlavoursByIds": "get-flavour-by-ids",
+    "GetAllCategories": "get-all-categories"
+  }
+}
