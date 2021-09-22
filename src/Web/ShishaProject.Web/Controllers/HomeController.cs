@@ -1,13 +1,11 @@
 ﻿namespace ShishaProject.Web.Controllers
 {
     using System.Diagnostics;
-
-    using ShishaProject.Web.ViewModels;
+    using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Mvc;
     using ShishaProject.Services.Interfaces;
-    using System.Threading.Tasks;
-    using System.Net.NetworkInformation;
+    using ShishaProject.Web.ViewModels;
 
     public class HomeController : BaseController
     {
@@ -20,7 +18,7 @@
 
         public async Task<IActionResult> Index()
         {
-            var prods = await this.productsService.GetAllCategories();
+            var prods = await this.productsService.GetAllFlavours();
             return this.View();
         }
 

@@ -6,7 +6,7 @@
 
     public class ProductsFlavoursDto
     {
-        [JsonProperty("data")]
+        [JsonProperty("flavours")]
         public IEnumerable<ProductFlavourDto> Flavours { get; set; }
     }
 }
