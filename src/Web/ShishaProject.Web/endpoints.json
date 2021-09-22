@@ -1,5 +1,6 @@
 {
   "Endpoints": {
+    "BaseUri": "http://shisha_project.localhost/api/",
     "GetAllFlavours": "get-all-flavours",
     "GetFlavourByCategoryId": "get-by-category",
     "GetFlavourById": "get-flavour-by-id",

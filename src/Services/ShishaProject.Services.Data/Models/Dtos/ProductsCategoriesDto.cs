@@ -8,6 +8,9 @@
 
     public class ProductsCategoriesDto
     {
+        [JsonProperty("status")]
+        public int Status { get; set; }
+
         [JsonProperty("categories")]
         public IEnumerable<ProductCategoryDto> Categories { get; set; }
     }
