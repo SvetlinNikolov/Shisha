@@ -2,33 +2,27 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.IO;
     using System.Net;
     using System.Net.Http;
     using System.Net.Http.Headers;
     using System.Text;
     using System.Threading.Tasks;
-    using Microsoft.Extensions.Options;
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Linq;
     using ShishaProject.Common.ExtensionMethods;
     using ShishaProject.Common.Utils;
-    using ShishaProject.Services.Data.Models.Configs;
     using ShishaProject.Services.Interfaces;
 
     public class RestClientService : HttpClient, IRestClient
     {
-
-        private readonly IOptions<EndpointConfig> endpointConfig;
         private string baseUri;
         private TokenResponse token;
 
-        public RestClientService(IOptions<EndpointConfig> endpointConfig)
+        public RestClientService()
         {
             this.token = new TokenResponse();
             this.InitializeTlsProtocol();
-            this.endpointConfig = endpointConfig;
-            this.baseUri = this.endpointConfig.Value.BaseUri;
+            this.baseUri = "http://shisha_project.localhost/api/";
         }
 
         public async Task<T> GetAsync<T>(string url, Dictionary<string, string> query)

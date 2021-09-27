@@ -1,16 +1,15 @@
-﻿using ShishaProject.Web.ViewModels.Users;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ShishaProject.Services.Interfaces
+﻿namespace ShishaProject.Services.Interfaces
 {
+    using System.Threading.Tasks;
+    using ShishaProject.Services.Data.Models.Dtos;
+    using ShishaProject.Web.ViewModels.Users;
+
     public interface IUsersService
     {
         //AuthenticateResponse Authenticate(AuthenticateRequest model);
         //IEnumerable<User> GetAll();
-        //User GetById(int id);
-        void Register(RegistrationInputModel model);
+        Task<UserDto> GetUserByIdAsync(int id);
+        Task<bool> RegisterUserAsync(RegistrationInputModel user);
         //void Update(int id, UpdateRequest model);
         //void Delete(int id);
     }

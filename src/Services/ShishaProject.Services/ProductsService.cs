@@ -7,19 +7,19 @@
     using Microsoft.Extensions.Options;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Linq;
+    using ShishaProject.Common.Helpers;
     using ShishaProject.Services.Data.Models.Configs;
     using ShishaProject.Services.Data.Models.Dtos;
-    using ShishaProject.Services.Data.Models.Dtos.Api;
     using ShishaProject.Services.Interfaces;
 
     public class ProductsService : IProductsService
     {
         private readonly IRestClient restClient;
-        private readonly IOptions<EndpointConfig> endpointConfig;
+        private readonly IOptions<ProductsEndpointsConfig> endpointConfig;
 
         public ProductsService(
             IRestClient restClient,
-            IOptions<EndpointConfig> endpointConfig)
+            IOptions<ProductsEndpointsConfig> endpointConfig)
         {
             this.restClient = restClient;
             this.endpointConfig = endpointConfig;
@@ -37,7 +37,7 @@
 
         public async Task<ProductsFlavoursDto> GetFlavoursByCategoryId(int categoryId)
         {
-            var json = JsonConvert.SerializeObject(new GetProductFlavourByCategoryIdRequest { CategoryId = categoryId });
+            var json = JsonHelper.SerializeToPhpApiFormat("category_id", categoryId);
 
             ProductsFlavoursDto dto = await this.restClient
                 .PostAsync<ProductsFlavoursDto>(
@@ -49,7 +49,7 @@
 
         public async Task<ProductFlavourDto> GetFlavourById(int flavourId)
         {
-            var json = JsonConvert.SerializeObject(new GetProductFlavourRequest { FlavourId = flavourId });
+            var json = JsonHelper.SerializeToPhpApiFormat("id", flavourId);
 
             JObject result = await this.restClient
                 .PostAsync<JObject>(

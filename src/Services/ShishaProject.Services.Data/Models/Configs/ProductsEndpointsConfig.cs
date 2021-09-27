@@ -1,13 +1,7 @@
 ﻿namespace ShishaProject.Services.Data.Models.Configs
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Text;
-
-    public class EndpointConfig
+    public class ProductsEndpointsConfig
     {
-        public string BaseUri { get; set; }
-
         public string GetAllFlavours { get; set; }
 
         public string GetFlavourByCategoryId { get; set; }

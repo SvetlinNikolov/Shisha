@@ -1,5 +1,6 @@
 ﻿namespace ShishaProject.Web
 {
+    using System;
     using System.IO;
     using System.Reflection;
 
@@ -36,6 +37,7 @@
           .SetBasePath(Directory.GetCurrentDirectory())
           .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
           .AddJsonFile("productsEndpoints.json", optional: false, reloadOnChange: false)
+          .AddJsonFile("usersEndpoints.json", optional: false, reloadOnChange: false)
           .Build();
         }
 
@@ -72,7 +74,8 @@
 
             // Config Registration
             services.AddOptions();
-            services.Configure<EndpointConfig>(this.configuration.GetSection("Endpoints"));
+            services.Configure<ProductsEndpointsConfig>(this.configuration.GetSection("Endpoints"));
+            services.Configure<UsersEndpointsConfig>(this.configuration.GetSection("Endpoints"));
 
             // Application services
             services.AddTransient<IEmailSender, NullMessageSender>();
@@ -85,7 +88,7 @@
             services.AddTransient<IProductsService, ProductsService>();
 
             //Users
-            services.AddTransient<IUserService, UsersService>();
+            services.AddTransient<IUsersService, UsersService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

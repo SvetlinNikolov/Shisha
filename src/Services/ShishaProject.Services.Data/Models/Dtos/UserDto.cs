@@ -1,10 +1,12 @@
-﻿namespace ShishaProject.Web.ViewModels.Users
+﻿namespace ShishaProject.Services.Data.Models.Dtos
 {
     using System;
+    using System.Collections.Generic;
+    using System.Text;
 
     using Newtonsoft.Json;
 
-    public class RegistrationInputModel
+    public class UserDto
     {
         [JsonProperty("username")]
         public string Username { get; set; }
@@ -14,9 +16,6 @@
 
         [JsonProperty("last_name")]
         public string LastName { get; set; }
-
-        [JsonProperty("password")]
-        public string Password { get; set; }
 
         [JsonProperty("email")]
         public string Email { get; set; }

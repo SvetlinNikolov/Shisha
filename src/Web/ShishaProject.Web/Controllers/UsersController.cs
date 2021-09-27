@@ -1,12 +1,10 @@
 ﻿namespace ShishaProject.Web.Controllers
 {
+    using System.Threading.Tasks;
+
     using Microsoft.AspNetCore.Mvc;
     using ShishaProject.Services.Interfaces;
     using ShishaProject.Web.ViewModels.Users;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
 
     public class UsersController : BaseController
     {
@@ -17,14 +15,16 @@
             this.usersService = usersService;
         }
 
-        public IActionResult Register(RegistrationInputModel inputModel)
+        public async Task<IActionResult> RegisterUser(RegistrationInputModel inputModel)
         {
             if (!this.ModelState.IsValid)
             {
                 return this.View(inputModel);
             }
-            return null;
 
+            var result = await this.usersService.RegisterUserAsync(inputModel);
+
+            return this.View();
         }
     }
 }

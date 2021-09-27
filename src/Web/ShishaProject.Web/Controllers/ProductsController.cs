@@ -10,10 +10,11 @@
     public class ProductsController : BaseController
     {
         private readonly IProductsService productsService;
-        private readonly IUserService userService;
+        private readonly IUsersService userService;
 
-        public ProductsController(IProductsService productsService,
-            IUserService userService)
+        public ProductsController(
+            IProductsService productsService,
+            IUsersService userService)
         {
             this.productsService = productsService;
             this.userService = userService;
@@ -21,7 +22,7 @@
 
         public async Task<IActionResult> Index()
         {
-            this.userService.RegisterUser(null);
+            return this.RedirectToAction("RegisterUser", "Users");
             var products = await this.productsService.GetFlavoursByCategoryId(176);
             return this.View();
         }

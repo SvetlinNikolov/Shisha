@@ -1,68 +1,54 @@
 ﻿namespace ShishaProject.Services
 {
     using System;
-    using System.Collections.Generic;
-    using System.Text;
     using System.Threading.Tasks;
+    using Microsoft.Extensions.Options;
     using Newtonsoft.Json;
+    using ShishaProject.Common.Helpers;
+    using ShishaProject.Services.Data.Models.Configs;
+    using ShishaProject.Services.Data.Models.Dtos;
     using ShishaProject.Services.Interfaces;
+    using ShishaProject.Web.ViewModels.Users;
 
-    public class UsersService : IUserService
+    public class UsersService : IUsersService
     {
-        private const string endpoint = "users/register-user";
         private readonly IRestClient restClient;
+        private readonly IOptions<UsersEndpointsConfig> endpointConfig;
 
-        public UsersService(IRestClient restClient)
+        public UsersService(
+            IRestClient restClient,
+            IOptions<UsersEndpointsConfig> endpointConfig)
         {
             this.restClient = restClient;
+            this.endpointConfig = endpointConfig;
         }
 
-        public async Task RegisterUser(dynamic user)
+        public async Task<UserDto> GetUserByIdAsync(int id)
         {
-            var myModel = new RegisterModel
+            var user = await this.restClient.PostAsync<UserDto>(this.endpointConfig.Value.GetUserById, JsonHelper.SerializeToPhpApiFormat("user_id", id));
+
+            return user;
+        }
+
+        public async Task<bool> RegisterUserAsync(RegistrationInputModel user)
+        {
+            var myModel = new RegistrationInputModel
             {
                 Address = "na ulicata",
                 City = "flowers",
-                CreatedAt = DateTime.Now.ToString(),
-                Email = "daxtera@abv.bg",
-                FirstName = "dasx",
-                LastName = "peshov",
+                CreatedAt = DateTime.Now,
+                Email = "daxtera1@abv.bg",
+                FirstName = "das123x1",
+                LastName = "pe123shov",
                 Password = "super heshirana parola",
-                Username = "daxterr"
+                Username = "daxterr1123",
+                PhoneNumber = "0876444918",
             };
 
-            var arr = new RegisterModelArr { UserData = myModel };
-
             var result = await this.restClient
-                .PostAsync<dynamic>(endpoint, JsonConvert.SerializeObject(arr));
+                .PostAsync<dynamic>(this.endpointConfig.Value.RegisterUser, JsonHelper.SerializeToPhpApiFormat("user_data", myModel));
+
+            return true;
         }
-    }
-    class RegisterModel
-    {
-        [JsonProperty("username")]
-        public string Username { get; set; }
-
-        [JsonProperty("first_name")]
-        public string FirstName { get; set; }
-
-        [JsonProperty("last_name")]
-        public string LastName { get; set; }
-        [JsonProperty("password")]
-        public string Password { get; set; }
-        [JsonProperty("email")]
-        public string Email { get; set; }
-        [JsonProperty("city")]
-        public string City { get; set; }
-
-        [JsonProperty("address")]
-        public string Address { get; set; }
-
-        [JsonProperty("created_at")]
-        public string CreatedAt { get; set; }
-    }
-    class RegisterModelArr
-    {
-        [JsonProperty("user_data")]
-        public RegisterModel UserData { get; set; }
     }
 }

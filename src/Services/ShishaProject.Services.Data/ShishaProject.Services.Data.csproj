@@ -22,6 +22,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Data\ShishaProject.Data.Common\ShishaProject.Data.Common.csproj" />
     <ProjectReference Include="..\..\Data\ShishaProject.Data.Models\ShishaProject.Data.Models.csproj" />
+    <ProjectReference Include="..\..\ShishaProject.Common\ShishaProject.Common.csproj" />
     <ProjectReference Include="..\ShishaProject.Services.Mapping\ShishaProject.Services.Mapping.csproj" />
   </ItemGroup>
 
