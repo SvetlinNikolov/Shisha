@@ -1,6 +1,7 @@
 ﻿namespace ShishaProject.Services
 {
     using System.Linq;
+    using System.Net;
     using System.Threading.Tasks;
 
     using Microsoft.Extensions.Options;
@@ -42,7 +43,7 @@
                 .PostAsync<ProductsFlavoursDto>(
                     this.endpointConfig.Value.GetFlavourByCategoryId,
                     json);
-            //todo make Service that handles status codes
+
             return dto;
         }
 

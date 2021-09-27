@@ -18,7 +18,7 @@
 
         public async Task<IActionResult> Index()
         {
-            var products = await this.productsService.GetFlavoursByCategoryId(176);
+            var products = await this.productsService.GetFlavoursByCategoryId(1);
             return this.View();
         }
     }

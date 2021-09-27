@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\ShishaProject.Common\ShishaProject.Common.csproj" />
+    <ProjectReference Include="..\..\Web\ShishaProject.Web.ViewModels\ShishaProject.Web.ViewModels.csproj" />
     <ProjectReference Include="..\ShishaProject.Services.Data\ShishaProject.Services.Data.csproj" />
   </ItemGroup>
 
