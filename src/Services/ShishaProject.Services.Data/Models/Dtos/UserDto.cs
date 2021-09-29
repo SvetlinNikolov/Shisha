@@ -2,14 +2,20 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     using System.Text;
 
     using Newtonsoft.Json;
 
     public class UserDto
     {
+        [Required]
         [JsonProperty("username")]
         public string Username { get; set; }
+
+        [Required]
+        [JsonProperty("password")]
+        public string Password { get; set; }
 
         [JsonProperty("first_name")]
         public string FirstName { get; set; }

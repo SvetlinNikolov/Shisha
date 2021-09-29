@@ -25,9 +25,24 @@
 
         public async Task<UserDto> GetUserByIdAsync(int id)
         {
-            var user = await this.restClient.PostAsync<UserDto>(this.endpointConfig.Value.GetUserById, JsonHelper.SerializeToPhpApiFormat("user_id", id));
+            var user = await this.restClient
+                .PostAsync<UserDto>(this.endpointConfig.Value.GetUserById, JsonHelper.SerializeToPhpApiFormat("user_id", id));
 
             return user;
+        }
+
+        public async Task<bool> LoginUserAsync(UserDto model)
+        {
+            var myModel = new UserDto
+            {
+                Password = "super heshirana parola",
+                Username = "daxterr1123",
+            };
+
+            var result = await this.restClient
+              .PostAsync<UserDto>(this.endpointConfig.Value.LoginUser, JsonConvert.SerializeObject(myModel));
+
+            return true;
         }
 
         public async Task<bool> RegisterUserAsync(RegistrationInputModel user)
@@ -37,8 +52,8 @@
                 Address = "na ulicata",
                 City = "flowers",
                 CreatedAt = DateTime.Now,
-                Email = "daxtera1@abv.bg",
-                FirstName = "das123x1",
+                Email = "daxtera1123@abv.bg",
+                FirstName = "das123x11",
                 LastName = "pe123shov",
                 Password = "super heshirana parola",
                 Username = "daxterr1123",
@@ -46,7 +61,7 @@
             };
 
             var result = await this.restClient
-                .PostAsync<dynamic>(this.endpointConfig.Value.RegisterUser, JsonHelper.SerializeToPhpApiFormat("user_data", myModel));
+                .PostAsync<UserDto>(this.endpointConfig.Value.RegisterUser, JsonHelper.SerializeToPhpApiFormat("user_data", myModel));
 
             return true;
         }

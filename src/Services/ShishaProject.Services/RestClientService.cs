@@ -65,7 +65,7 @@
             {
                 if (response.IsSuccessStatusCode)
                 {
-                    return await response.Content.ReadAsAsync<T>();
+                    return await response.Content.Validate().ReadAsAsync<T>();
                 }
 
                 throw new Exception(response.ReasonPhrase);

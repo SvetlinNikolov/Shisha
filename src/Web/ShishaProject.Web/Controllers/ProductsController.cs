@@ -22,7 +22,7 @@
 
         public async Task<IActionResult> Index()
         {
-            return this.RedirectToAction("RegisterUser", "Users");
+            return this.RedirectToAction("LoginUser", "Users");
             var products = await this.productsService.GetFlavoursByCategoryId(176);
             return this.View();
         }

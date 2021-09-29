@@ -5,6 +5,8 @@
     using System.Net;
     using System.Text;
 
+    using Newtonsoft.Json;
+
     public class RestClientUtils
     {
         public static string AddQueryString(string uri, IDictionary<string, string> queryString)
