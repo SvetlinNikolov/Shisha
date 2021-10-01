@@ -5,6 +5,7 @@
     using System.Reflection;
 
     using ExampleAPIClient.Client;
+    using Microsoft.AspNetCore.Authentication.Cookies;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
@@ -50,10 +51,22 @@
             services.AddDefaultIdentity<ApplicationUser>(IdentityOptionsProvider.GetIdentityOptions)
                 .AddRoles<ApplicationRole>().AddEntityFrameworkStores<ApplicationDbContext>();
 
+            services.AddAuthentication(options =>
+            {
+                options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultSignOutScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            }).AddCookie(
+              CookieAuthenticationDefaults.AuthenticationScheme, (options) =>
+              {
+                  options.LoginPath = "/Users/LoginUser";
+                  options.LogoutPath = "/Users/LogoutUser";
+              });
+
             services.Configure<CookiePolicyOptions>(
                 options =>
                     {
-                        options.CheckConsentNeeded = context => true;
+                        options.CheckConsentNeeded = context => false;
                         options.MinimumSameSitePolicy = SameSiteMode.None;
                     });
 
@@ -87,7 +100,7 @@
             // Products
             services.AddTransient<IProductsService, ProductsService>();
 
-            //Users
+            // Users
             services.AddTransient<IUsersService, UsersService>();
         }
 

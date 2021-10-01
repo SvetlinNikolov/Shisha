@@ -2,13 +2,13 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics;
     using System.IO;
     using System.Net;
     using System.Net.Http;
     using System.Net.Http.Headers;
     using System.Text;
     using System.Threading.Tasks;
+
     using ShishaProject.Common.ExtensionMethods;
     using ShishaProject.Common.Utils;
     using ShishaProject.Services.Interfaces;
@@ -33,7 +33,7 @@
             {
                 if (response.IsSuccessStatusCode)
                 {
-                    return await response.Content.ReadAsAsync<T>();
+                    return await response.Content.Validate().ReadAsAsync<T>();
                 }
 
                 throw new Exception(response.ReasonPhrase);
@@ -48,7 +48,7 @@
             {
                 if (response.IsSuccessStatusCode)
                 {
-                    return await response.Content.ReadAsAsync<T>();
+                    return await response.Content.Validate().ReadAsAsync<T>();
                 }
 
                 throw new Exception(response.ReasonPhrase);
@@ -81,7 +81,7 @@
             {
                 if (response.IsSuccessStatusCode)
                 {
-                    return await response.Content.ReadAsAsync<T>();
+                    return await response.Content.Validate().ReadAsAsync<T>();
                 }
 
                 throw new Exception(response.ReasonPhrase);
@@ -92,11 +92,11 @@
         {
             await this.PrepairRequest();
 
-            using (HttpResponseMessage response = await PutAsync(this.baseUri + url, new StreamContent(fs)))
+            using (HttpResponseMessage response = await this.PutAsync(this.baseUri + url, new StreamContent(fs)))
             {
                 if (response.IsSuccessStatusCode)
                 {
-                    return await response.Content.ReadAsAsync<T>();
+                    return await response.Content.Validate().ReadAsAsync<T>();
                 }
 
                 throw new Exception(response.ReasonPhrase);

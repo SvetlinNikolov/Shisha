@@ -5,7 +5,7 @@
     "GetUserById": "users/get-user-by-id",
     "RegisterUser": "users/register-user",
     "UpdateUser": "",
-    "LoginUser": "users/login-user",
+    "AuthenticateUser": "users/login-user",
     "DeleteUser": ""
   }
 }

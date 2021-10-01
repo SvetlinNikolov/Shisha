@@ -1,8 +1,12 @@
 ﻿namespace ShishaProject.Web.Controllers
 {
     using System;
+    using System.Collections.Generic;
+    using System.Security.Claims;
     using System.Threading.Tasks;
 
+    using Microsoft.AspNetCore.Authentication;
+    using Microsoft.AspNetCore.Authentication.Cookies;
     using Microsoft.AspNetCore.Mvc;
     using ShishaProject.Services.Data.Models.Dtos;
     using ShishaProject.Services.Interfaces;
@@ -21,15 +25,20 @@
         {
             if (!this.ModelState.IsValid)
             {
-                return this.View(inputModel);
+                throw new Exception("You didn't enter the needed stuff bruh");
             }
 
-            var result = await this.usersService.LoginUserAsync(inputModel);
+            var userAuthenticated = await this.usersService.AuthenticateUser(inputModel);
 
-            return this.View();
+            if (userAuthenticated)
+            {
+                await this.SignInUser(inputModel);
+            }
+
+            return this.Json("you have logged in");
         }
 
-        public async Task<IActionResult> RegisterUser(RegistrationInputModel inputModel)
+        public async Task<IActionResult> RegisterUserAsync(RegistrationInputModel inputModel)
         {
             if (!this.ModelState.IsValid)
             {
@@ -46,6 +55,18 @@
             var user = await this.usersService.GetUserByIdAsync(17);
 
             throw new Exception();
+        }
+
+        private async Task SignInUser(UserDto inputModel)
+        {
+            var claims = new List<Claim>
+                {
+                    new Claim(ClaimTypes.Name, inputModel.Username),
+                };
+
+            var claimsIdentity = new ClaimsIdentity(claims, "Login");
+
+            await this.HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
         }
     }
 }

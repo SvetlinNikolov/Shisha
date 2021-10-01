@@ -9,7 +9,7 @@
         [JsonProperty("status")]
         public int StatusCode { get; set; }
 
-        [JsonProperty("flavours")]
+        [JsonProperty("data")]
         public IEnumerable<ProductFlavourDto> Flavours { get; set; }
     }
 }

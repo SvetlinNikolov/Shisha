@@ -10,6 +10,6 @@
 
         public string UpdateUser { get; set; }
 
-        public string LoginUser { get; set; }
+        public string AuthenticateUser { get; set; }
     }
 }

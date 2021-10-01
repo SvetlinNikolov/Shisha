@@ -2,8 +2,10 @@
 {
     using System;
     using System.Threading.Tasks;
+
     using Microsoft.Extensions.Options;
     using Newtonsoft.Json;
+    using Newtonsoft.Json.Linq;
     using ShishaProject.Common.Helpers;
     using ShishaProject.Services.Data.Models.Configs;
     using ShishaProject.Services.Data.Models.Dtos;
@@ -25,13 +27,18 @@
 
         public async Task<UserDto> GetUserByIdAsync(int id)
         {
-            var user = await this.restClient
-                .PostAsync<UserDto>(this.endpointConfig.Value.GetUserById, JsonHelper.SerializeToPhpApiFormat("user_id", id));
+            var result = await this.restClient
+                .PostAsync<JObject>(
+                 this.endpointConfig.Value.GetUserById,
+                 JsonHelper.SerializeToPhpApiFormat("user_id", id));
+
+            var user = result.Value<JObject>("data")
+                .ToObject(typeof(UserDto)) as UserDto;
 
             return user;
         }
 
-        public async Task<bool> LoginUserAsync(UserDto model)
+        public async Task<bool> AuthenticateUser(UserDto model)
         {
             var myModel = new UserDto
             {
@@ -40,7 +47,7 @@
             };
 
             var result = await this.restClient
-              .PostAsync<UserDto>(this.endpointConfig.Value.LoginUser, JsonConvert.SerializeObject(myModel));
+              .PostAsync<UserDto>(this.endpointConfig.Value.AuthenticateUser, JsonConvert.SerializeObject(myModel));
 
             return true;
         }

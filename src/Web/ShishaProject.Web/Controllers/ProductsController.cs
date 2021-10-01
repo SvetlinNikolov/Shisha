@@ -23,8 +23,13 @@
         public async Task<IActionResult> Index()
         {
             return this.RedirectToAction("LoginUser", "Users");
-            var products = await this.productsService.GetFlavoursByCategoryId(176);
+            var products = await this.userService.GetUserByIdAsync(1);
             return this.View();
+        }
+
+        public IActionResult Index2()
+        {
+            return this.Json("lg g2 > sgs4");
         }
     }
 }
