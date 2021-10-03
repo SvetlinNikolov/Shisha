@@ -6,7 +6,7 @@
 
     public class ProductsFlavoursDto
     {
-        [JsonProperty("status")]
+        [JsonProperty("status_code")]
         public int StatusCode { get; set; }
 
         [JsonProperty("data")]

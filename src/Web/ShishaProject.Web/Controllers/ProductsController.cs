@@ -22,9 +22,9 @@
 
         public async Task<IActionResult> Index()
         {
-            return this.RedirectToAction("LoginUser", "Users");
-            var products = await this.userService.GetUserByIdAsync(1);
-            return this.View();
+            var products = await this.productsService.GetAllFlavours();
+
+            return this.View(products);
         }
 
         public IActionResult Index2()

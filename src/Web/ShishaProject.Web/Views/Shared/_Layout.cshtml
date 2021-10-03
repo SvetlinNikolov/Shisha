@@ -9,38 +9,57 @@
     <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
 
     @*custom css*@
-    <link href="~/css/font-awesome.min.css" rel="stylesheet" />
-    <link href="~/css/prettyPhoto.css" rel="stylesheet" />
-    <link href="~/css/price-range.css" rel="stylesheet" />
-    <link href="~/css/animate.css" rel="stylesheet" />
-    <link href="~/css/main.css" rel="stylesheet" />
-    <link href="~/css/responsive.css" rel="stylesheet" />
+
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">@GlobalConstants.SystemName</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
+        <nav>
+            <div class="mobile-navigation">
+                <a href="/">
+                    <img src="./assets/images/logo.png" alt="">
+                </a>
+
+                <button id="menu-icon">
+                    <img src="./assets/icons/menu.svg" alt="Open Menu">
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <partial name="_LoginPartial" />
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Settings" asp-action="Index">Settings</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
             </div>
+
+            <ul id="main-menu">
+                <li class="active">
+                    <a href="/">Home</a>
+                </li>
+
+                <li>
+                    <a href="./pages/shop.html">Shop</a>
+                </li>
+
+                <li class="logo">
+                    <a href="/">
+                        <img src="./assets/images/logo.png" alt="">
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/about-us">About Us</a>
+                </li>
+
+                <li>
+                    <a href="/contact-us">Contact Us</a>
+                </li>
+            </ul>
         </nav>
+
+        <a href="/cart" class="cart-section-container">
+            <div class="cart-icon-container">
+                <img src="./assets/icons/cart.svg" alt="">
+                <img src="./assets/icons/cart-hover.svg" alt="">
+                <span>Cart :</span>
+            </div>
+
+            <span class="cart-item-container">
+                0 items
+            </span>
+        </a>
     </header>
 
     <div class="container">
@@ -63,11 +82,6 @@
     <script src="~/js/site.min.js" asp-append-version="true"></script>
 
     @*custom js*@
-    <script src="~/js/price-range.js"></script>
-    <script src="~/js/jquery.scrollUp.min.js"></script>
-    <script src="~/js/bootstrap.min.js"></script>
-    <script src="~/js/jquery.prettyPhoto.js"></script>
-    <script src="~/js/main.js"></script>
 
     @await this.RenderSectionAsync("Scripts", required: false)
 </body>
