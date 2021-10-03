@@ -14,13 +14,10 @@
 </head>
 <body>
     <partial name="_Header" />
-
-    <div class="container">
         <partial name="_CookieConsentPartial" />
-        <main role="main" class="pb-3">
+        <main>
             @this.RenderBody()
         </main>
-    </div>
 
     <partial name="_Footer" />
 
@@ -36,6 +33,7 @@
     <script src="~/js/products.js" asp-append-version="true"></script>
     <script src="~/js/requests.js" asp-append-version="true"></script>
     <script src="~/js/search-bar.js" asp-append-version="true"></script>
+
     @await this.RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

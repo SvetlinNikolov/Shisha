@@ -50,4 +50,8 @@
     <ProjectReference Include="..\ShishaProject.Web.Infrastructure\ShishaProject.Web.Infrastructure.csproj" />
     <ProjectReference Include="..\ShishaProject.Web.ViewModels\ShishaProject.Web.ViewModels.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\fonts\" />
+  </ItemGroup>
 </Project>
