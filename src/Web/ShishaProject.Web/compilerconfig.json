@@ -1,0 +1,46 @@
+﻿[
+  {
+    "outputFile": "wwwroot/css/_shared.css",
+    "inputFile": "wwwroot/css/_shared.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/style.css",
+    "inputFile": "wwwroot/css/style.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/_layout.css",
+    "inputFile": "wwwroot/css/_layout.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/_search-bar.css",
+    "inputFile": "wwwroot/css/_search-bar.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/_products.css",
+    "inputFile": "wwwroot/css/_products.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/_product.css",
+    "inputFile": "wwwroot/css/_product.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/_home.css",
+    "inputFile": "wwwroot/css/_home.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/_hero.css",
+    "inputFile": "wwwroot/css/_hero.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/_header.css",
+    "inputFile": "wwwroot/css/_header.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/_footer.css",
+    "inputFile": "wwwroot/css/_footer.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/_action.css",
+    "inputFile": "wwwroot/css/_action.scss"
+  }
+]

@@ -1,0 +1,30 @@
+@font-face {
+  font-family: Overpass;
+  src: url(../fonts/Overpass/Overpass-Light.ttf);
+}
+
+@font-face {
+  font-family: Overpass;
+  src: url(../fonts/Overpass/Overpass-SemiBold.ttf);
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: 'Yeseva One';
+  src: url(../fonts/Yeseva_One/YesevaOne-Regular.ttf);
+}
+
+* {
+  font-size: 12px;
+  box-sizing: border-box;
+  font-family: Overpass;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  font-size: 70px;
+  font-family: 'Yeseva One', sans-serif;
+  font-weight: normal;
+  color: $text-light;
+}

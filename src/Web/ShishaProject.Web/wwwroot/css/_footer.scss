@@ -1,0 +1,121 @@
+footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: $secondary;
+
+  .footer-top {
+    display: flex;
+    justify-content: space-between;
+    max-width: 970px;
+    width: 100%;
+    padding: 30px 0;
+
+    p {
+      color: $text-light;
+      font-size: 16px;
+      font-weight: bold;
+      margin-bottom: 16px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid $primary;
+    }
+
+    ul {
+      list-style: none;
+      
+      li {
+        margin-bottom: 5px;
+
+        a {
+          color: darken($text-light, 15%);
+          text-decoration: none;
+
+          &:hover {
+            color: $text-light;
+          }
+        }
+      }
+    }
+  }
+
+  .footer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 30px 0;
+    max-width: 970px;
+    width: 100%;
+    border-top: 1px solid $primary;
+  
+    p {
+      color: darken($text-light, 15%);
+      font-size: 16px;
+    }
+  
+    .logo-footer-container {
+      img {
+        width: 160px;
+        opacity: 0.75;
+
+        &:hover {
+          opacity: 1;
+        }
+      }
+    }
+  
+    .social-icons-container {
+      a {
+        display: inline-block;
+        margin-left: 20px;
+  
+        img {
+          width: 20px;
+          height: 20px;
+  
+          &:last-of-type {
+            display: none;
+          }
+        }
+        
+        &:hover {
+          img {
+            &:first-child {
+              display: none;
+            }
+      
+            &:last-of-type {
+              display: block;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // Mobile responsiveness
+  @media (max-width: 1024px) {
+    padding: 0 30px;
+  }
+
+  @media (max-width: 767px) {
+    .footer-top {
+      flex-wrap: wrap;
+      justify-content: start;
+      padding-bottom: 0;
+      
+      .column {
+        padding: 0 30px 30px;
+      }
+    }
+
+    .footer-bottom {
+      flex-direction: column;
+
+      p {
+        margin: 30px 0;
+        text-align: center;
+      }
+    }
+  }
+}

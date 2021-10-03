@@ -9,58 +9,11 @@
     <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
 
     @*custom css*@
+    <link href="~/css/style.css" rel="stylesheet" />
 
 </head>
 <body>
-    <header>
-        <nav>
-            <div class="mobile-navigation">
-                <a href="/">
-                    <img src="./assets/images/logo.png" alt="">
-                </a>
-
-                <button id="menu-icon">
-                    <img src="./assets/icons/menu.svg" alt="Open Menu">
-                </button>
-            </div>
-
-            <ul id="main-menu">
-                <li class="active">
-                    <a href="/">Home</a>
-                </li>
-
-                <li>
-                    <a href="./pages/shop.html">Shop</a>
-                </li>
-
-                <li class="logo">
-                    <a href="/">
-                        <img src="./assets/images/logo.png" alt="">
-                    </a>
-                </li>
-
-                <li>
-                    <a href="/about-us">About Us</a>
-                </li>
-
-                <li>
-                    <a href="/contact-us">Contact Us</a>
-                </li>
-            </ul>
-        </nav>
-
-        <a href="/cart" class="cart-section-container">
-            <div class="cart-icon-container">
-                <img src="./assets/icons/cart.svg" alt="">
-                <img src="./assets/icons/cart-hover.svg" alt="">
-                <span>Cart :</span>
-            </div>
-
-            <span class="cart-item-container">
-                0 items
-            </span>
-        </a>
-    </header>
+    <partial name="_Header" />
 
     <div class="container">
         <partial name="_CookieConsentPartial" />
@@ -69,11 +22,7 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; @DateTime.Now.Year - @GlobalConstants.SystemName - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
+    <partial name="_Footer" />
 
     <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js" asp-append-version="true"></script>
@@ -82,7 +31,11 @@
     <script src="~/js/site.min.js" asp-append-version="true"></script>
 
     @*custom js*@
-
+    <script src="~/js/cart.js" asp-append-version="true"></script>
+    <script src="~/js/header.js" asp-append-version="true"></script>
+    <script src="~/js/products.js" asp-append-version="true"></script>
+    <script src="~/js/requests.js" asp-append-version="true"></script>
+    <script src="~/js/search-bar.js" asp-append-version="true"></script>
     @await this.RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
