@@ -40,6 +40,21 @@
             }
         }
 
+        public async Task<T> GetAsync<T>(string url, string language)
+        {
+            await this.PrepairRequest();
+
+            using (HttpResponseMessage response = await this.GetAsync(this.baseUri + url + RestClientUtils.AddQueryLanguage(language)))
+            {
+                if (response.IsSuccessStatusCode)
+                {
+                    return await response.Content.Validate().ReadAsAsync<T>();
+                }
+
+                throw new Exception(response.ReasonPhrase);
+            }
+        }
+
         public async Task<T> GetAsync<T>(string url)
         {
             await this.PrepairRequest();
@@ -64,6 +79,7 @@
 
             using (HttpResponseMessage response = await this.PostAsync(this.baseUri + url, content))
             {
+                var test = await response.Content.ReadAsAsync<dynamic>();
                 if (response.IsSuccessStatusCode)
                 {
                     return await response.Content.Validate().ReadAsAsync<T>();

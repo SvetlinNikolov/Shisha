@@ -14,6 +14,7 @@
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
+    using ShishaProject.Common;
     using ShishaProject.Data;
     using ShishaProject.Data.Common;
     using ShishaProject.Data.Common.Repositories;
@@ -141,7 +142,7 @@
                 endpoints =>
                     {
                         endpoints.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
-                        endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
+                        endpoints.MapControllerRoute("default", "{language}/{controller=Home}/{action=Index}/{id?}", new { language = GlobalConstants.MainLanguage });
                         endpoints.MapRazorPages();
                     });
         }

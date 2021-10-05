@@ -1,0 +1,53 @@
+﻿@using ShishaProject.Services.Data.Models.Dtos
+
+@model ProductFlavourDto
+
+<div class="hero-section">
+    <div class="text-container">
+        <h1>Product</h1>
+        <p>Home / Shop / Product</p>
+    </div>
+</div>
+
+<!-- Search bar - present on every page -->
+<div class="search-bar">
+    <form>
+        <input type="text" id="search-bar-field" placeholder="Search for whatever you like . . .">
+        <button type="button" id="search-bar-btn">
+            <img src="../assets/icons/search.svg" alt="Search">
+        </button>
+    </form>
+</div>
+
+<!-- Product details page -->
+<div class="product-details-container">
+    <div class="product-image-and-text-container">
+        <img src="@Model.Image" alt="">
+
+        <div class="product-text-container" data-product-number="1">
+            <h2>@Model.Title</h2>
+
+            <p>
+                <span class="product-text-title">Flavor: </span>
+                <span>Chicken</span>
+            </p>
+
+            <p>
+                <span class="product-text-title">Packaging: </span>
+                <span>80 pcs.</span>
+            </p>
+
+            <p>
+                <span class="product-text-title">Description: </span>
+                <br>
+                <span>
+                    @Model.Description
+                </span>
+            </p>
+
+            <button type="button" class="product-add-to-cart-button">ADD TO CART</button>
+        </div>
+    </div>
+
+    <!-- Add extra content under here - suggested products, last reviewed, etc. -->
+</div>

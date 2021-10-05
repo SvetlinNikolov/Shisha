@@ -261,22 +261,22 @@
     <!-- Products container -->
     <div class="products">
         <!-- FOR EACH THIS - START -->
-        @foreach (var product in Model.Flavours)
+        @foreach (var flavour in Model.Flavours)
         {
-            <div class="product" data-product-number="@product.Id">
+            <div class="product" data-product-number="@flavour.Id">
                 <div class="product-content">
-                    <a href="./product.html">
-                        <img src="@product.Image" alt="Flavour Image">
+                    <a asp-controller="Products" asp-action="FlavourDetails" asp-route-id="@flavour.Id">
+                        <img src="@flavour.Image" alt="Flavour Image">
                     </a>
 
                     <div class="product-text-and-price-container">
                         <div class="product-text-container">
-                            <p class="product-title">@product.Title</p>
-                            <p>@product.ShortDescription</p>
+                            <p class="product-title">@flavour.Title</p>
+                            <p>@flavour.ShortDescription</p>
                             <p>tuka pi6e6e broikite 80pcs primerno</p>
                         </div>
 
-                        <p class="price-container">@product.Price</p>
+                        <p class="price-container">@flavour.Price</p>
                     </div>
                 </div>
 
@@ -288,7 +288,6 @@
     </div>
 
     <!-- FOR EACH THIS - END -->
-
     <!-- Pagination -->
     <div class="pagination">
         <button type="button" class="button-previous">Previous</button>

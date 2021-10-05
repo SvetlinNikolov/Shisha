@@ -24,6 +24,21 @@
             return AddQueryString(uri, (IEnumerable<KeyValuePair<string, string>>)queryString);
         }
 
+        public static string AddQueryLanguage(string language)
+        {
+            if (string.IsNullOrEmpty(language))
+            {
+                language = GlobalConstants.MainLanguage;
+            }
+
+            return new StringBuilder()
+            .Append('?')
+            .Append(WebUtility.UrlEncode(nameof(language)))
+            .Append('=')
+            .Append(WebUtility.UrlEncode(language))
+            .ToString();
+        }
+
         private static string AddQueryString(
             string uri,
             IEnumerable<KeyValuePair<string, string>> queryString)

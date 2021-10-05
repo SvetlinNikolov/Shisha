@@ -1,5 +1,6 @@
 ﻿namespace ShishaProject.Services
 {
+    using System.Collections.Generic;
     using System.Linq;
     using System.Net;
     using System.Threading.Tasks;
@@ -10,6 +11,7 @@
     using ShishaProject.Common.Helpers;
     using ShishaProject.Services.Data.Models.Configs;
     using ShishaProject.Services.Data.Models.Dtos;
+    using ShishaProject.Services.Data.Models.Dtos.Api;
     using ShishaProject.Services.Interfaces;
 
     public class ProductsService : IProductsService
@@ -25,9 +27,9 @@
             this.endpointConfig = endpointConfig;
         }
 
-        public async Task<ProductsFlavoursDto> GetAllFlavours()
+        public async Task<ProductsFlavoursDto> GetAllFlavours(string language)
         {
-            return await this.restClient.GetAsync<ProductsFlavoursDto>(this.endpointConfig.Value.GetAllFlavours);
+            return await this.restClient.GetAsync<ProductsFlavoursDto>(this.endpointConfig.Value.GetAllFlavours, language);
         }
 
         public async Task<ProductsCategoriesDto> GetAllCategories()
@@ -35,9 +37,9 @@
             return await this.restClient.GetAsync<ProductsCategoriesDto>(this.endpointConfig.Value.GetAllCategories);
         }
 
-        public async Task<ProductsFlavoursDto> GetFlavoursByCategoryId(int categoryId)
+        public async Task<ProductsFlavoursDto> GetFlavoursByCategoryId(FlavourByCategoryIdRequest request)
         {
-            var json = JsonHelper.SerializeToPhpApiFormat("category_id", categoryId);
+            var json = JsonConvert.SerializeObject(request);
 
             ProductsFlavoursDto dto = await this.restClient
                 .PostAsync<ProductsFlavoursDto>(
@@ -47,9 +49,9 @@
             return dto;
         }
 
-        public async Task<ProductFlavourDto> GetFlavourById(int flavourId)
+        public async Task<ProductFlavourDto> GetFlavourById(FlavourByIdRequest request)
         {
-            var json = JsonHelper.SerializeToPhpApiFormat("id", flavourId);
+            var json = JsonConvert.SerializeObject(request);
 
             JObject result = await this.restClient
                 .PostAsync<JObject>(
