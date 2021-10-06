@@ -18,7 +18,6 @@
         public async Task<IActionResult> Index()
         {
             var products = await this.productsService.GetAllFlavours(this.Language);
-
             return this.View(products);
         }
 

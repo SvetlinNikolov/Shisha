@@ -14,24 +14,7 @@
 <!-- Products page -->
 <div class="products-container">
     <!-- Filters on the top -->
-    <div class="filters-top">
-        <h2>Products</h2>
-
-        <div class="filters-select">
-            <span>Sort: </span>
-
-            <select name="sort" id="sort">
-                <!-- FOR EACH THIS - START -->
-                <option value="0" selected>Price - Lowest</option>
-                <option value="1">Price - Highest</option>
-                <option value="2">Name - A-Z</option>
-                <option value="3">Name - Z-A</option>
-                <option value="4">Brand - A-Z</option>
-                <option value="5">Brand - Z-A</option>
-                <!-- FOR EACH THIS - END -->
-            </select>
-        </div>
-    </div>
+    <partial name="Filters/_SortFilter" />
 
     <!-- Filters on the left -->
     <div class="filters-left">
@@ -39,220 +22,27 @@
 
         <form id="filters-menu" autocomplete="off">
             <!-- Filter - price -->
-            <div class="filter-left-container">
-                <h3>Filter by price</h3>
-
-                <ul>
-                    <li>
-                        <label for="filter-price-1">
-                            <input type="checkbox" name="filter-price" id="filter-price-1">
-                            <span class="checkmark"></span>
-                            0 - 50
-                        </label>
-                    </li>
-
-                    <li>
-                        <label for="filter-price-2">
-                            <input type="checkbox" name="filter-price" id="filter-price-2">
-                            <span class="checkmark"></span>
-                            51 - 100
-                        </label>
-                    </li>
-
-                    <li>
-                        <label for="filter-price-3">
-                            <input type="checkbox" name="filter-price" id="filter-price-3">
-                            <span class="checkmark"></span>
-                            101 - 150
-                        </label>
-                    </li>
-
-                    <li>
-                        <label for="filter-price-4">
-                            <input type="checkbox" name="filter-price" id="filter-price-4">
-                            <span class="checkmark"></span>
-                            151 - 200
-                        </label>
-                    </li>
-
-                    <li>
-                        <label for="filter-price-5">
-                            <input type="checkbox" name="filter-price" id="filter-price-5">
-                            over 200
-                            <span class="checkmark"></span>
-                        </label>
-                    </li>
-                </ul>
-            </div>
+            <partial name="Filters/_PriceFilter" />
 
             <!-- Filter - brand -->
-            <div class="filter-left-container">
-                <h3>Filter by brand</h3>
-
-                <ul>
-                    <li>
-                        <label for="filter-brand-1">
-                            <input type="checkbox" name="filter-brand" id="filter-brand-1">
-                            <span class="checkmark"></span>
-                            Adidas
-                        </label>
-                    </li>
-
-                    <li>
-                        <label for="filter-brand-2">
-                            <input type="checkbox" name="filter-brand" id="filter-brand-2">
-                            <span class="checkmark"></span>
-                            Nike
-                        </label>
-                    </li>
-
-                    <li>
-                        <label for="filter-brand-3">
-                            <input type="checkbox" name="filter-brand" id="filter-brand-3">
-                            <span class="checkmark"></span>
-                            Puma
-                        </label>
-                    </li>
-
-                    <li>
-                        <label for="filter-brand-4">
-                            <input type="checkbox" name="filter-brand" id="filter-brand-4">
-                            <span class="checkmark"></span>
-                            100 kila
-                        </label>
-                    </li>
-                </ul>
-            </div>
+            <partial name="Filters/_BrandFilter" />
 
             <!-- Filter - flavor -->
-            <div class="filter-left-container">
-                <h3>Filter by flavor</h3>
-
-                <ul>
-                    <li>
-                        <label for="filter-flavor-1">
-                            <input type="checkbox" name="filter-flavor" id="filter-flavor-1">
-                            <span class="checkmark"></span>
-                            Melon
-                        </label>
-                    </li>
-
-                    <li>
-                        <label for="filter-flavor-2">
-                            <input type="checkbox" name="filter-flavor" id="filter-flavor-2">
-                            <span class="checkmark"></span>
-                            Brick
-                        </label>
-                    </li>
-
-                    <li>
-                        <label for="filter-flavor-3">
-                            <input type="checkbox" name="filter-flavor" id="filter-flavor-3">
-                            <span class="checkmark"></span>
-                            Chicken
-                        </label>
-                    </li>
-
-                    <li>
-                        <label for="filter-flavor-4">
-                            <input type="checkbox" name="filter-flavor" id="filter-flavor-4">
-                            <span class="checkmark"></span>
-                            Dust
-                        </label>
-                    </li>
-                </ul>
-            </div>
+            <partial name="Filters/_FlavourFilter" />
 
             <!-- Filter - packaging -->
-            <div class="filter-left-container">
-                <h3>Filter by packaging</h3>
-
-                <ul>
-                    <li>
-                        <label for="filter-packaging-1">
-                            <input type="checkbox" name="filter-packaging" id="filter-packaging-1">
-                            <span class="checkmark"></span>
-                            20 pcs
-                        </label>
-                    </li>
-
-                    <li>
-                        <label for="filter-packaging-2">
-                            <input type="checkbox" name="filter-packaging" id="filter-packaging-2">
-                            <span class="checkmark"></span>
-                            40 pcs
-                        </label>
-                    </li>
-
-                    <li>
-                        <label for="filter-packaging-3">
-                            <input type="checkbox" name="filter-packaging" id="filter-packaging-3">
-                            <span class="checkmark"></span>
-                            1.00 kg
-                        </label>
-                    </li>
-
-                    <li>
-                        <label for="filter-packaging-4">
-                            <input type="checkbox" name="filter-packaging" id="filter-packaging-4">
-                            <span class="checkmark"></span>
-                            100 kg
-                        </label>
-                    </li>
-                </ul>
-            </div>
+            <partial name="Filters/_PackagingFilter" />
 
             <!-- Filter - stock -->
-            <div class="filter-left-container">
-                <h3>Filter by stock</h3>
-
-                <ul>
-                    <li>
-                        <label for="filter-stock-1">
-                            <input type="checkbox" name="filter-stock" id="filter-stock-1">
-                            <span class="checkmark"></span>
-                            In stock
-                        </label>
-                    </li>
-
-                    <li>
-                        <label for="filter-stock-2">
-                            <input type="checkbox" name="filter-stock" id="filter-stock-2">
-                            <span class="checkmark"></span>
-                            Back soon
-                        </label>
-                    </li>
-
-                    <li>
-                        <label for="filter-stock-3">
-                            <input type="checkbox" name="filter-stock" id="filter-stock-3">
-                            <span class="checkmark"></span>
-                            Out of stock
-                        </label>
-                    </li>
-                </ul>
-            </div>
+            <partial name="Filters/_StockFilter" />
 
             <!-- Filter - category -->
-            <div class="filter-left-container">
-                <h3>Filter by category</h3>
-
-                <ul>
-                    <li>
-                        <label for="changeme">
-                            <input type="checkbox" name="changeme" id="changeme">
-                            <span class="checkmark"></span>
-                            Maybe have this category
-                        </label>
-                    </li>
-                </ul>
-            </div>
+            <partial name="Filters/_CategoryFilter" />
         </form>
     </div>
 
     <!-- Products container -->
     <div class="products">
-        <!-- FOR EACH THIS - START -->
         @foreach (var flavour in Model.Flavours)
         {
             <div class="product" data-product-number="@flavour.Id">
@@ -275,26 +65,7 @@
                 <button type="button" class="product-add-to-cart-button">ADD TO CART</button>
             </div>
         }
-
-
+        <partial name="_Pagination" />
     </div>
-
-    <!-- FOR EACH THIS - END -->
-    <!-- Pagination -->
-    <div class="pagination">
-        <button type="button" class="button-previous">Previous</button>
-        <button type="button" class="active">1</button>
-        <button type="button">2</button>
-        <button type="button">3</button>
-        <button type="button">4</button>
-        <button type="button">5</button>
-        <button type="button">6</button>
-        <button type="button">7</button>
-        <button type="button">8</button>
-        <button type="button">9</button>
-        <button type="button">10</button>
-        <button type="button" class="button-next">Next</button>
-    </div>
-
 </div>
 
