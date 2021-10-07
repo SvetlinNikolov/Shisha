@@ -4,6 +4,7 @@
 
     using Microsoft.AspNetCore.Mvc;
     using ShishaProject.Services.Data.Models.Dtos.Api;
+    using ShishaProject.Services.Data.Models.Filters;
     using ShishaProject.Services.Interfaces;
 
     public class ProductsController : BaseController
@@ -26,6 +27,12 @@
             var product = await this.productsService.GetFlavourById(new FlavourByIdRequest { FlavourId = id, Language = this.Language });
 
             return this.View(product);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> GetFlavours(FlavourFilterContext context)
+        {
+            return null;
         }
     }
 }

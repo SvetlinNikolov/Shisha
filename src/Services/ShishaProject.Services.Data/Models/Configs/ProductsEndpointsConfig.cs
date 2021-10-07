@@ -11,5 +11,7 @@
         public string GetFlavoursByIds { get; set; }
 
         public string GetAllCategories { get; set; }
+
+        public string Filters { get; set; }
     }
 }

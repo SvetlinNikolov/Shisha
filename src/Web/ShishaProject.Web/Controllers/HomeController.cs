@@ -17,8 +17,9 @@
             this.productsService = productsService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            var filteredFlavours = await this.productsService.GetFilteredFlavours(null);
             return this.View();
         }
 

@@ -80,6 +80,17 @@ function updateProducts() {
     }
 
     // TO DO - SEND TO THE BE
+    let postData = { context: checkedInputsArray };
+
+    $.ajax({
+        url: "Products/GetFlavours",
+        data: JSON.stringify(postData),
+        contentType: "application/json; charset=utf-8",
+        success: function (html) {
+            alert("I am successfull")
+        }
+    });
+
     console.log('Current page: ', currentPageNumber);
     console.log('Selected checkboxes: ', checkedInputsArray);
     console.log('Select value: ', selectValue);

@@ -12,6 +12,7 @@
     using ShishaProject.Services.Data.Models.Configs;
     using ShishaProject.Services.Data.Models.Dtos;
     using ShishaProject.Services.Data.Models.Dtos.Api;
+    using ShishaProject.Services.Data.Models.Filters;
     using ShishaProject.Services.Interfaces;
 
     public class ProductsService : IProductsService
@@ -60,6 +61,18 @@
 
             ProductFlavourDto dto = result.Value<JObject>("flavour")
                 .ToObject(typeof(ProductFlavourDto)) as ProductFlavourDto;
+
+            return dto;
+        }
+
+        public async Task<ProductsFlavoursDto> GetFilteredFlavours(FlavourFilterContext context)
+        {
+            var json = JsonConvert.SerializeObject(context);
+
+            var dto = await this.restClient
+                 .PostAsync<dynamic>(
+                     this.endpointConfig.Value.Filters,
+                     json);
 
             return dto;
         }
