@@ -1,9 +1,12 @@
 // Products JS logic
 // Variable definitions
-let allInputs = document.querySelectorAll('.filter-left-container input');
+let allInputs = document.querySelectorAll('.filter-left-container input[type=checkbox]');
 let selectDropdown = document.querySelector('.filters-top .filters-select select');
 let pageNavigationButtons = document.querySelectorAll('.pagination button');
 let filterMenuIcon = document.getElementById('filter-menu-button');
+let customPriceFilterBtn = document.getElementById('filter-price-custom-button');
+let checkBoxFilterPrice = document.querySelectorAll('.filter-left-container input[name="filter-price"]');
+let checkBoxFilterStock = document.querySelectorAll('.filter-left-container input[name="filter-stock"]');
 
 // Function definitions
 function navigatePageNavigation(clickedElement) {
@@ -73,28 +76,78 @@ function updateProducts() {
 
     // Get checked checkboxes
     let checkedInputsList = document.querySelectorAll('.filter-left-container input:checked');
-    let checkedInputsArray = [];
+    
+    // Create variables for the request object
+    // Price
+    let price_from = null;
+    let price_to = null;
+    // Category
+    let category_id = [];
+    // Flavor
+    let flavor = [];
+    // Packaging
+    let packaging = [];
+    // Stock status
+    let in_stock = true;
 
     for (let checkedInput of checkedInputsList) {
-        checkedInputsArray.push(checkedInput.id);
+        switch (checkedInput.name) {
+            case 'filter-price':
+                if (checkedInput.value === 'Custom') {
+                    price_from = document.getElementById('filter-price-custom-from').value;
+                    price_to = document.getElementById('filter-price-custom-to').value;
+
+                    if (price_from.length < 1 || price_to.length < 1) {
+                        return;
+                    }
+                    break;
+                }
+
+                let splitPriceValues = checkedInput.value.split(' - ');
+                price_from = splitPriceValues[0];
+                price_to = splitPriceValues[1];
+                break;
+
+            case 'filter-brand':
+                category_id.push(checkedInput.id);
+                break;
+
+            case 'filter-flavor':
+                flavor.push(checkedInput.id);
+                break;
+
+            case 'filter-packaging':
+                packaging.push(checkedInput.id);
+                break;
+
+            case 'filter-stock':
+                if (checkedInput.value === 'in-stock') {
+                    in_stock = true;
+                    break;
+                }
+
+                in_stock = false;
+                break;
+        }
     }
 
-    // TO DO - SEND TO THE BE
-    let postData = { context: checkedInputsArray };
-
-    $.ajax({
-        url: "Products/GetFlavours",
-        data: JSON.stringify(postData),
-        contentType: "application/json; charset=utf-8",
-        success: function (html) {
-            alert("I am successfull")
+    let data = {
+        currentPageNumber,
+        selectValue,
+        filters: {
+            price_from,
+            price_to,
+            category_id,
+            svetlio: flavor,
+            svetlio2: packaging,
+            in_stock
         }
-    });
+    }
 
-    console.log('Current page: ', currentPageNumber);
-    console.log('Selected checkboxes: ', checkedInputsArray);
-    console.log('Select value: ', selectValue);
-    // TO DO - SEND TO THE BE
+    postRequest('Products/GetFilteredFlavours', { data })
+    .then(data => {
+        console.log('data', data);
+    });
 }
 
 function toggleFilterMenu() {
@@ -108,11 +161,34 @@ function toggleFilterMenu() {
     filterMenu.style.display = 'flex';
 }
 
+function checkBoxToRadio(event, checkBoxArray) {
+    let currentCheckBox = event.target;
+
+    // Check if it's checked, in which case remove it
+    if (currentCheckBox.classList.contains('checked-already')) {
+        currentCheckBox.checked = false;
+        currentCheckBox.classList.remove('checked-already');
+        return
+    }
+
+    // Otherwise remove other checkboxes and check it
+    for (let checkBox of checkBoxArray) {
+        checkBox.checked = false;
+        checkBox.classList.remove('checked-already');
+    }
+    
+    currentCheckBox.checked = true;
+    currentCheckBox.classList.add('checked-already');
+};
+
 // Add event listeners
 // On input (checkbox) click
 for (let input of allInputs) {
     input.addEventListener('click', updateProducts);
 }
+
+// Custom price button click
+customPriceFilterBtn.addEventListener('click', updateProducts)
 
 // On select change
 selectDropdown.addEventListener('change', updateProducts);
@@ -124,3 +200,13 @@ for (let button of pageNavigationButtons) {
 
 // Show filters on button / header click
 filterMenuIcon.addEventListener('click', toggleFilterMenu);
+
+// Price filter checkboxes
+for (let checkBox of checkBoxFilterPrice) {
+    checkBox.addEventListener('click', (event) => checkBoxToRadio(event, checkBoxFilterPrice));
+}
+
+// Stock filter checkboxes
+for (let checkBox of checkBoxFilterStock) {
+    checkBox.addEventListener('click', (event) => checkBoxToRadio(event, checkBoxFilterStock));
+}

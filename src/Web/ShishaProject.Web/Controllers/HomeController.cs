@@ -11,7 +11,6 @@
     {
         private readonly IProductsService productsService;
 
-
         public HomeController(IProductsService productsService)
         {
             this.productsService = productsService;
@@ -19,7 +18,7 @@
 
         public async Task<IActionResult> Index()
         {
-            var filteredFlavours = await this.productsService.GetFilteredFlavours(null);
+            var filteredFlavours = await this.productsService.GetAllFlavours(this.Language);
             return this.View();
         }
 

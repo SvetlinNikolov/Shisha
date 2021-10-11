@@ -14,7 +14,7 @@
         public string Title { get; set; }
 
         [JsonProperty("price")]
-        public string Price { get; set; }
+        public decimal Price { get; set; }
 
         [JsonProperty("description")]
         public string Description { get; set; }

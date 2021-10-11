@@ -7,6 +7,10 @@ let searchBarField = document.getElementById('search-bar-field');
 function sendSearchBarData() {
     // TO DO - Send to the BE
     console.log(searchBarField.value);
+    // postRequest('url', { data })
+    // .then(data => {
+    //     console.log('data', data);
+    // });
     // TO DO - Do something with the data from the BE
 }
 

@@ -1,11 +1,16 @@
 ﻿namespace ShishaProject.Web.Controllers
 {
+    using System.Collections.Generic;
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Mvc;
+    using Newtonsoft.Json;
     using ShishaProject.Services.Data.Models.Dtos.Api;
     using ShishaProject.Services.Data.Models.Filters;
     using ShishaProject.Services.Interfaces;
+    using ShishaProject.Common.ExtensionMethods;
+    using System.IO;
+    using System.Text;
 
     public class ProductsController : BaseController
     {
@@ -30,9 +35,35 @@
         }
 
         [HttpPost]
-        public async Task<IActionResult> GetFlavours(FlavourFilterContext context)
+        public async Task<IActionResult> GetFilteredFlavours([FromRoute]Root root)
         {
-            return null;
+            using StreamReader reader = new StreamReader(this.HttpContext.Request.Body, Encoding.UTF8);
+            string body = await reader.ReadToEndAsync();
+            return this.Json("az sym qk");
         }
     }
+    // Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse); 
+    public class Filters
+    {
+        public string price_from { get; set; }
+        public string price_to { get; set; }
+        public List<object> category_id { get; set; }
+        public List<object> svetlio { get; set; }
+        public List<object> svetlio2 { get; set; }
+        public bool in_stock { get; set; }
+    }
+
+    public class Data
+    {
+        public string currentPageNumber { get; set; }
+        public string selectValue { get; set; }
+        public Filters filters { get; set; }
+    }
+
+    public class Root
+    {
+        public Data data { get; set; }
+    }
+
+
 }

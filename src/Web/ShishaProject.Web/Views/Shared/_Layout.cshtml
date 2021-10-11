@@ -13,6 +13,8 @@
 
 </head>
 <body>
+    <span hidden class="PageLanguage">@this.ViewData["Language"]</span>
+    <span class="AntiForgery"> @Html.AntiForgeryToken() </span>
     <partial name="_Header" />
     <partial name="_CookieConsentPartial" />
     <main>
@@ -28,10 +30,10 @@
     <script src="~/js/site.min.js" asp-append-version="true"></script>
 
     @*custom js*@
+    <script src="~/js/requests.js" asp-append-version="true"></script>
     <script src="~/js/cart.js" asp-append-version="true"></script>
     <script src="~/js/header.js" asp-append-version="true"></script>
     <script src="~/js/products.js" asp-append-version="true"></script>
-    <script src="~/js/requests.js" asp-append-version="true"></script>
     <script src="~/js/search-bar.js" asp-append-version="true"></script>
 
     @await this.RenderSectionAsync("Scripts", required: false)

@@ -15,7 +15,7 @@ function addProductToCart() {
 
     // TO DO - SEND TO THE BE
     console.log('Product number: ', productNumber);
-    // postRequest('addUrl', { add: 'data' })
+    // postRequest('addUrl', { data })
     // .then(data => {
     //     console.log(data);
     // });

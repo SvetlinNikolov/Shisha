@@ -3,7 +3,6 @@
 async function postRequest(url = '', data = {}) {
     const response = await fetch(url, {
         method: 'POST',
-        mode: 'cors',
         cache: 'no-cache',
         credentials: 'same-origin',
         headers: {
@@ -19,9 +18,9 @@ async function postRequest(url = '', data = {}) {
 
 // POST - how to use
 // postRequest('addUrl', { add: 'data' })
-    // .then(data => {
-    //     console.log(data);
-    // });
+// .then(data => {
+//     console.log(data);
+// });
 
 // GET
 async function getRequest(url = '') {

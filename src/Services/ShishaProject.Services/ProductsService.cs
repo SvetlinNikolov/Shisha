@@ -65,7 +65,7 @@
             return dto;
         }
 
-        public async Task<ProductsFlavoursDto> GetFilteredFlavours(FlavourFilterContext context)
+        public async Task<ProductsFlavoursDto> GetFilteredFlavours(Filters context)
         {
             var json = JsonConvert.SerializeObject(context);
 

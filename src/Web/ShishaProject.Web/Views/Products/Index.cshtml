@@ -35,9 +35,6 @@
 
             <!-- Filter - stock -->
             <partial name="Filters/_StockFilter" />
-
-            <!-- Filter - category -->
-            <partial name="Filters/_CategoryFilter" />
         </form>
     </div>
 
@@ -58,7 +55,10 @@
                             <p>tuka pi6e6e broikite 80pcs primerno</p>
                         </div>
 
-                        <p class="price-container">@flavour.Price</p>
+                        <div class="price-container">
+                            <p class="price-container-og-price">@(flavour.Price += (flavour.Price*0.15m))</p>
+                            <p class="price-container-discount-price">@flavour.Price BGN</p>
+                        </div>
                     </div>
                 </div>
 

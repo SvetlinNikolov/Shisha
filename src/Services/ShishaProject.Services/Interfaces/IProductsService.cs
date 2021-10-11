@@ -16,7 +16,7 @@
 
         Task<ProductFlavourDto> GetFlavourById(FlavourByIdRequest request);
 
-        Task<ProductsFlavoursDto> GetFilteredFlavours(FlavourFilterContext request);
+        Task<ProductsFlavoursDto> GetFilteredFlavours(Filters request);
 
         // Task<ProductsFlavoursDto> GetFlavoursByIds(IEnumerable<string> flavourIds);
     }
