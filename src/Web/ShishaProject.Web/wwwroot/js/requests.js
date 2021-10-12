@@ -17,10 +17,10 @@ async function postRequest(url = '', data = {}) {
 }
 
 // POST - how to use
-// postRequest('addUrl', { add: 'data' })
-// .then(data => {
-//     console.log(data);
-// });
+// postRequest('addUrl', { data })
+    // .then(data => {
+    //     console.log(data);
+    // });
 
 // GET
 async function getRequest(url = '') {

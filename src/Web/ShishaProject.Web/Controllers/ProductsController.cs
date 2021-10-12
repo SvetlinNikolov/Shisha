@@ -35,10 +35,8 @@
         }
 
         [HttpPost]
-        public async Task<IActionResult> GetFilteredFlavours([FromRoute]Root root)
+        public async Task<IActionResult> GetFilteredFlavours([FromBody] Root root)
         {
-            using StreamReader reader = new StreamReader(this.HttpContext.Request.Body, Encoding.UTF8);
-            string body = await reader.ReadToEndAsync();
             return this.Json("az sym qk");
         }
     }

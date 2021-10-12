@@ -52,12 +52,26 @@
                         <div class="product-text-container">
                             <p class="product-title">@flavour.Title</p>
                             <p>@flavour.ShortDescription</p>
-                            <p>tuka pi6e6e broikite 80pcs primerno</p>
+
+                            <div class="packaging-choices-container">
+                                <button type="button" class="packaging-choice active">20 pcs</button> @*tuka tova active e stranno*@
+                                <button type="button" class="packaging-choice">40 pcs</button>
+                                <button type="button" class="packaging-choice">1.00 kg</button>
+                                <button type="button" class="packaging-choice">100 kg</button>
+                            </div>
+
                         </div>
 
                         <div class="price-container">
+                            <div class="quantity">
+                                <label for="quantity">Quantity:</label>
+                                <br>
+                                <input type="text" name="quantity" id="quantity" value="1">
+                            </div>
+
                             <p class="price-container-og-price">@(flavour.Price += (flavour.Price*0.15m))</p>
                             <p class="price-container-discount-price">@flavour.Price BGN</p>
+
                         </div>
                     </div>
                 </div>
@@ -65,7 +79,7 @@
                 <button type="button" class="product-add-to-cart-button">ADD TO CART</button>
             </div>
         }
-        <partial name="_Pagination" />
     </div>
-</div>
 
+    <partial name="_Pagination" />
+</div>

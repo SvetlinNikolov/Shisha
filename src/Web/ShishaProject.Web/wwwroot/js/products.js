@@ -7,6 +7,7 @@ let filterMenuIcon = document.getElementById('filter-menu-button');
 let customPriceFilterBtn = document.getElementById('filter-price-custom-button');
 let checkBoxFilterPrice = document.querySelectorAll('.filter-left-container input[name="filter-price"]');
 let checkBoxFilterStock = document.querySelectorAll('.filter-left-container input[name="filter-stock"]');
+let allPackagingButtons = document.querySelectorAll('.product-text-and-price-container .packaging-choices-container button');
 
 // Function definitions
 function navigatePageNavigation(clickedElement) {
@@ -181,6 +182,26 @@ function checkBoxToRadio(event, checkBoxArray) {
     currentCheckBox.classList.add('checked-already');
 };
 
+function changePackaging() {
+    // Get elements
+    let packagingChoices = this.parentNode.childNodes;
+    let currentPackaging;
+    let newPackaging = this;
+
+    for (let packagingChoice of packagingChoices) {
+        if (packagingChoice.classList) {
+            if (packagingChoice.classList.contains('active')) {
+                currentPackaging = packagingChoice;
+                break;
+            }
+        }
+    }
+
+    // Set 
+    currentPackaging.classList.remove('active');
+    newPackaging.classList.add('active');
+}
+
 // Add event listeners
 // On input (checkbox) click
 for (let input of allInputs) {
@@ -209,4 +230,9 @@ for (let checkBox of checkBoxFilterPrice) {
 // Stock filter checkboxes
 for (let checkBox of checkBoxFilterStock) {
     checkBox.addEventListener('click', (event) => checkBoxToRadio(event, checkBoxFilterStock));
+}
+
+// Packaging selection
+for (let packagingBtn of allPackagingButtons) {
+    packagingBtn.addEventListener('click', changePackaging);
 }

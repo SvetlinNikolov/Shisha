@@ -12,13 +12,75 @@
 
 <partial name="_SearchBar" />
 
-<!-- Product details page -->
 <div class="product-details-container">
+    <div class="product-header-container">
+        <nav class="product-header-breadcrumbs">
+            <ul>
+                <li>
+                    <a href="#">Crumb 1</a>
+                </li>
+
+                <li>
+                    >
+                </li>
+
+                <li>
+                    <a href="#">Crumb 2</a>
+                </li>
+
+                <li>
+                    >
+                </li>
+
+                <li class="active">
+                    <a href="#">Crumb 3</a>
+                </li>
+            </ul>
+        </nav>
+        <h2>Product name</h2>
+    </div>
+
     <div class="product-image-and-text-container">
-        <img src="@Model.Image" alt="">
+        <div class="product-image-container">
+            <img class="product-big-image" src="../assets/images/products/coal_example_2.jpg" alt="">
+
+            <div class="product-image-navigation-container">
+                <button class="active">
+                    <img src="../assets/images/products/coal_example_2.jpg" alt="">
+                </button>
+
+                <button>
+                    <img src="../assets/images/products/coal_example.jpg" alt="">
+                </button>
+
+                <button>
+                    <img src="../assets/images/products/coal_example_2.jpg" alt="">
+                </button>
+
+                <button>
+                    <img src="../assets/images/products/coal_example.jpg" alt="">
+                </button>
+            </div>
+        </div>
 
         <div class="product-text-container" data-product-number="1">
-            <h2>@Model.Title</h2>
+            <div class="product-ratings-container">
+                <span class="product-text-title">Ratings: </span>
+                <span class="ratings-container">
+                    <img src="../assets/icons/star.svg" alt="">
+                    <img src="../assets/icons/star.svg" alt="">
+                    <img src="../assets/icons/star.svg" alt="">
+                    <img src="../assets/icons/star.svg" alt="">
+                    <img src="../assets/icons/star.svg" alt="">
+                </span>
+
+                <span>4.20 / 5.00</span>
+            </div>
+
+            <p>
+                <span class="product-text-title">Product code: </span>
+                <span>1234567890</span>
+            </p>
 
             <p>
                 <span class="product-text-title">Flavor: </span>
@@ -26,21 +88,42 @@
             </p>
 
             <p>
-                <span class="product-text-title">Packaging: </span>
-                <span>80 pcs.</span>
-            </p>
-
-            <p>
                 <span class="product-text-title">Description: </span>
                 <br>
                 <span>
-                    @Model.Description
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam minima nisi harum ipsa, modi neque adipisci eius aut aliquid et quaerat illum, rerum possimus magni quia ipsam est sunt architecto.
+                    Corporis, nam. Possimus velit cum, dolorem necessitatibus voluptates minima, facilis quisquam accusantium illum vero ut ullam similique? Doloribus ducimus amet aut soluta laudantium placeat incidunt consequuntur, similique nobis animi repellat!
+                    Similique deserunt reiciendis harum, deleniti beatae omnis fugiat rerum eveniet nesciunt doloremque fugit voluptate consequatur officia ratione voluptatum quae consectetur distinctio cumque ipsam. Quisquam molestias sapiente, voluptate commodi rerum voluptatem.
                 </span>
             </p>
+        </div>
 
-            <button type="button" class="product-add-to-cart-button">ADD TO CART</button>
+        <div class="price-and-button-container">
+            <p class="product-text-title">Packaging:</p>
+            <div class="packaging-choices-container">
+                <button type="button" class="packaging-choice active">20 pcs</button>
+                <button type="button" class="packaging-choice">40 pcs</button>
+                <button type="button" class="packaging-choice">1.00 kg</button>
+                <button type="button" class="packaging-choice">100 kg</button>
+            </div>
+
+            <div class="price-container">
+                <div class="quantity">
+                    <label for="quantity">Quantity:</label>
+                    <br>
+                    <input type="text" name="quantity" id="quantity" value="1">
+                    x
+                </div>
+
+                <div class="price">
+                    <p class="price-container-og-price">200.00 BGN</p>
+                    <p class="price-container-discount-price">100.00 BGN</p>
+                </div>
+            </div>
+
+            <button type="button" class="product-add-to-cart-button product-page">ADD TO CART</button>
         </div>
     </div>
 
-    <!-- Add extra content under here - suggested products, last reviewed, etc. -->
+
 </div>

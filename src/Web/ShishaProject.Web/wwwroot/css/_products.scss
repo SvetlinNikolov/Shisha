@@ -272,9 +272,10 @@
           margin: 15px 15px 0;
           display: flex;
           justify-content: space-between;
-          align-items: center;
+          align-items: flex-start;
   
           .product-text-container {
+            max-width: 150px;
             .product-title {
               font-weight: bold;
             }
@@ -282,9 +283,42 @@
             p {
               font-size: 14px;
             }
+
+            .packaging-choices-container {
+              display: flex;
+              flex-wrap: wrap;
+      
+              .packaging-choice {
+                border: 1px solid $primary;
+                padding: 5px 7.5px;
+                background-color: transparent;
+                margin-right: 5px;
+                margin-top: 5px;
+                cursor: pointer;
+      
+                &.active, &:hover {
+                  background-color: $primary;
+                  color: $text-light;
+                }
+              }
+            }
           }
   
           .price-container {
+            .quantity {
+              text-align: right;
+              margin-bottom: 5px;
+
+              label {
+                font-weight: bold;
+              }
+    
+              input {
+                width: 50px;
+                text-align: center;
+              }
+            }
+
             .price-container-og-price {
               text-align: right;
               opacity: 0.75;
