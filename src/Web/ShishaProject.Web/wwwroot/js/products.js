@@ -8,6 +8,7 @@ let customPriceFilterBtn = document.getElementById('filter-price-custom-button')
 let checkBoxFilterPrice = document.querySelectorAll('.filter-left-container input[name="filter-price"]');
 let checkBoxFilterStock = document.querySelectorAll('.filter-left-container input[name="filter-stock"]');
 let allPackagingButtons = document.querySelectorAll('.product-text-and-price-container .packaging-choices-container button');
+let language = document.getElementById("PageLanguage").innerText;
 
 // Function definitions
 function navigatePageNavigation(clickedElement) {
@@ -77,7 +78,7 @@ function updateProducts() {
 
     // Get checked checkboxes
     let checkedInputsList = document.querySelectorAll('.filter-left-container input:checked');
-    
+
     // Create variables for the request object
     // Price
     let price_from = null;
@@ -135,20 +136,18 @@ function updateProducts() {
     let data = {
         currentPageNumber,
         selectValue,
-        filters: {
-            price_from,
+         price_from,
             price_to,
             category_id,
             svetlio: flavor,
             svetlio2: packaging,
             in_stock
-        }
     }
 
-    postRequest('Products/GetFilteredFlavours', { data })
-    .then(data => {
-        console.log('data', data);
-    });
+    postRequest('Products/GetFilteredFlavours', { data }, language)
+        .then(data => {
+            console.log('data', data);
+        });
 }
 
 function toggleFilterMenu() {
@@ -177,7 +176,7 @@ function checkBoxToRadio(event, checkBoxArray) {
         checkBox.checked = false;
         checkBox.classList.remove('checked-already');
     }
-    
+
     currentCheckBox.checked = true;
     currentCheckBox.classList.add('checked-already');
 };

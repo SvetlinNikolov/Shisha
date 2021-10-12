@@ -5,16 +5,11 @@
 
     public class Filters
     {
-        [JsonProperty("price_from")]
-        public string PriceFrom { get; set; }
-
-        [JsonProperty("price_to")]
-        public string PriceTo { get; set; }
-
-        [JsonProperty("in_stock")]
-        public bool InStock { get; set; }
-
-        [JsonProperty("category_id")]
-        public IEnumerable<int> CategoryId { get; set; }
+        public string price_from { get; set; }
+        public string price_to { get; set; }
+        public List<object> category_id { get; set; }
+        public List<object> svetlio { get; set; }
+        public List<object> svetlio2 { get; set; }
+        public bool in_stock { get; set; }
     }
 }

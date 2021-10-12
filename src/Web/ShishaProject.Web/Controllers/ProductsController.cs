@@ -11,6 +11,7 @@
     using ShishaProject.Common.ExtensionMethods;
     using System.IO;
     using System.Text;
+    using Newtonsoft.Json.Linq;
 
     public class ProductsController : BaseController
     {
@@ -35,33 +36,10 @@
         }
 
         [HttpPost]
-        public async Task<IActionResult> GetFilteredFlavours([FromBody] Root root)
+        public async Task<IActionResult> GetFilteredFlavours([FromBody] Data data)
         {
-            return this.Json("az sym qk");
+            var filteredFlavours = await this.productsService.GetFilteredFlavours(JsonConvert.SerializeObject(data));
+            return this.Json("az pak sym qk");
         }
     }
-    // Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse); 
-    public class Filters
-    {
-        public string price_from { get; set; }
-        public string price_to { get; set; }
-        public List<object> category_id { get; set; }
-        public List<object> svetlio { get; set; }
-        public List<object> svetlio2 { get; set; }
-        public bool in_stock { get; set; }
-    }
-
-    public class Data
-    {
-        public string currentPageNumber { get; set; }
-        public string selectValue { get; set; }
-        public Filters filters { get; set; }
-    }
-
-    public class Root
-    {
-        public Data data { get; set; }
-    }
-
-
 }

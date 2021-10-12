@@ -65,10 +65,8 @@
             return dto;
         }
 
-        public async Task<ProductsFlavoursDto> GetFilteredFlavours(Filters context)
+        public async Task<ProductsFlavoursDto> GetFilteredFlavours(string json)
         {
-            var json = JsonConvert.SerializeObject(context);
-
             var dto = await this.restClient
                  .PostAsync<dynamic>(
                      this.endpointConfig.Value.Filters,

@@ -1,6 +1,7 @@
 // Requests to BE JS logic
 // POST
-async function postRequest(url = '', data = {}) {
+async function postRequest(url = '', data = {}, language = '') {
+    data['data']['language'] = language;
     const response = await fetch(url, {
         method: 'POST',
         cache: 'no-cache',
@@ -18,9 +19,9 @@ async function postRequest(url = '', data = {}) {
 
 // POST - how to use
 // postRequest('addUrl', { data })
-    // .then(data => {
-    //     console.log(data);
-    // });
+// .then(data => {
+//     console.log(data);
+// });
 
 // GET
 async function getRequest(url = '') {

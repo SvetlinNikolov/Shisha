@@ -13,7 +13,7 @@
 
 </head>
 <body>
-    <span hidden class="PageLanguage">@this.ViewData["Language"]</span>
+    <span hidden id="PageLanguage">@this.ViewData["Language"]</span>
     <span class="AntiForgery"> @Html.AntiForgeryToken() </span>
     <partial name="_Header" />
     <partial name="_CookieConsentPartial" />

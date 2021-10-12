@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.IO;
     using System.Net;
     using System.Net.Http;
@@ -74,7 +75,7 @@
         public async Task<T> PostAsync<T>(string url, string data)
         {
             await this.PrepairRequest();
-
+            Debug.WriteLine(data);
             var content = new StringContent(data, Encoding.Default, "application/json");
 
             using (HttpResponseMessage response = await this.PostAsync(this.baseUri + url, content))
