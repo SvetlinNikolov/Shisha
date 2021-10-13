@@ -8,10 +8,6 @@
     using ShishaProject.Services.Data.Models.Dtos.Api;
     using ShishaProject.Services.Data.Models.Filters;
     using ShishaProject.Services.Interfaces;
-    using ShishaProject.Common.ExtensionMethods;
-    using System.IO;
-    using System.Text;
-    using Newtonsoft.Json.Linq;
 
     public class ProductsController : BaseController
     {
@@ -36,9 +32,11 @@
         }
 
         [HttpPost]
-        public async Task<IActionResult> GetFilteredFlavours([FromBody] Data data)
+        public async Task<IActionResult> GetFilteredFlavours([FromBody] Root data)
         {
-            var filteredFlavours = await this.productsService.GetFilteredFlavours(JsonConvert.SerializeObject(data));
+            data.Data.category_id = new List<object> { 1 };
+
+            var filteredFlavours = await this.productsService.GetFilteredFlavours(JsonConvert.SerializeObject(data.Data));
             return this.Json("az pak sym qk");
         }
     }

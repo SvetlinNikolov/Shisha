@@ -75,9 +75,8 @@
         public async Task<T> PostAsync<T>(string url, string data)
         {
             await this.PrepairRequest();
-            Debug.WriteLine(data);
             var content = new StringContent(data, Encoding.Default, "application/json");
-
+            Debug.WriteLine(data);
             using (HttpResponseMessage response = await this.PostAsync(this.baseUri + url, content))
             {
                 var test = await response.Content.ReadAsAsync<dynamic>();
