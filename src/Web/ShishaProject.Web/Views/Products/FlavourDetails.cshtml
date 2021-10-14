@@ -42,9 +42,10 @@
 
     <div class="product-image-and-text-container">
         <div class="product-image-container">
-            <img class="product-big-image" src="../assets/images/products/coal_example_2.jpg" alt="">
+            <img class="product-big-image" src="@Model.Image" alt="">
 
             <div class="product-image-navigation-container">
+                @*needs array of pictures*@
                 <button class="active">
                     <img src="../assets/images/products/coal_example_2.jpg" alt="">
                 </button>
@@ -79,7 +80,7 @@
 
             <p>
                 <span class="product-text-title">Product code: </span>
-                <span>1234567890</span>
+                <span>@Model.Id</span>
             </p>
 
             <p>
@@ -89,12 +90,7 @@
 
             <p>
                 <span class="product-text-title">Description: </span>
-                <br>
-                <span>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam minima nisi harum ipsa, modi neque adipisci eius aut aliquid et quaerat illum, rerum possimus magni quia ipsam est sunt architecto.
-                    Corporis, nam. Possimus velit cum, dolorem necessitatibus voluptates minima, facilis quisquam accusantium illum vero ut ullam similique? Doloribus ducimus amet aut soluta laudantium placeat incidunt consequuntur, similique nobis animi repellat!
-                    Similique deserunt reiciendis harum, deleniti beatae omnis fugiat rerum eveniet nesciunt doloremque fugit voluptate consequatur officia ratione voluptatum quae consectetur distinctio cumque ipsam. Quisquam molestias sapiente, voluptate commodi rerum voluptatem.
-                </span>
+                    @Html.Raw(Model.Description)
             </p>
         </div>
 
@@ -112,12 +108,11 @@
                     <label for="quantity">Quantity:</label>
                     <br>
                     <input type="text" name="quantity" id="quantity" value="1">
-                    x
                 </div>
 
                 <div class="price">
-                    <p class="price-container-og-price">200.00 BGN</p>
-                    <p class="price-container-discount-price">100.00 BGN</p>
+                    <p class="price-container-og-price">@(Model.Price += (Model.Price*0.15m))</p>
+                    <p class="price-container-discount-price">@Model.Price BGN</p>
                 </div>
             </div>
 

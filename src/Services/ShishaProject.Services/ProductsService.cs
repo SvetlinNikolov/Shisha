@@ -54,13 +54,12 @@
         {
             var json = JsonConvert.SerializeObject(request);
 
-            JObject result = await this.restClient
-                .PostAsync<JObject>(
+            var result = await this.restClient
+                .PostAsync<ProductsFlavoursDto>(
                     this.endpointConfig.Value.GetFlavourById,
                     json);
 
-            ProductFlavourDto dto = result.Value<JObject>("flavour")
-                .ToObject(typeof(ProductFlavourDto)) as ProductFlavourDto;
+            var dto = result.Flavours?.FirstOrDefault();
 
             return dto;
         }

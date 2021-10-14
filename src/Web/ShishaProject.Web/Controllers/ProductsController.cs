@@ -29,7 +29,7 @@
             var product = await this.productsService.GetFlavourById(new FlavourByIdRequest { FlavourId = id, Language = this.Language });
 
             return this.View(product);
-        }
+            }
 
         [HttpPost]
         public async Task<IActionResult> GetFilteredFlavours([FromBody] Root data)
