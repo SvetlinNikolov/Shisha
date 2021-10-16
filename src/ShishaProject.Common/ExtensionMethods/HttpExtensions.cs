@@ -18,7 +18,7 @@
         {
             var message = JsonConvert.DeserializeObject<HttpMessage>(content.ReadAsStringAsync().GetAwaiter().GetResult());
 
-            if (message.StatusCode != (int)HttpStatusCode.OK)
+            if (message.StatusCode != (int)HttpStatusCode.OK && message.StatusCode != (int)HttpStatusCode.NoContent)
             {
                 throw new InvalidOperationException(FormatExceptionMessage(message));
             }

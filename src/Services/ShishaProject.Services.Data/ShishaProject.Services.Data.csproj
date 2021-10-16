@@ -8,6 +8,12 @@
   <PropertyGroup>
     <CodeAnalysisRuleSet>..\..\Rules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Models\InputModels\**" />
+    <EmbeddedResource Remove="Models\InputModels\**" />
+    <None Remove="Models\InputModels\**" />
+  </ItemGroup>
   <ItemGroup>
     <AdditionalFiles Include="..\..\stylecop.json" />
   </ItemGroup>
@@ -24,10 +30,6 @@
     <ProjectReference Include="..\..\Data\ShishaProject.Data.Models\ShishaProject.Data.Models.csproj" />
     <ProjectReference Include="..\..\ShishaProject.Common\ShishaProject.Common.csproj" />
     <ProjectReference Include="..\ShishaProject.Services.Mapping\ShishaProject.Services.Mapping.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Models\InputModels\" />
   </ItemGroup>
 
 </Project>

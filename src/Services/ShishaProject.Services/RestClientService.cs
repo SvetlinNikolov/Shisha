@@ -49,6 +49,7 @@
             {
                 if (response.IsSuccessStatusCode)
                 {
+                    var test = await response.Content.ReadAsAsync<dynamic>();
                     return await response.Content.Validate().ReadAsAsync<T>();
                 }
 

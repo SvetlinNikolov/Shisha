@@ -8,7 +8,7 @@ let customPriceFilterBtn = document.getElementById('filter-price-custom-button')
 let checkBoxFilterPrice = document.querySelectorAll('.filter-left-container input[name="filter-price"]');
 let checkBoxFilterStock = document.querySelectorAll('.filter-left-container input[name="filter-stock"]');
 let allPackagingButtons = document.querySelectorAll('.product-text-and-price-container .packaging-choices-container button');
-let language = document.getElementById("PageLanguage").innerText;
+let language = document.getElementById("page_language").innerText;
 
 // Function definitions
 function navigatePageNavigation(clickedElement) {
@@ -136,15 +136,16 @@ function updateProducts() {
     let data = {
         currentPageNumber,
         selectValue,
-         price_from,
-            price_to,
-            category_id,
-            svetlio: flavor,
-            svetlio2: packaging,
-            in_stock
+        price_from,
+        price_to,
+        category_id,
+        svetlio: flavor,
+        svetlio2: packaging,
+        in_stock,
+        language
     }
 
-    postRequest('Products/GetFilteredFlavours', { data }, language)
+    postRequest('Products/GetFilteredFlavours', data)
         .then(data => {
             console.log('data', data);
         });

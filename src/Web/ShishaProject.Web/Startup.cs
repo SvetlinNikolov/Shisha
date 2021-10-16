@@ -75,7 +75,9 @@
                 options =>
                     {
                         //options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
-                    }).AddRazorRuntimeCompilation();
+                    }).AddRazorRuntimeCompilation()
+                      .AddNewtonsoftJson();
+
             services.AddRazorPages();
             services.AddDatabaseDeveloperPageExceptionFilter();
 

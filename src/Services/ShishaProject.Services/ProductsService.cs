@@ -40,36 +40,38 @@
 
         public async Task<ProductsFlavoursDto> GetFlavoursByCategoryId(FlavourByCategoryIdRequest request)
         {
-            var json = JsonConvert.SerializeObject(request);
+            var requestJson = JsonConvert.SerializeObject(request);
 
             ProductsFlavoursDto dto = await this.restClient
                 .PostAsync<ProductsFlavoursDto>(
                     this.endpointConfig.Value.GetFlavourByCategoryId,
-                    json);
+                    requestJson);
 
             return dto;
         }
 
         public async Task<ProductFlavourDto> GetFlavourById(FlavourByIdRequest request)
         {
-            var json = JsonConvert.SerializeObject(request);
+            var requestJson = JsonConvert.SerializeObject(request);
 
             var result = await this.restClient
                 .PostAsync<ProductsFlavoursDto>(
                     this.endpointConfig.Value.GetFlavourById,
-                    json);
+                    requestJson);
 
             var dto = result.Flavours?.FirstOrDefault();
 
             return dto;
         }
 
-        public async Task<ProductsFlavoursDto> GetFilteredFlavours(string json)
+        public async Task<ProductsFlavoursDto> GetFilteredFlavours(Filters filters)
         {
+            var filtersJson = JsonConvert.SerializeObject(filters);
+
             var dto = await this.restClient
-                 .PostAsync<dynamic>(
+                 .GetAsync<dynamic>(
                      this.endpointConfig.Value.Filters,
-                     json);
+                     filtersJson);
 
             return dto;
         }

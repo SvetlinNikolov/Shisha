@@ -29,14 +29,12 @@
             var product = await this.productsService.GetFlavourById(new FlavourByIdRequest { FlavourId = id, Language = this.Language });
 
             return this.View(product);
-            }
+        }
 
         [HttpPost]
-        public async Task<IActionResult> GetFilteredFlavours([FromBody] Root data)
+        public async Task<IActionResult> GetFilteredFlavours([FromBody] Filters filters)
         {
-            data.Data.category_id = new List<object> { 1 };
-
-            var filteredFlavours = await this.productsService.GetFilteredFlavours(JsonConvert.SerializeObject(data.Data));
+            var filteredFlavours = await this.productsService.GetFilteredFlavours(filters);
             return this.Json("az pak sym qk");
         }
     }
