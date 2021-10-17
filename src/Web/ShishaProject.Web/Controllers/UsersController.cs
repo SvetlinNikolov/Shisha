@@ -21,6 +21,13 @@
             this.usersService = usersService;
         }
 
+        [HttpGet]
+        public IActionResult LoginUser()
+        {
+            return this.View();
+        }
+
+        [HttpPost]
         public async Task<IActionResult> LoginUser(UserDto inputModel)
         {
             if (!this.ModelState.IsValid)
