@@ -17,6 +17,18 @@ async function postRequest(url = '', data = {}) {
     return response.json();
 }
 
+ function postRequestRawHtml(url = '', data = {}) {
+    $.ajax({
+        url: url,
+        method: 'POST',
+        data: data,
+
+    }).done(function (data) {
+        console.log('az sym datata',  data)
+        return data;
+    })
+}
+
 // POST - how to use
 // postRequest('addUrl', { data })
 // .then(data => {

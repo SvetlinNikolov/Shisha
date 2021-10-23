@@ -1,5 +1,6 @@
 ﻿namespace ShishaProject.Services.Data.Models.Dtos
 {
+    using System.Collections.Generic;
     using Newtonsoft.Json;
 
     public class ProductFlavourDto
@@ -23,7 +24,10 @@
         public string ShortDescription { get; set; }
 
         [JsonProperty("image")]
-        public string Image { get; set; }
+        public string Thumbnail { get; set; }
+
+        [JsonProperty("image_gallery")]
+        public IEnumerable<string> Images { get; set; }
 
         [JsonProperty("created_at")]
         public string CreatedAt { get; set; }

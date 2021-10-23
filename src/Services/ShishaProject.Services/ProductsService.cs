@@ -32,9 +32,11 @@
             this.endpointConfig = endpointConfig;
         }
 
-        public async Task<ProductsFlavoursDto> GetAllFlavours(string language)
+        public async Task<ProductsFlavoursDto> GetAllFlavours(GetAllFlavoursRequest request)
         {
-            var allProducts = await this.restClient.GetAsync<ProductsFlavoursDto>(this.endpointConfig.Value.GetAllFlavours, language);
+            var requestJson = JsonConvert.SerializeObject(request);
+
+            var allProducts = await this.restClient.PostAsync<ProductsFlavoursDto>(this.endpointConfig.Value.GetAllFlavours, requestJson);
 
             var pager = new Pager(allProducts.Flavours.Count());
             allProducts.PaginationData.Pages = pager.Pages;

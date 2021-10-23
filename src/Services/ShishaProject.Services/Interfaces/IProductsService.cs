@@ -8,7 +8,7 @@
 
     public interface IProductsService
     {
-        Task<ProductsFlavoursDto> GetAllFlavours(string language);
+        Task<ProductsFlavoursDto> GetAllFlavours(GetAllFlavoursRequest request);
 
         Task<ProductsCategoriesDto> GetAllCategories();
 

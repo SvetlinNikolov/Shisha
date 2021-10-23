@@ -19,12 +19,12 @@
 
         public async Task<IActionResult> Index()
         {
-            var products = await this.productsService.GetAllFlavours(this.Language);
+            var products = await this.productsService.GetAllFlavours(new GetAllFlavoursRequest { Language = this.Language });
             return this.View(products);
         }
 
         [HttpPost]
-        public async Task<IActionResult> GetFilteredFlavours([FromBody] Filters filters)
+        public async Task<IActionResult> GetFilteredFlavours(/*[FromBody]*/ Filters filters)
         {
             var filteredFlavours = await this.productsService.GetFilteredFlavours(filters);
             return this.PartialView("_Flavours", filteredFlavours);

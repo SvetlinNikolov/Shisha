@@ -42,5 +42,9 @@
   {
     "outputFile": "wwwroot/css/_action.css",
     "inputFile": "wwwroot/css/_action.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/cart.css",
+    "inputFile": "wwwroot/css/cart.scss"
   }
 ]

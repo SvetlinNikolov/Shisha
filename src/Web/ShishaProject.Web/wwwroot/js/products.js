@@ -145,14 +145,28 @@ function updateProducts() {
         language
     }
 
-    postRequest('Products/GetFilteredFlavours', data)
-        .then(data => {
-            console.log('data', data);
+    //const rawHtml = async () => {
+    //    const result = await postRequestRawHtml('Products/GetFilteredFlavours', data);
+    //    console.log('raw eihtiml', data);
+    //    console.log('i am resutl', result);
 
-            let productsContainer = document.getElementById('products');
-            productsContainer.innerHTML = data;
-        });
+    //}
+    //let productsContainer = document.getElementById('products');
+    //productsContainer.innerHTML = rawHtml();
+
+    
+
+    async function asyncCall() {
+        console.log('calling');
+        const result = await postRequestRawHtml('Products/GetFilteredFlavours', data);
+        console.log(result);
+        // expected output: "resolved"
+    }
+
+    asyncCall();
+
 }
+
 
 function toggleFilterMenu() {
     let filterMenu = document.getElementById('filters-menu');

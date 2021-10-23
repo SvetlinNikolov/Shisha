@@ -2,7 +2,7 @@
   margin: 30px auto;
   display: grid;
   grid-template-columns: 240px auto;
-  grid-template-rows: 70px auto auto;
+  grid-template-rows: 70px auto;
   align-items: flex-start;
 
   h2 {
@@ -249,9 +249,10 @@
       margin-bottom: 15px;
       display: flex;
       flex-direction: column;
+      box-shadow: 1px 1px 3px #bbc6cc;
+      border-radius: 5px;
 
       .product-content {
-        border: 1px solid $text-dark;
         border-bottom: none;
         border-top-left-radius: 15px;
         border-top-right-radius: 15px;
@@ -317,6 +318,10 @@
               input {
                 width: 50px;
                 text-align: center;
+
+                &:focus {
+                  outline: none;
+                }
               }
             }
 
@@ -352,50 +357,49 @@
         }
       }
     }
-  }
 
-  .pagination {
-    grid-row: 3 / span 1;
-    grid-column: 2 / span 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 15px 0 0;
-    margin: 0 auto;
-
-    button {
+    .pagination {
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 30px;
-      height: 30px;
-      text-align: center;
-      border: none;
-      border-right: 1px solid $primary;
-      background-color: $secondary;
-      color: $text-light;
-      font-weight: bold;
-      cursor: pointer;
-
-      &:last-child {
+      padding: 15px 0 0;
+      margin: 0 auto;
+      flex: 100%;
+  
+      button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 30px;
+        height: 30px;
+        text-align: center;
         border: none;
-      }
-
-      &:hover {
-        background-color: $primary;
-      }
-
-      &.active {
-        background-color: $primary;
-      }
-
-      &.button-previous, &.button-next {
-        width: auto;
-        padding: 0 7.5px;
+        border-right: 1px solid $primary;
         background-color: $secondary;
-
+        color: $text-light;
+        font-weight: bold;
+        cursor: pointer;
+  
+        &:last-child {
+          border: none;
+        }
+  
         &:hover {
           background-color: $primary;
+        }
+  
+        &.active {
+          background-color: $primary;
+        }
+  
+        &.button-previous, &.button-next {
+          width: auto;
+          padding: 0 7.5px;
+          background-color: $secondary;
+  
+          &:hover {
+            background-color: $primary;
+          }
         }
       }
     }

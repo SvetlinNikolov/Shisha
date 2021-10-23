@@ -1,0 +1,486 @@
+﻿<!-- Main content - different for every page -->
+<main>
+
+
+    <!-- Search bar - present on every page -->
+    <div class="search-bar">
+        <form>
+            <input type="text" id="search-bar-field" placeholder="Search for whatever you like . . .">
+            <button type="button" id="search-bar-btn">
+                <img src="../assets/icons/search.svg" alt="Search">
+            </button>
+        </form>
+    </div>
+
+    <!-- Products page -->
+    <div class="cart-container" id="cart-container">
+        <h2>Your cart</h2>
+
+        <div class="cart-sections">
+            <div class="cart-item-container">
+                <!-- FOR LOOP THIS - START -->
+                <div class="cart-item" data-product-number="1234567890">
+                    <button type="button" class="cart-item-remove-icon-container">
+                        <img src="../assets/icons/remove.svg" alt="Remove">
+                    </button>
+
+                    <div class="cart-item-image-container">
+                        <img src="../assets/images/products/coal_example_2.jpg" alt="">
+                    </div>
+
+                    <div class="cart-item-text-container">
+                        <div class="cart-item-name">
+                            LONG AND DESCRIPTIVE NAME OF THIS FINE PRODUCT
+                        </div>
+
+                        <div class="cart-item-text">
+                            <div class="cart-item-text-left">
+                                <div class="item-ratings-container">
+                                    <span class="item-text-title">Ratings: </span>
+                                    <span class="ratings-container">
+                                        <img src="../assets/icons/star.svg" alt="">
+                                        <img src="../assets/icons/star.svg" alt="">
+                                        <img src="../assets/icons/star.svg" alt="">
+                                        <img src="../assets/icons/star.svg" alt="">
+                                        <img src="../assets/icons/star.svg" alt="">
+                                    </span>
+
+                                    <span>4.20 / 5.00</span>
+                                </div>
+
+                                <p>
+                                    <span class="item-text-title">Product code: </span>
+                                    <span>1234567890</span>
+                                </p>
+
+                                <p>
+                                    <span class="item-text-title">Flavor: </span>
+                                    <span>Chicken</span>
+                                </p>
+                            </div>
+
+                            <div class="cart-item-text-right">
+                                <div class="cart-item-packaging-container">
+                                    <p class="item-text-title">Packaging:</p>
+                                    <div class="packaging-choices-container">
+                                        <button type="button" class="packaging-choice active">20 pcs</button>
+                                        <button type="button" class="packaging-choice">40 pcs</button>
+                                        <button type="button" class="packaging-choice">1.00 kg</button>
+                                        <button type="button" class="packaging-choice">100 kg</button>
+                                    </div>
+                                </div>
+
+                                <div class="price-container">
+                                    <div class="quantity">
+                                        <label for="quantity">Quantity:</label>
+                                        <br>
+                                        <input type="text" name="quantity" id="quantity" value="1">
+                                        x
+                                    </div>
+
+                                    <div class="price">
+                                        <p class="price-container-og-price">200.00 BGN</p>
+                                        <p class="price-container-discount-price">100.00 BGN</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- FOR LOOP THIS - END -->
+                <!-- DELETE THESE - START -->
+                <div class="cart-item" data-product-number="1">
+                    <button type="button" class="cart-item-remove-icon-container">
+                        <img src="../assets/icons/remove.svg" alt="Remove">
+                    </button>
+
+                    <div class="cart-item-image-container">
+                        <img src="../assets/images/products/coal_example_2.jpg" alt="">
+                    </div>
+
+                    <div class="cart-item-text-container">
+                        <div class="cart-item-name">
+                            LONG AND DESCRIPTIVE NAME OF THIS FINE PRODUCT
+                        </div>
+
+                        <div class="cart-item-text">
+                            <div class="cart-item-text-left">
+                                <div class="item-ratings-container">
+                                    <span class="item-text-title">Ratings: </span>
+                                    <span class="ratings-container">
+                                        <img src="../assets/icons/star.svg" alt="">
+                                        <img src="../assets/icons/star.svg" alt="">
+                                        <img src="../assets/icons/star.svg" alt="">
+                                        <img src="../assets/icons/star.svg" alt="">
+                                        <img src="../assets/icons/star.svg" alt="">
+                                    </span>
+
+                                    <span>4.20 / 5.00</span>
+                                </div>
+
+                                <p>
+                                    <span class="item-text-title">Product code: </span>
+                                    <span>1234567890</span>
+                                </p>
+
+                                <p>
+                                    <span class="item-text-title">Flavor: </span>
+                                    <span>Chicken</span>
+                                </p>
+                            </div>
+
+                            <div class="cart-item-text-right">
+                                <div class="cart-item-packaging-container">
+                                    <p class="item-text-title">Packaging:</p>
+                                    <div class="packaging-choices-container">
+                                        <button type="button" class="packaging-choice active">20 pcs</button>
+                                        <button type="button" class="packaging-choice">40 pcs</button>
+                                        <button type="button" class="packaging-choice">1.00 kg</button>
+                                        <button type="button" class="packaging-choice">100 kg</button>
+                                    </div>
+                                </div>
+
+                                <div class="price-container">
+                                    <div class="quantity">
+                                        <label for="quantity">Quantity:</label>
+                                        <br>
+                                        <input type="text" name="quantity" id="quantity" value="1">
+                                        x
+                                    </div>
+
+                                    <div class="price">
+                                        <p class="price-container-og-price">200.00 BGN</p>
+                                        <p class="price-container-discount-price">100.00 BGN</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cart-item" data-product-number="2">
+                    <button type="button" class="cart-item-remove-icon-container">
+                        <img src="../assets/icons/remove.svg" alt="Remove">
+                    </button>
+
+                    <div class="cart-item-image-container">
+                        <img src="../assets/images/products/coal_example_2.jpg" alt="">
+                    </div>
+
+                    <div class="cart-item-text-container">
+                        <div class="cart-item-name">
+                            LONG AND DESCRIPTIVE NAME OF THIS FINE PRODUCT
+                        </div>
+
+                        <div class="cart-item-text">
+                            <div class="cart-item-text-left">
+                                <div class="item-ratings-container">
+                                    <span class="item-text-title">Ratings: </span>
+                                    <span class="ratings-container">
+                                        <img src="../assets/icons/star.svg" alt="">
+                                        <img src="../assets/icons/star.svg" alt="">
+                                        <img src="../assets/icons/star.svg" alt="">
+                                        <img src="../assets/icons/star.svg" alt="">
+                                        <img src="../assets/icons/star.svg" alt="">
+                                    </span>
+
+                                    <span>4.20 / 5.00</span>
+                                </div>
+
+                                <p>
+                                    <span class="item-text-title">Product code: </span>
+                                    <span>1234567890</span>
+                                </p>
+
+                                <p>
+                                    <span class="item-text-title">Flavor: </span>
+                                    <span>Chicken</span>
+                                </p>
+                            </div>
+
+                            <div class="cart-item-text-right">
+                                <div class="cart-item-packaging-container">
+                                    <p class="item-text-title">Packaging:</p>
+                                    <div class="packaging-choices-container">
+                                        <button type="button" class="packaging-choice active">20 pcs</button>
+                                        <button type="button" class="packaging-choice">40 pcs</button>
+                                        <button type="button" class="packaging-choice">1.00 kg</button>
+                                        <button type="button" class="packaging-choice">100 kg</button>
+                                    </div>
+                                </div>
+
+                                <div class="price-container">
+                                    <div class="quantity">
+                                        <label for="quantity">Quantity:</label>
+                                        <br>
+                                        <input type="text" name="quantity" id="quantity" value="1">
+                                        x
+                                    </div>
+
+                                    <div class="price">
+                                        <p class="price-container-og-price">200.00 BGN</p>
+                                        <p class="price-container-discount-price">100.00 BGN</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cart-item" data-product-number="3">
+                    <button type="button" class="cart-item-remove-icon-container">
+                        <img src="../assets/icons/remove.svg" alt="Remove">
+                    </button>
+
+                    <div class="cart-item-image-container">
+                        <img src="../assets/images/products/coal_example_2.jpg" alt="">
+                    </div>
+
+                    <div class="cart-item-text-container">
+                        <div class="cart-item-name">
+                            LONG AND DESCRIPTIVE NAME OF THIS FINE PRODUCT
+                        </div>
+
+                        <div class="cart-item-text">
+                            <div class="cart-item-text-left">
+                                <div class="item-ratings-container">
+                                    <span class="item-text-title">Ratings: </span>
+                                    <span class="ratings-container">
+                                        <img src="../assets/icons/star.svg" alt="">
+                                        <img src="../assets/icons/star.svg" alt="">
+                                        <img src="../assets/icons/star.svg" alt="">
+                                        <img src="../assets/icons/star.svg" alt="">
+                                        <img src="../assets/icons/star.svg" alt="">
+                                    </span>
+
+                                    <span>4.20 / 5.00</span>
+                                </div>
+
+                                <p>
+                                    <span class="item-text-title">Product code: </span>
+                                    <span>1234567890</span>
+                                </p>
+
+                                <p>
+                                    <span class="item-text-title">Flavor: </span>
+                                    <span>Chicken</span>
+                                </p>
+                            </div>
+
+                            <div class="cart-item-text-right">
+                                <div class="cart-item-packaging-container">
+                                    <p class="item-text-title">Packaging:</p>
+                                    <div class="packaging-choices-container">
+                                        <button type="button" class="packaging-choice active">20 pcs</button>
+                                        <button type="button" class="packaging-choice">40 pcs</button>
+                                        <button type="button" class="packaging-choice">1.00 kg</button>
+                                        <button type="button" class="packaging-choice">100 kg</button>
+                                    </div>
+                                </div>
+
+                                <div class="price-container">
+                                    <div class="quantity">
+                                        <label for="quantity">Quantity:</label>
+                                        <br>
+                                        <input type="text" name="quantity" id="quantity" value="1">
+                                        x
+                                    </div>
+
+                                    <div class="price">
+                                        <p class="price-container-og-price">200.00 BGN</p>
+                                        <p class="price-container-discount-price">100.00 BGN</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- DELETE THESE - END -->
+            </div>
+
+            <div class="cart-item-total-price-container" id="cart-item-total-price-container">
+                <div class="cart-item-total-price-text">
+                    <p class="cart-item-total-header">Total</p>
+
+                    <p>
+                        <span id="cart-item-total-price">100.00</span>
+                        <span>BGN</span>
+                    </p>
+
+                    <p>
+                        <span id="cart-item-total-items">10</span>
+                        <span>items</span>
+                    </p>
+                </div>
+
+                <div class="cart-order-button-container">
+                    <button type="button" id="cart-oder-button">Place order</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- Footer - same for every page -->
+<footer>
+    <div class="footer-top">
+        <div class="column">
+            <p>Title Name</p>
+
+            <ul>
+                <li>
+                    <a href="#">Link Name</a>
+                </li>
+
+                <li>
+                    <a href="#">Link Name</a>
+                </li>
+
+                <li>
+                    <a href="#">Link Name</a>
+                </li>
+
+                <li>
+                    <a href="#">Link Name</a>
+                </li>
+
+                <li>
+                    <a href="#">Link Name</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="column">
+            <p>Title Name</p>
+
+            <ul>
+                <li>
+                    <a href="#">Link Name</a>
+                </li>
+
+                <li>
+                    <a href="#">Link Name</a>
+                </li>
+
+                <li>
+                    <a href="#">Link Name</a>
+                </li>
+
+                <li>
+                    <a href="#">Link Name</a>
+                </li>
+
+                <li>
+                    <a href="#">Link Name</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="column">
+            <p>Title Name</p>
+
+            <ul>
+                <li>
+                    <a href="#">Link Name</a>
+                </li>
+
+                <li>
+                    <a href="#">Link Name</a>
+                </li>
+
+                <li>
+                    <a href="#">Link Name</a>
+                </li>
+
+                <li>
+                    <a href="#">Link Name</a>
+                </li>
+
+                <li>
+                    <a href="#">Link Name</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="column">
+            <p>Title Name</p>
+
+            <ul>
+                <li>
+                    <a href="#">Link Name</a>
+                </li>
+
+                <li>
+                    <a href="#">Link Name</a>
+                </li>
+
+                <li>
+                    <a href="#">Link Name</a>
+                </li>
+
+                <li>
+                    <a href="#">Link Name</a>
+                </li>
+
+                <li>
+                    <a href="#">Link Name</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="column">
+            <p>Title Name</p>
+
+            <ul>
+                <li>
+                    <a href="#">Link Name</a>
+                </li>
+
+                <li>
+                    <a href="#">Link Name</a>
+                </li>
+
+                <li>
+                    <a href="#">Link Name</a>
+                </li>
+
+                <li>
+                    <a href="#">Link Name</a>
+                </li>
+
+                <li>
+                    <a href="#">Link Name</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <div class="logo-footer-container">
+            <a href="/">
+                <img src="../assets/images/logo_footer.webp" alt="">
+            </a>
+        </div>
+
+        <p>ShishaDealerZ &copy; 2021 All rights reserved.</p>
+
+        <div class="social-icons-container">
+            <a href="https://www.facebook.com/">
+                <img src="../assets/icons/facebook.svg" alt="Facebook">
+                <img src="../assets/icons/facebook-hover.svg" alt="Facebook">
+            </a>
+
+            <a href="https://www.instagram.com/">
+                <img src="../assets/icons/instagram.svg" alt="Instagram">
+                <img src="../assets/icons/instagram-hover.svg" alt="Instagram">
+            </a>
+
+            <a href="https://www.tiktok.com/">
+                <img src="../assets/icons/tiktok.svg" alt="Tik Tok">
+                <img src="../assets/icons/tiktok-hover.svg" alt="Tik Tok">
+            </a>
+        </div>
+    </div>
+</footer>
+
+<script src="~/js/cart.js" asp-append-version="true"></script>
