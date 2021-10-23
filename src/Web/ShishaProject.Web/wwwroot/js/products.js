@@ -90,7 +90,7 @@ function updateProducts() {
     // Packaging
     let packaging = [];
     // Stock status
-    let in_stock = true;
+    let in_stock = 1;
 
     for (let checkedInput of checkedInputsList) {
         switch (checkedInput.name) {
@@ -124,11 +124,11 @@ function updateProducts() {
 
             case 'filter-stock':
                 if (checkedInput.value === 'in-stock') {
-                    in_stock = true;
+                    in_stock = 1;
                     break;
                 }
 
-                in_stock = false;
+                in_stock = 0;
                 break;
         }
     }
@@ -148,6 +148,9 @@ function updateProducts() {
     postRequest('Products/GetFilteredFlavours', data)
         .then(data => {
             console.log('data', data);
+
+            let productsContainer = document.getElementById('products');
+            productsContainer.innerHTML = data;
         });
 }
 

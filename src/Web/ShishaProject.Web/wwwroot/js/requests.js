@@ -1,6 +1,6 @@
 // Requests to BE JS logic
 // POST
-async function postRequest(url = '', data = {}, language = '') {
+async function postRequest(url = '', data = {}) {
 
     const response = await fetch(url, {
         method: 'POST',

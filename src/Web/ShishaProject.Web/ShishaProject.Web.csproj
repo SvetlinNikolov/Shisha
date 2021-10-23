@@ -53,6 +53,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Views\Shared\Flavours\" />
     <Folder Include="wwwroot\fonts\" />
     <Folder Include="wwwroot\icons\" />
   </ItemGroup>

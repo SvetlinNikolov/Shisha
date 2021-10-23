@@ -1,13 +1,14 @@
 ﻿namespace ShishaProject.Services.Data.Models.Filters
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Text;
-
+    using Newtonsoft.Json;
     using ShishaProject.Services.Data.Models.Dtos;
 
     public class FiltersResults
     {
-        IEnumerable<ProductFlavourDto> FilteredFlavours { get; set; }
+        [JsonProperty("status_code")]
+        public int StatusCode { get; set; }
+
+        [JsonProperty("items")]
+        public ProductsFlavoursDto Results { get; set; }
     }
 }

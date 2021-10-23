@@ -22,9 +22,12 @@
         public IEnumerable<int> CategoryIds { get; set; }
 
         [JsonProperty("in_stock")]
-        public bool InStock { get; set; }
+        public short InStock { get; set; }
 
         [JsonProperty("language")]
         public string Language { get; set; }
+
+        [JsonProperty("items_per_page")]
+        public int FlavoursPerPage => 9;
     }
 }

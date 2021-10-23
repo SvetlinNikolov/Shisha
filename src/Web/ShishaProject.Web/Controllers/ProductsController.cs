@@ -1,10 +1,9 @@
 ﻿namespace ShishaProject.Web.Controllers
 {
-    using System.Collections.Generic;
     using System.Threading.Tasks;
+
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
-    using Newtonsoft.Json;
     using ShishaProject.Services.Data.Models.Dtos.Api;
     using ShishaProject.Services.Data.Models.Filters;
     using ShishaProject.Services.Interfaces;
@@ -24,18 +23,18 @@
             return this.View(products);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> GetFilteredFlavours([FromBody] Filters filters)
+        {
+            var filteredFlavours = await this.productsService.GetFilteredFlavours(filters);
+            return this.PartialView("_Flavours", filteredFlavours);
+        }
+
         public async Task<IActionResult> FlavourDetails(int id)
         {
             var product = await this.productsService.GetFlavourById(new FlavourByIdRequest { FlavourId = id, Language = this.Language });
 
             return this.View(product);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> GetFilteredFlavours([FromBody] Filters filters)
-        {
-            var filteredFlavours = await this.productsService.GetFilteredFlavours(filters);
-            return this.Json("az pak sym qk");
         }
     }
 }
