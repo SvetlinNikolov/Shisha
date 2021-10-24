@@ -155,15 +155,16 @@ function updateProducts() {
     //productsContainer.innerHTML = rawHtml();
 
     
+    let svetlio = postRequestRawHtml('Products/GetFilteredFlavours', data);
+    console.log(svetlio);
+    //async function asyncCall() {
+    //    console.log('calling');
+    //    const result = await postRequestRawHtml('Products/GetFilteredFlavours', data);
+    //    console.log(result);
+    //    // expected output: "resolved"
+    //}
 
-    async function asyncCall() {
-        console.log('calling');
-        const result = await postRequestRawHtml('Products/GetFilteredFlavours', data);
-        console.log(result);
-        // expected output: "resolved"
-    }
-
-    asyncCall();
+    //asyncCall();
 
 }
 

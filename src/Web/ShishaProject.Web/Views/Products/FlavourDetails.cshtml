@@ -45,22 +45,12 @@
             <img class="product-big-image" src="@Model.Thumbnail" alt="">
 
             <div class="product-image-navigation-container">
-                @*needs array of pictures*@
-                <button class="active">
-                    <img src="../assets/images/products/coal_example_2.jpg" alt="">
-                </button>
-
-                <button>
-                    <img src="../assets/images/products/coal_example.jpg" alt="">
-                </button>
-
-                <button>
-                    <img src="../assets/images/products/coal_example_2.jpg" alt="">
-                </button>
-
-                <button>
-                    <img src="../assets/images/products/coal_example.jpg" alt="">
-                </button>
+                @foreach (var image in Model.Images)
+                {
+                    <button class="">
+                        <img src="@image" alt="">
+                    </button>
+                }
             </div>
         </div>
 
@@ -90,7 +80,7 @@
 
             <p>
                 <span class="product-text-title">Description: </span>
-                    @Html.Raw(Model.Description)
+                @Html.Raw(Model.Description)
             </p>
         </div>
 

@@ -18,7 +18,7 @@ async function postRequest(url = '', data = {}) {
 }
 
  function postRequestRawHtml(url = '', data = {}) {
-    $.ajax({
+    return $.ajax({
         url: url,
         method: 'POST',
         data: data,
