@@ -87,10 +87,10 @@
         <div class="price-and-button-container">
             <p class="product-text-title">Packaging:</p>
             <div class="packaging-choices-container">
-                <button type="button" class="packaging-choice active">20 pcs</button>
-                <button type="button" class="packaging-choice">40 pcs</button>
-                <button type="button" class="packaging-choice">1.00 kg</button>
-                <button type="button" class="packaging-choice">100 kg</button>
+                @foreach (var variation in Model.Variations)
+                {
+                    <button type="button" class="packaging-choice active">@variation.weight</button>
+                }
             </div>
 
             <div class="price-container">
@@ -101,7 +101,7 @@
                 </div>
 
                 <div class="price">
-                    <p class="price-container-og-price">@(Model.Price += (Model.Price*0.15m))</p>
+                    <p class="price-container-og-price">this needs to be set when there is a promotion not every product has to be discounted otherwise users will think we are scamming them</p>
                     <p class="price-container-discount-price">@Model.Price BGN</p>
                 </div>
             </div>
