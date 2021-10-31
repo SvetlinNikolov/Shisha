@@ -34,5 +34,8 @@
 
         [JsonProperty("updated_at")]
         public string UpdatedAt { get; set; }
+
+        [JsonProperty("flavour_variations")]
+        public IEnumerable<FlavourVariation> Variations { get; set; }
     }
 }
