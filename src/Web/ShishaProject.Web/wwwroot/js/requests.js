@@ -17,17 +17,22 @@ async function postRequest(url = '', data = {}) {
     return response.json();
 }
 
- function postRequestRawHtml(url = '', data = {}) {
-    return $.ajax({
+async function postRequestHTML(url = '', data = {}) {
+    let test = await $.ajax({
         url: url,
         method: 'POST',
         data: data,
-
+        headers: {
+            'Accept-Language': language
+        }
     }).done(function (data) {
-        console.log('az sym datata',  data)
+        // Create modal and populate it with the response data
+        console.log('request', data);
         return data;
-    })
-}
+    });
+
+    return test;
+} 
 
 // POST - how to use
 // postRequest('addUrl', { data })

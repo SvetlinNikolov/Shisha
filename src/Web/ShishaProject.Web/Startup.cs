@@ -1,6 +1,8 @@
 ﻿namespace ShishaProject.Web
 {
     using System;
+    using System.Collections.Generic;
+    using System.Globalization;
     using System.IO;
     using System.Linq;
     using System.Reflection;
@@ -10,25 +12,25 @@
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
-    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Localization;
+    using Microsoft.AspNetCore.Mvc.Razor;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
+    using Microsoft.Extensions.Options;
     using ShishaProject.Common;
     using ShishaProject.Data;
     using ShishaProject.Data.Common;
     using ShishaProject.Data.Common.Repositories;
     using ShishaProject.Data.Models;
     using ShishaProject.Data.Repositories;
-    using ShishaProject.Data.Seeding;
     using ShishaProject.Services;
     using ShishaProject.Services.Data;
     using ShishaProject.Services.Data.Models.Configs;
     using ShishaProject.Services.Interfaces;
     using ShishaProject.Services.Mapping;
     using ShishaProject.Services.Messaging;
-    using ShishaProject.Web.ViewModels;
 
     public class Startup
     {
@@ -53,6 +55,19 @@
             services.AddDefaultIdentity<ApplicationUser>(IdentityOptionsProvider.GetIdentityOptions)
                 .AddRoles<ApplicationRole>().AddEntityFrameworkStores<ApplicationDbContext>();
 
+            services.Configure<RequestLocalizationOptions>(
+                opt =>
+                {
+                    opt.DefaultRequestCulture = new RequestCulture(GlobalConstants.MainLanguage);
+                    opt.SupportedCultures = GlobalConstants.AvailableLanguages.Select(x => new CultureInfo(x)).ToList();
+                    opt.SupportedUICultures = GlobalConstants.AvailableLanguages.Select(x => new CultureInfo(x)).ToList();
+                    opt.RequestCultureProviders = new List<IRequestCultureProvider>
+                    {
+                        new QueryStringRequestCultureProvider(),
+                        new CookieRequestCultureProvider(),
+                    };
+                });
+
             services.AddAuthentication(options =>
             {
                 options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
@@ -69,8 +84,11 @@
                 options =>
                     {
                         options.CheckConsentNeeded = context => false;
-                        options.MinimumSameSitePolicy = SameSiteMode.None;
+                        //options.MinimumSameSitePolicy = SameSiteMode.None;
+                        // this has to be none in production!!!!
+                        options.MinimumSameSitePolicy = SameSiteMode.Unspecified;
                     });
+
 
             services.AddControllersWithViews(
                 options =>
@@ -83,6 +101,11 @@
             services.AddDatabaseDeveloperPageExceptionFilter();
 
             services.AddSingleton(this.configuration);
+
+            // Localization
+            services.AddLocalization(opt => { opt.ResourcesPath = "Resources"; });
+            services.AddMvc().AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix).AddDataAnnotationsLocalization();
+
 
             // Data repositories
             services.AddScoped(typeof(IDeletableEntityRepository<>), typeof(EfDeletableEntityRepository<>));
@@ -115,12 +138,12 @@
             AutoMapperConfig.RegisterMappings(Assembly.GetExecutingAssembly().GetReferencedAssemblies().Select((item) => Assembly.Load(item)).ToArray());
 
             // Seed data on application startup
-            using (var serviceScope = app.ApplicationServices.CreateScope())
-            {
-                var dbContext = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-                dbContext.Database.Migrate();
-                new ApplicationDbContextSeeder().SeedAsync(dbContext, serviceScope.ServiceProvider).GetAwaiter().GetResult();
-            }
+            //using (var serviceScope = app.ApplicationServices.CreateScope())
+            //{
+            //    var dbContext = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+            //    dbContext.Database.Migrate();
+            //    new ApplicationDbContextSeeder().SeedAsync(dbContext, serviceScope.ServiceProvider).GetAwaiter().GetResult();
+            //}
 
             if (env.IsDevelopment())
             {
@@ -141,6 +164,8 @@
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseRequestLocalization(app.ApplicationServices.GetRequiredService<IOptions<RequestLocalizationOptions>>().Value);
 
             app.UseEndpoints(
                 endpoints =>

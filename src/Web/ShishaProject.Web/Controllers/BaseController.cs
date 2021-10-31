@@ -1,14 +1,25 @@
 ﻿namespace ShishaProject.Web.Controllers
 {
+    using System;
+    using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Localization;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Filters;
 
     public class BaseController : Controller
     {
-        protected string Language
+        [HttpPost]
+        protected IActionResult CultureManagement(string culture, string returnUrl)
         {
-            get { return (string)this.ControllerContext.RouteData.Values["language"]; }
+            this.Response.Cookies.Append(
+                CookieRequestCultureProvider.DefaultCookieName,
+                CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)),
+                new CookieOptions { Expires = DateTimeOffset.Now.AddYears(1) });
+
+            return this.LocalRedirect(returnUrl);
         }
+
+        protected string Language => (string)this.ControllerContext.RouteData.Values["language"];
 
         public override void OnActionExecuted(ActionExecutedContext filterContext)
         {

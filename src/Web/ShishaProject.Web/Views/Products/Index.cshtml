@@ -1,10 +1,12 @@
 ﻿@using ShishaProject.Services.Data.Models.Dtos
 
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer;
+
 @model ProductsFlavoursDto
 
 <div class="hero-section">
     <div class="text-container">
-        <h1>The Shop</h1>
+        <h1>@localizer["Title"]</h1>
         <p>Home / Shop</p>
     </div>
 </div>
@@ -24,7 +26,7 @@
             <!-- Filter - price -->
             <partial name="Filters/_PriceFilter" />
 
-            <!-- Filter - brand --> 
+            <!-- Filter - brand -->
             <partial name="Filters/_BrandFilter" />
 
             <!-- Filter - flavor -->

@@ -4,6 +4,7 @@
 
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Mvc.Localization;
     using ShishaProject.Services.Data.Models.Dtos.Api;
     using ShishaProject.Services.Data.Models.Filters;
     using ShishaProject.Services.Interfaces;
@@ -11,10 +12,12 @@
     public class ProductsController : BaseController
     {
         private readonly IProductsService productsService;
+        private readonly IHtmlLocalizer<ProductsController> localizer;
 
-        public ProductsController(IProductsService productsService)
+        public ProductsController(IProductsService productsService, IHtmlLocalizer<ProductsController> localizer)
         {
             this.productsService = productsService;
+            this.localizer = localizer;
         }
 
         public async Task<IActionResult> Index()

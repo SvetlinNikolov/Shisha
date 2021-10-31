@@ -154,17 +154,13 @@ function updateProducts() {
     //let productsContainer = document.getElementById('products');
     //productsContainer.innerHTML = rawHtml();
 
-    
-    let svetlio = postRequestRawHtml('Products/GetFilteredFlavours', data);
-    console.log(svetlio);
-    //async function asyncCall() {
-    //    console.log('calling');
-    //    const result = await postRequestRawHtml('Products/GetFilteredFlavours', data);
-    //    console.log(result);
-    //    // expected output: "resolved"
-    //}
 
-    //asyncCall();
+    postRequestHTML('Products/GetFilteredFlavours', data)
+        .then(results => {
+            let productsContainer = document.getElementById('products');
+            productsContainer.innerHTML = results;
+        });
+
 
 }
 
