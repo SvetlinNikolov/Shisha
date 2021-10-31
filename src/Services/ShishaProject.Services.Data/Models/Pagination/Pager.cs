@@ -9,11 +9,11 @@
         public Pager(
             int totalItems,
             int currentPage = 1,
-            int pageSize = 9,
+            int itemsPerPage = 9,
             int maxPages = 10)
         {
             // calculate total pages
-            var totalPages = (int)Math.Ceiling(totalItems / (decimal)pageSize);
+            var totalPages = (int)Math.Ceiling(totalItems / (decimal)itemsPerPage);
 
             // ensure current page isn't out of range
             if (currentPage < 1)
@@ -58,8 +58,8 @@
             }
 
             // calculate start and end item indexes
-            var startIndex = (currentPage - 1) * pageSize;
-            var endIndex = Math.Min(startIndex + pageSize - 1, totalItems - 1);
+            var startIndex = (currentPage - 1) * itemsPerPage;
+            var endIndex = Math.Min(startIndex + itemsPerPage - 1, totalItems - 1);
 
             // create an array of pages that can be looped over
             var pages = Enumerable.Range(startPage, endPage + 1 - startPage).ToList();
@@ -73,7 +73,7 @@
             // update object instance with all pager properties required by the view
             TotalItems = totalItems;
             CurrentPage = currentPage;
-            PageSize = pageSize;
+            PageSize = itemsPerPage;
             TotalPages = totalPages;
             StartPage = startPage;
             EndPage = endPage;

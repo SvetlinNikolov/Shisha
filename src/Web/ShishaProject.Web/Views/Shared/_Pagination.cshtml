@@ -4,9 +4,15 @@
 
 <div class="pagination">
     <button type="button" class="button-previous">Previous</button>
+
+    @if (!Model.Pages.Any())
+    {
+        <button type="button" class="active">1</button>
+    }
+
     @foreach (var currentPage in Model.Pages)
     {
-        <button type="button" class="active">@currentPage</button>
+        <button type="button" class="@(currentPage == Model.CurrentPage ? "active" : string.Empty)">@currentPage</button>
     }
 
     <button type="button" class="button-next">Next</button>

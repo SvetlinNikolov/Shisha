@@ -1,14 +1,11 @@
 ﻿namespace ShishaProject.Services
 {
-    using System.Collections.Generic;
     using System.Linq;
-    using System.Net;
     using System.Threading.Tasks;
+
     using AutoMapper;
     using Microsoft.Extensions.Options;
     using Newtonsoft.Json;
-    using Newtonsoft.Json.Linq;
-    using ShishaProject.Common.Helpers;
     using ShishaProject.Services.Data.Models.Configs;
     using ShishaProject.Services.Data.Models.Dtos;
     using ShishaProject.Services.Data.Models.Dtos.Api;
@@ -38,7 +35,7 @@
 
             var allProducts = await this.restClient.PostAsync<ProductsFlavoursDto>(this.endpointConfig.Value.GetAllFlavours, requestJson);
 
-            var pager = new Pager(allProducts.Flavours.Count());
+            var pager = new Pager(allProducts.PaginationData.TotalProducts, allProducts.PaginationData.CurrentPage, allProducts.PaginationData.ItemsPerPage);
             allProducts.PaginationData.Pages = pager.Pages;
 
             return allProducts;
@@ -84,7 +81,7 @@
                      this.endpointConfig.Value.Filters,
                      filtersJson);
 
-            var pager = new Pager(dto.Flavours.Count());
+            var pager = new Pager(dto.PaginationData.TotalProducts, dto.PaginationData.CurrentPage, dto.PaginationData.ItemsPerPage);
             dto.PaginationData.Pages = pager.Pages;
 
             return dto;

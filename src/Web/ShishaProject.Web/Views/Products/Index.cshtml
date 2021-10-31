@@ -40,7 +40,10 @@
         </form>
     </div>
 
-    @await Html.PartialAsync("_Flavours", Model)
+    <div class="products" id="products">
+        @await Html.PartialAsync("_Flavours", Model)
+    </div>
+
 </div>
 
 <script src="~/js/products.js" asp-append-version="true"></script>

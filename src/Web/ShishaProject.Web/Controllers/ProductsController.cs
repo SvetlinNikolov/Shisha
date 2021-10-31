@@ -1,5 +1,6 @@
 ﻿namespace ShishaProject.Web.Controllers
 {
+    using System.Linq;
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Authorization;
@@ -27,9 +28,15 @@
         }
 
         [HttpPost]
-        public async Task<IActionResult> GetFilteredFlavours(/*[FromBody]*/ Filters filters)
+        public async Task<IActionResult> GetFilteredFlavours([FromBody] Filters filters)
         {
             var filteredFlavours = await this.productsService.GetFilteredFlavours(filters);
+
+            if (!filteredFlavours.Flavours.Any())
+            {
+                return this.PartialView("_NoFlavours", filteredFlavours);
+            }
+
             return this.PartialView("_Flavours", filteredFlavours);
         }
 

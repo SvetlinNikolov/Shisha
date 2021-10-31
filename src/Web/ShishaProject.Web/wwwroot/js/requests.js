@@ -18,21 +18,18 @@ async function postRequest(url = '', data = {}) {
 }
 
 async function postRequestHTML(url = '', data = {}) {
-    let test = await $.ajax({
+    return await $.ajax({
         url: url,
         method: 'POST',
-        data: data,
+        data: JSON.stringify(data),
         headers: {
-            'Accept-Language': language
-        }
+            'Content-Type': 'application/json',
+        },
     }).done(function (data) {
         // Create modal and populate it with the response data
-        console.log('request', data);
         return data;
     });
-
-    return test;
-} 
+}
 
 // POST - how to use
 // postRequest('addUrl', { data })

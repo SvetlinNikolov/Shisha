@@ -1,5 +1,6 @@
 // Products JS logic
 // Variable definitions
+
 let allInputs = document.querySelectorAll('.filter-left-container input[type=checkbox]');
 let selectDropdown = document.querySelector('.filters-top .filters-select select');
 let pageNavigationButtons = document.querySelectorAll('.pagination button');
@@ -17,7 +18,7 @@ function navigatePageNavigation(clickedElement) {
     let indexToMakeActive;
 
     // Get the index of the active element
-    pageNavigationButtons.forEach(function (currentValue, currentIndex) {
+    document.querySelectorAll('.pagination button').forEach(function (currentValue, currentIndex) {
         if (currentValue.classList.contains('active')) {
             currentActiveIndex = currentIndex;
             return;
@@ -71,7 +72,7 @@ function updatePageNavigation() {
 
 function updateProducts() {
     // Get selected page from page navigation
-    let currentPageNumber = document.querySelector('.pagination button.active').innerHTML;
+    let current_page = document.querySelector('.pagination button.active').innerHTML;
 
     // Get select current select dropdown value
     let selectValue = selectDropdown.value;
@@ -134,7 +135,7 @@ function updateProducts() {
     }
 
     let data = {
-        currentPageNumber,
+        'page': current_page,
         selectValue,
         price_from,
         price_to,
@@ -145,25 +146,19 @@ function updateProducts() {
         language
     }
 
-    //const rawHtml = async () => {
-    //    const result = await postRequestRawHtml('Products/GetFilteredFlavours', data);
-    //    console.log('raw eihtiml', data);
-    //    console.log('i am resutl', result);
-
-    //}
-    //let productsContainer = document.getElementById('products');
-    //productsContainer.innerHTML = rawHtml();
-
-
     postRequestHTML('Products/GetFilteredFlavours', data)
         .then(results => {
             let productsContainer = document.getElementById('products');
             productsContainer.innerHTML = results;
+
+            //DELETE THIS AND THINK OF ANOTHER WAY OF DOING IT
+            let temp = document.querySelectorAll('.pagination button');
+            for (let button of temp) {
+                button.addEventListener('click', updatePageNavigation);
+            }
         });
 
-
 }
-
 
 function toggleFilterMenu() {
     let filterMenu = document.getElementById('filters-menu');

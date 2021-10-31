@@ -9,7 +9,7 @@
     public class BaseController : Controller
     {
         [HttpPost]
-        protected IActionResult CultureManagement(string culture, string returnUrl)
+        public IActionResult CultureManagement(string culture, string returnUrl)
         {
             this.Response.Cookies.Append(
                 CookieRequestCultureProvider.DefaultCookieName,

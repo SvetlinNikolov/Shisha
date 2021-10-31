@@ -6,7 +6,7 @@
 
     public class Filters
     {
-        [JsonProperty("currentPageNumber")]
+        [JsonProperty("page")]
         public string CurrentPageNumber { get; set; }
 
         [JsonProperty("selectValue")]
@@ -28,6 +28,6 @@
         public string Language { get; set; }
 
         [JsonProperty("items_per_page")]
-        public int FlavoursPerPage => 9;
+        public int FlavoursPerPage => 1;
     }
 }

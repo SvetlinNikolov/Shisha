@@ -6,5 +6,8 @@
     {
         [JsonProperty("language")]
         public string Language { get; set; }
+
+        [JsonProperty("items_per_page")]
+        public int FlavoursPerPage => 1;
     }
 }

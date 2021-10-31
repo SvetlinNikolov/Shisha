@@ -137,14 +137,6 @@
         {
             AutoMapperConfig.RegisterMappings(Assembly.GetExecutingAssembly().GetReferencedAssemblies().Select((item) => Assembly.Load(item)).ToArray());
 
-            // Seed data on application startup
-            //using (var serviceScope = app.ApplicationServices.CreateScope())
-            //{
-            //    var dbContext = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-            //    dbContext.Database.Migrate();
-            //    new ApplicationDbContextSeeder().SeedAsync(dbContext, serviceScope.ServiceProvider).GetAwaiter().GetResult();
-            //}
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

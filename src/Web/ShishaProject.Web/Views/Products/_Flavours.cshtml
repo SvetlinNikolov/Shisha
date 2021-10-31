@@ -2,7 +2,7 @@
 
 @model ProductsFlavoursDto
 <!-- Products container -->
-<div class="products" id="products">
+
     @foreach (var flavour in Model.Flavours)
     {
         <div class="product" data-product-number="@flavour.Id">
@@ -42,6 +42,4 @@
             <button type="button" class="product-add-to-cart-button">ADD TO CART</button>
         </div>
     }
-</div>
-
-@await Html.PartialAsync("_Pagination", Model.PaginationData)
+    @await Html.PartialAsync("_Pagination", Model.PaginationData)
