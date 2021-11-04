@@ -1,16 +1,7 @@
 ﻿<!-- Main content - different for every page -->
 <main>
 
-
-    <!-- Search bar - present on every page -->
-    <div class="search-bar">
-        <form>
-            <input type="text" id="search-bar-field" placeholder="Search for whatever you like . . .">
-            <button type="button" id="search-bar-btn">
-                <img src="../assets/icons/search.svg" alt="Search">
-            </button>
-        </form>
-    </div>
+    <partial name="_SearchBar" />
 
     <!-- Products page -->
     <div class="cart-container" id="cart-container">
@@ -177,11 +168,11 @@
                                 <div class="item-ratings-container">
                                     <span class="item-text-title">Ratings: </span>
                                     <span class="ratings-container">
-                                        <img src="../assets/icons/star.svg" alt="">
-                                        <img src="../assets/icons/star.svg" alt="">
-                                        <img src="../assets/icons/star.svg" alt="">
-                                        <img src="../assets/icons/star.svg" alt="">
-                                        <img src="../assets/icons/star.svg" alt="">
+                                        <img src="~/icons/star.svg" alt="">
+                                        <img src="~/icons/star.svg" alt="">
+                                        <img src="~/icons/star.svg" alt="">
+                                        <img src="~/icons/star.svg" alt="">
+                                        <img src="~/icons/star.svg" alt="">
                                     </span>
 
                                     <span>4.20 / 5.00</span>
@@ -229,7 +220,7 @@
 
                 <div class="cart-item" data-product-number="3">
                     <button type="button" class="cart-item-remove-icon-container">
-                        <img src="../assets/icons/remove.svg" alt="Remove">
+                        <img src="~/icons/remove.svg" alt="Remove">
                     </button>
 
                     <div class="cart-item-image-container">
@@ -246,11 +237,11 @@
                                 <div class="item-ratings-container">
                                     <span class="item-text-title">Ratings: </span>
                                     <span class="ratings-container">
-                                        <img src="../assets/icons/star.svg" alt="">
-                                        <img src="../assets/icons/star.svg" alt="">
-                                        <img src="../assets/icons/star.svg" alt="">
-                                        <img src="../assets/icons/star.svg" alt="">
-                                        <img src="../assets/icons/star.svg" alt="">
+                                        <img src="~/icons/star.svg" alt="">
+                                        <img src="~/icons/star.svg" alt="">
+                                        <img src="~/icons/star.svg" alt="">
+                                        <img src="~/icons/star.svg" alt="">
+                                        <img src="~/icons/star.svg" alt="">
                                     </span>
 
                                     <span>4.20 / 5.00</span>
@@ -320,167 +311,5 @@
         </div>
     </div>
 </main>
-
-<!-- Footer - same for every page -->
-<footer>
-    <div class="footer-top">
-        <div class="column">
-            <p>Title Name</p>
-
-            <ul>
-                <li>
-                    <a href="#">Link Name</a>
-                </li>
-
-                <li>
-                    <a href="#">Link Name</a>
-                </li>
-
-                <li>
-                    <a href="#">Link Name</a>
-                </li>
-
-                <li>
-                    <a href="#">Link Name</a>
-                </li>
-
-                <li>
-                    <a href="#">Link Name</a>
-                </li>
-            </ul>
-        </div>
-
-        <div class="column">
-            <p>Title Name</p>
-
-            <ul>
-                <li>
-                    <a href="#">Link Name</a>
-                </li>
-
-                <li>
-                    <a href="#">Link Name</a>
-                </li>
-
-                <li>
-                    <a href="#">Link Name</a>
-                </li>
-
-                <li>
-                    <a href="#">Link Name</a>
-                </li>
-
-                <li>
-                    <a href="#">Link Name</a>
-                </li>
-            </ul>
-        </div>
-
-        <div class="column">
-            <p>Title Name</p>
-
-            <ul>
-                <li>
-                    <a href="#">Link Name</a>
-                </li>
-
-                <li>
-                    <a href="#">Link Name</a>
-                </li>
-
-                <li>
-                    <a href="#">Link Name</a>
-                </li>
-
-                <li>
-                    <a href="#">Link Name</a>
-                </li>
-
-                <li>
-                    <a href="#">Link Name</a>
-                </li>
-            </ul>
-        </div>
-
-        <div class="column">
-            <p>Title Name</p>
-
-            <ul>
-                <li>
-                    <a href="#">Link Name</a>
-                </li>
-
-                <li>
-                    <a href="#">Link Name</a>
-                </li>
-
-                <li>
-                    <a href="#">Link Name</a>
-                </li>
-
-                <li>
-                    <a href="#">Link Name</a>
-                </li>
-
-                <li>
-                    <a href="#">Link Name</a>
-                </li>
-            </ul>
-        </div>
-
-        <div class="column">
-            <p>Title Name</p>
-
-            <ul>
-                <li>
-                    <a href="#">Link Name</a>
-                </li>
-
-                <li>
-                    <a href="#">Link Name</a>
-                </li>
-
-                <li>
-                    <a href="#">Link Name</a>
-                </li>
-
-                <li>
-                    <a href="#">Link Name</a>
-                </li>
-
-                <li>
-                    <a href="#">Link Name</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-
-    <div class="footer-bottom">
-        <div class="logo-footer-container">
-            <a href="/">
-                <img src="../assets/images/logo_footer.webp" alt="">
-            </a>
-        </div>
-
-        <p>ShishaDealerZ &copy; 2021 All rights reserved.</p>
-
-        <div class="social-icons-container">
-            <a href="https://www.facebook.com/">
-                <img src="../assets/icons/facebook.svg" alt="Facebook">
-                <img src="../assets/icons/facebook-hover.svg" alt="Facebook">
-            </a>
-
-            <a href="https://www.instagram.com/">
-                <img src="../assets/icons/instagram.svg" alt="Instagram">
-                <img src="../assets/icons/instagram-hover.svg" alt="Instagram">
-            </a>
-
-            <a href="https://www.tiktok.com/">
-                <img src="../assets/icons/tiktok.svg" alt="Tik Tok">
-                <img src="../assets/icons/tiktok-hover.svg" alt="Tik Tok">
-            </a>
-        </div>
-    </div>
-</footer>
 
 <script src="~/js/cart.js" asp-append-version="true"></script>

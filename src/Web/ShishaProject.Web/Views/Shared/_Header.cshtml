@@ -6,7 +6,7 @@
             </a>
 
             <button id="menu-icon">
-                <img src="./assets/icons/menu.svg" alt="Open Menu">
+                <img src="~/icons/menu.svg" alt="Open Menu">
             </button>
         </div>
 
@@ -42,15 +42,15 @@
     <div class="menu-right-container">
         <a href="./login.html">
             <div class="user-icon-container">
-                <img src="../assets/icons/user.svg" alt="">
-                <img src="../assets/icons/user-hover.svg" alt="">
+                <img src="~/icons/user.svg" alt="">
+                <img src="~/icons/user-hover.svg" alt="">
             </div>
         </a>
 
-        <a href="./cart.html" class="cart-section-container">
+        <a asp-controller="Cart" asp-action="Index" class="cart-section-container">
             <div class="cart-icon-container">
-                <img src="../assets/icons/cart.svg" alt="">
-                <img src="../assets/icons/cart-hover.svg" alt="">
+                <img src="~/icons/cart.svg" alt="">
+                <img src="~/icons/cart-hover.svg" alt="">
                 <span>Cart :</span>
             </div>
 

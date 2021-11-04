@@ -27,7 +27,7 @@ function changePackaging() {
 
 function removeItem() {
     this.parentNode.remove();
-        
+
     // TO DO
     // Also remove from localstorage
     // Also send a remove request to the cart saved on BE
@@ -47,7 +47,7 @@ function placeOrder() {
         // Get the packaging
         let packagingContainer = checkChildrenForClass(item, 'packaging-choices-container');
         let packaging = checkChildrenForClass(packagingContainer, 'active').innerText;
-        
+
         // Get the quantity
         // let quantity;
         let quantity = checkChildrenForClass(item, 'quantity').children[2].value;

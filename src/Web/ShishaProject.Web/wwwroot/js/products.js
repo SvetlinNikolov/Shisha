@@ -1,24 +1,26 @@
 // Products JS logic
 // Variable definitions
-
 let allInputs = document.querySelectorAll('.filter-left-container input[type=checkbox]');
 let selectDropdown = document.querySelector('.filters-top .filters-select select');
-let pageNavigationButtons = document.querySelectorAll('.pagination button');
 let filterMenuIcon = document.getElementById('filter-menu-button');
 let customPriceFilterBtn = document.getElementById('filter-price-custom-button');
 let checkBoxFilterPrice = document.querySelectorAll('.filter-left-container input[name="filter-price"]');
 let checkBoxFilterStock = document.querySelectorAll('.filter-left-container input[name="filter-stock"]');
-let allPackagingButtons = document.querySelectorAll('.product-text-and-price-container .packaging-choices-container button');
 let language = document.getElementById("page_language").innerText;
+let pageNavigationButtons = document.querySelectorAll('.pagination button');
+
 
 // Function definitions
 function navigatePageNavigation(clickedElement) {
+    // Get all buttons
+    let pageNavigationButtons = document.querySelectorAll('.pagination button');
+
     // Define overwritable variables
     let currentActiveIndex;
     let indexToMakeActive;
 
     // Get the index of the active element
-    document.querySelectorAll('.pagination button').forEach(function (currentValue, currentIndex) {
+    pageNavigationButtons.forEach(function (currentValue, currentIndex) {
         if (currentValue.classList.contains('active')) {
             currentActiveIndex = currentIndex;
             return;
@@ -151,13 +153,10 @@ function updateProducts() {
             let productsContainer = document.getElementById('products');
             productsContainer.innerHTML = results;
 
-            //DELETE THIS AND THINK OF ANOTHER WAY OF DOING IT
-            let temp = document.querySelectorAll('.pagination button');
-            for (let button of temp) {
-                button.addEventListener('click', updatePageNavigation);
-            }
-        });
-
+            pageNavigation();
+            packagingOptions();
+            addToCart();
+    });
 }
 
 function toggleFilterMenu() {
@@ -211,6 +210,68 @@ function changePackaging() {
     newPackaging.classList.add('active');
 }
 
+function addProductToCart() {
+    // Define variables
+    let productParentNode = this.parentNode;
+    let packaging = null;
+    let quantity = 1;
+    let productParent = productParentNode.attributes;
+
+    // Check if the button is on the product page
+    if (this.classList.contains('product-page')) {
+        productParent = document.querySelector('.product-text-container').attributes;
+        packaging = document.querySelector('.packaging-choices-container .packaging-choice.active').innerText;
+        quantity = Number(document.getElementById('quantity').value);
+
+        if (quantity < 1) {
+            quantity = 1;
+        }
+    }
+
+    if (!this.classList.contains('product-page')) {
+        // Set packaging on products page
+        let packagingChoicesContainer = productParentNode.childNodes[1].childNodes[3].childNodes[1].childNodes[5].childNodes;
+        for (let packagingChoice of packagingChoicesContainer) {
+            if (packagingChoice.classList) {
+                if (packagingChoice.classList.contains('active')) {
+                    packaging = packagingChoice.innerText;
+                    break;
+                }
+            }
+        }
+
+        // Set quantity on products page
+        let getQuantity = productParentNode.childNodes[1].childNodes[3].childNodes[3].childNodes[1].childNodes[5].value;
+        quantity = getQuantity;
+
+        if (quantity < 1) {
+            quantity = 1;
+        }
+    }
+
+    let productAttributeObject = {};
+
+    for (let attribute of productParent) {
+        productAttributeObject[attribute.name] = attribute.value;
+    }
+
+    let productNumber = productAttributeObject['data-product-number'];
+
+    let data = {
+        productNumber,
+        packaging,
+        quantity
+    };
+
+    // TO DO - SEND TO THE BE
+    console.log(data);
+    // postRequest('addUrl', { data })
+    // .then(data => {
+    //     console.log(data);
+    // });
+    // TO DO - SEND TO THE BE
+}
+
 // Add event listeners
 // On input (checkbox) click
 for (let input of allInputs) {
@@ -222,11 +283,6 @@ customPriceFilterBtn.addEventListener('click', updateProducts)
 
 // On select change
 selectDropdown.addEventListener('change', updateProducts);
-
-// On page change
-for (let button of pageNavigationButtons) {
-    button.addEventListener('click', updatePageNavigation);
-}
 
 // Show filters on button / header click
 filterMenuIcon.addEventListener('click', toggleFilterMenu);
@@ -241,7 +297,41 @@ for (let checkBox of checkBoxFilterStock) {
     checkBox.addEventListener('click', (event) => checkBoxToRadio(event, checkBoxFilterStock));
 }
 
-// Packaging selection
-for (let packagingBtn of allPackagingButtons) {
-    packagingBtn.addEventListener('click', changePackaging);
+// Reusable combined functions - definition and event listener
+// Page navigation under the products
+function pageNavigation() {
+    // Define
+    let pageNavigationButtons = document.querySelectorAll('.pagination button');
+
+    // Set event listener
+    for (let button of pageNavigationButtons) {
+        button.addEventListener('click', updatePageNavigation);
+    }
 }
+// Run
+pageNavigation();
+
+function packagingOptions() {
+    // Define
+    let allPackagingButtons = document.querySelectorAll('.product-text-and-price-container .packaging-choices-container button');
+
+    // Set event listener
+    for (let packagingBtn of allPackagingButtons) {
+        packagingBtn.addEventListener('click', changePackaging);
+    }
+}
+// Run
+packagingOptions();
+
+function addToCart() {
+    // Define
+    let addToCartButtons = document.querySelectorAll('.product-add-to-cart-button');
+
+    // Set event listener
+    for (let button of addToCartButtons) {
+        button.addEventListener('click', addProductToCart);
+    }
+
+}
+// Run
+addToCart();

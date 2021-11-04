@@ -45,9 +45,14 @@
             <img class="product-big-image" src="@Model.Thumbnail" alt="">
 
             <div class="product-image-navigation-container">
+
+                <button class="active">
+                    <img src="@Model.Thumbnail" alt="">
+                </button>
+
                 @foreach (var image in Model.Images)
                 {
-                    <button class="">
+                    <button>
                         <img src="@image" alt="">
                     </button>
                 }
@@ -112,3 +117,5 @@
 
 
 </div>
+
+<script src="~/js/product.js" asp-append-version="true"></script>
