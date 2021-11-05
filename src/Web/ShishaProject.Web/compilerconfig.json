@@ -46,5 +46,13 @@
   {
     "outputFile": "wwwroot/css/cart.css",
     "inputFile": "wwwroot/css/cart.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/_auth-form.css",
+    "inputFile": "wwwroot/css/_auth-form.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/_colors.css",
+    "inputFile": "wwwroot/css/_colors.scss"
   }
 ]

@@ -45,7 +45,7 @@
             return this.Json("you have logged in");
         }
 
-        public async Task<IActionResult> RegisterUserAsync(RegistrationInputModel inputModel)
+        public async Task<IActionResult> RegisterUser(RegistrationInputModel inputModel)
         {
             if (!this.ModelState.IsValid)
             {
@@ -54,6 +54,11 @@
 
             var result = await this.usersService.RegisterUserAsync(inputModel);
 
+            return this.View();
+        }
+
+        public async Task<IActionResult> ResetPassword(RegistrationInputModel inputModel)
+        {
             return this.View();
         }
 

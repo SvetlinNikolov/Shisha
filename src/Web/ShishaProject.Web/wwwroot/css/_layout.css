@@ -1007,3 +1007,62 @@ footer {
         font-size: 16px; }
       .cart-container .cart-item .cart-item-text-container .cart-item-text .cart-item-text-left {
         margin-right: 0px; } }
+
+.auth-form-container {
+  max-width: 735px;
+  margin: 60px auto;
+  padding: 0 30px; }
+  .auth-form-container form {
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    border-radius: 25px;
+    background-color: #1e2225;
+    color: #fff; }
+    .auth-form-container form h2 {
+      font-size: 50px;
+      line-height: 50px;
+      padding-bottom: 15px;
+      border-bottom: 2px solid #ed5034;
+      text-align: center; }
+    .auth-form-container form label, .auth-form-container form input {
+      font-size: 16px; }
+    .auth-form-container form label {
+      display: flex;
+      flex-direction: column;
+      margin-top: 30px; }
+    .auth-form-container form input {
+      background-color: transparent;
+      border: none;
+      border-bottom: 1px solid #ed5034;
+      color: #fff;
+      margin-top: 5px;
+      padding-left: 7.5px; }
+      .auth-form-container form input:focus {
+        outline: transparent;
+        border-bottom: 2px solid #ed5034; }
+    .auth-form-container form button {
+      padding: 20px;
+      width: 100%;
+      border: none;
+      background-color: #ed5034;
+      color: #fff;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      max-width: 250px;
+      margin: 0 auto; }
+      .auth-form-container form button:hover {
+        background-color: #c32c11; }
+    .auth-form-container form .login-helpful-links-container {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      margin: 15px 0 30px; }
+      .auth-form-container form .login-helpful-links-container.login-helpful-links-container-one {
+        justify-content: flex-end; }
+      .auth-form-container form .login-helpful-links-container a {
+        color: #ed5034;
+        text-underline-offset: 2px; }
+        .auth-form-container form .login-helpful-links-container a:hover {
+          color: #c32c11; }

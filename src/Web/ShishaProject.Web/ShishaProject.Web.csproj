@@ -24,6 +24,8 @@
     <Content Remove="C:\Users\daxte\.nuget\packages\bootstrap.sass\5.1.0\contentFiles\any\any\wwwroot\js\bootstrap.min.js" />
     <Content Remove="C:\Users\daxte\.nuget\packages\bootstrap.sass\5.1.0\contentFiles\any\any\wwwroot\js\bootstrap.min.js.map" />
     <Content Remove="compilerconfig.json" />
+    <Content Remove="Views\Users\LoginUser.cshtml" />
+    <Content Remove="Views\Users\RegisterUser.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -35,6 +37,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="compilerconfig.json" />
+    <None Include="Views\Users\LoginUser.cshtml" />
+    <None Include="Views\Users\RegisterUser.cshtml" />
   </ItemGroup>
 
   <ItemGroup>

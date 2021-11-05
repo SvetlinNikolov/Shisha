@@ -1,0 +1,83 @@
+.auth-form-container {
+  max-width: 735px;
+  margin: 60px auto;
+  padding: 0 30px;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    border-radius: 25px;
+    background-color: $secondary;
+    color: $text-light;
+
+    h2 {
+      font-size: 50px;
+      line-height: 50px;
+      padding-bottom: 15px;
+      border-bottom: 2px solid #ed5034;
+      text-align: center;
+    }
+
+    label, input {
+      font-size: 16px;
+    }
+
+    label {
+      display: flex;
+      flex-direction: column;
+      margin-top: 30px;
+    }
+
+    input {
+      background-color: transparent;
+      border: none;
+      border-bottom: 1px solid $primary;
+      color: $text-light;
+      margin-top: 5px;
+      padding-left: 7.5px;
+
+      &:focus {
+        outline: transparent;
+        border-bottom: 2px solid $primary;
+      }
+    }
+
+    button {
+      padding: 20px;
+      width: 100%;
+      border: none;
+      background-color: $primary;
+      color: #fff;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      max-width: 250px;
+      margin: 0 auto;
+
+      &:hover {
+        background-color: darken($primary, 15%);
+      }
+    }
+
+    .login-helpful-links-container {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      margin: 15px 0 30px;
+
+      &.login-helpful-links-container-one {
+        justify-content: flex-end;
+      }
+
+      a {
+        color: $primary;
+        text-underline-offset: 2px;
+
+        &:hover {
+          color: darken($primary, 15%);
+        }
+      }
+    }
+  }
+}
