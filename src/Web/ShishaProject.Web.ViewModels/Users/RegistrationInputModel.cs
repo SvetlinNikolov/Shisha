@@ -12,6 +12,9 @@
         [JsonProperty("password")]
         public string Password { get; set; }
 
+        [JsonProperty("repeat_password")]
+        public string RepeatPassword { get; set; }
+
         [JsonProperty("first_name")]
         public string FirstName { get; set; }
 
@@ -19,6 +22,7 @@
         public string LastName { get; set; }
 
         [JsonProperty("email")]
+
         public string Email { get; set; }
 
         [JsonProperty("city")]
@@ -31,6 +35,6 @@
         public string PhoneNumber { get; set; }
 
         [JsonProperty("created_at")]
-        public DateTime CreatedAt { get; set; }
+        public DateTime CreatedAt => DateTime.Now;
     }
 }

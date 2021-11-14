@@ -38,39 +38,21 @@
             return user;
         }
 
-        public async Task<bool> AuthenticateUser(UserDto model)
+        public async Task<bool> AuthenticateUser(LoginInputModel model)
         {
-            var myModel = new UserDto
-            {
-                Password = "super heshirana parola",
-                Username = "daxterr1123",
-            };
-
             var result = await this.restClient
-              .PostAsync<UserDto>(this.endpointConfig.Value.AuthenticateUser, JsonConvert.SerializeObject(myModel));
+              .PostAsync<UserDto>(this.endpointConfig.Value.AuthenticateUser, JsonConvert.SerializeObject(model));
 
-            return true;
+            return result != null;
         }
 
         public async Task<bool> RegisterUserAsync(RegistrationInputModel user)
         {
-            var myModel = new RegistrationInputModel
-            {
-                Address = "na ulicata",
-                City = "flowers",
-                CreatedAt = DateTime.Now,
-                Email = "daxtera1123@abv.bg",
-                FirstName = "das123x11",
-                LastName = "pe123shov",
-                Password = "super heshirana parola",
-                Username = "daxterr1123",
-                PhoneNumber = "0876444918",
-            };
-
+            user.City = "Ne sam go napravil o6te";
             var result = await this.restClient
-                .PostAsync<UserDto>(this.endpointConfig.Value.RegisterUser, JsonHelper.SerializeToPhpApiFormat("user_data", myModel));
+                 .PostAsync<UserDto>(this.endpointConfig.Value.RegisterUser, JsonHelper.SerializeToPhpApiFormat("user_data", user));
 
-            return true;
+            return result != null;
         }
     }
 }

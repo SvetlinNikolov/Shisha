@@ -1,5 +1,7 @@
-﻿
-<partial name="Hero" />
+﻿@using ShishaProject.Web.ViewModels.Users;
+@model RegistrationInputModel
+
+<partial name="_Hero" />
 
 <partial name="_SearchBar" />
 
@@ -10,38 +12,48 @@
 
         <label for="email">
             E-mail
-            <input type="email" name="email" id="email">
+            <input type="email" asp-for="@Model.Email">
         </label>
 
         <label for="username">
             Username
-            <input type="text" name="username" id="username">
+            <input asp-for="@Model.Username">
         </label>
 
         <label for="password">
             Password
-            <input type="password" name="password" id="password">
+            <input type="password" asp-for="@Model.Password">
         </label>
 
-        <label for="repassword">
+        <label for="repeat_password">
             Repeat Password
-            <input type="password" name="repassword" id="repassword">
+            <input type="password" asp-for="@Model.RepeatPassword">
         </label>
 
-        <label for="phone">
+        <label for="first_name">
+            First Name
+            <input asp-for="@Model.FirstName">
+        </label>
+
+        <label for="last_name">
+            Last Name
+            <input asp-for="@Model.LastName">
+        </label>
+
+        <label for="phone_number">
             Phone
-            <input type="tel" name="phone" id="phone">
+            <input type="tel" asp-for="@Model.PhoneNumber">
         </label>
 
         <label for="address">
             Address
-            <input type="text" name="address" id="address">
+            <input asp-for="@Model.Address">
         </label>
 
         <div class="login-helpful-links-container login-helpful-links-container-one">
-            <p>Have an account? <a href="./login.html">Login!</a></p>
+            <p>Have an account? <a asp-controller="Users" asp-action="LoginUser">Login!</a></p>
         </div>
 
-        <button type="submit">REGISTER</button>
+        <button type="submit" asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">REGISTER</button>
     </form>
 </div>

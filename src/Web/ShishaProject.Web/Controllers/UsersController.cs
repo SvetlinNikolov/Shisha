@@ -28,11 +28,11 @@
         }
 
         [HttpPost]
-        public async Task<IActionResult> LoginUser(UserDto inputModel)
+        public async Task<IActionResult> LoginUser(LoginInputModel inputModel, string returnUrl = "")
         {
             if (!this.ModelState.IsValid)
             {
-                throw new Exception("You didn't enter the needed stuff bruh");
+                return this.View(inputModel);
             }
 
             var userAuthenticated = await this.usersService.AuthenticateUser(inputModel);
@@ -42,10 +42,17 @@
                 await this.SignInUser(inputModel);
             }
 
-            return this.Json("you have logged in");
+            return this.LocalRedirect(returnUrl);
         }
 
-        public async Task<IActionResult> RegisterUser(RegistrationInputModel inputModel)
+        [HttpGet]
+        public IActionResult RegisterUser()
+        {
+            return this.View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> RegisterUser([FromForm] RegistrationInputModel inputModel)
         {
             if (!this.ModelState.IsValid)
             {
@@ -69,7 +76,7 @@
             throw new Exception();
         }
 
-        private async Task SignInUser(UserDto inputModel)
+        private async Task SignInUser(LoginInputModel inputModel)
         {
             var claims = new List<Claim>
                 {

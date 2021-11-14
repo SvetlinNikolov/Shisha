@@ -6,7 +6,7 @@
 
     public interface IUsersService
     {
-        Task<bool> AuthenticateUser(UserDto model);
+        Task<bool> AuthenticateUser(LoginInputModel model);
         //IEnumerable<User> GetAll();
         Task<UserDto> GetUserByIdAsync(int id);
         Task<bool> RegisterUserAsync(RegistrationInputModel user);

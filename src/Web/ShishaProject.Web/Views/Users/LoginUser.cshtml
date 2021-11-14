@@ -1,4 +1,9 @@
-﻿
+﻿@using ShishaProject.Web.ViewModels.Users;
+@model LoginInputModel
+
+@{ 
+    var returnUrl = string.IsNullOrWhiteSpace(Context.Request.Path) ? "~/" : $"~{Context.Request.Path.Value}{Context.Request.QueryString}";
+}
 <partial name="_Hero" />
 <partial name="_SearchBar" />
 
@@ -9,12 +14,12 @@
 
         <label for="username">
             Username
-            <input type="text" name="username" id="username">
+            <input type="text" asp-for="@Model.Username">
         </label>
 
         <label for="password">
             Password
-            <input type="password" name="password" id="password">
+            <input type="password" asp-for="@Model.Password">
         </label>
 
         <div class="login-helpful-links-container">
@@ -22,6 +27,6 @@
             <p>Don't have an account? <a asp-controller="Users" asp-action="RegisterUser">Register!</a></p>
         </div>
 
-        <button type="submit">LOGIN</button>
+        <button type="submit" asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">LOGIN</button>
     </form>
 </div>
