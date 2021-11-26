@@ -1,7 +1,7 @@
 ﻿@using ShishaProject.Web.ViewModels.Users;
 @model LoginInputModel
 
-@{ 
+@{
     var returnUrl = string.IsNullOrWhiteSpace(Context.Request.Path) ? "~/" : $"~{Context.Request.Path.Value}{Context.Request.QueryString}";
 }
 <partial name="_Hero" />
@@ -20,6 +20,8 @@
         <label for="password">
             Password
             <input type="password" asp-for="@Model.Password">
+            <span class="@ViewData["LoginError"]??" hidden">@ViewData["LoginError"]</span>
+
         </label>
 
         <div class="login-helpful-links-container">

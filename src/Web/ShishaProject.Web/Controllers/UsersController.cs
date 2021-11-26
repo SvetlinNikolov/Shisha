@@ -1,30 +1,29 @@
 ﻿namespace ShishaProject.Web.Controllers
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Security.Claims;
     using System.Threading.Tasks;
 
-    using Microsoft.AspNetCore.Authentication;
-    using Microsoft.AspNetCore.Authentication.Cookies;
     using Microsoft.AspNetCore.Mvc;
-    using ShishaProject.Services.Data.Models.Dtos;
+    using Microsoft.Extensions.Localization;
     using ShishaProject.Services.Interfaces;
     using ShishaProject.Web.ViewModels.Users;
 
     public class UsersController : BaseController
     {
         private readonly IUsersService usersService;
+        private readonly IStringLocalizer<UsersController> stringLocalizer;
 
-        public UsersController(IUsersService usersService)
+        public UsersController(
+            IUsersService usersService,
+            IStringLocalizer<UsersController> stringLocalizer)
         {
             this.usersService = usersService;
+            this.stringLocalizer = stringLocalizer;
         }
 
         [HttpGet]
-        public IActionResult LoginUser()
+        public IActionResult LoginUser(LoginInputModel inputModel)
         {
-            return this.View();
+            return this.View(inputModel);
         }
 
         [HttpPost]
@@ -39,10 +38,30 @@
 
             if (userAuthenticated)
             {
-                await this.SignInUser(inputModel);
+                if (this.usersService.UserLoggedIn())
+                {
+                    return this.LocalRedirect(returnUrl);
+                    // this should be the profile page just like emag
+                }
+
+                await this.usersService.LoginUser(inputModel);
+
+                return this.LocalRedirect(returnUrl);
+            }
+            else
+            {
+                this.ViewData["LoginError"] = this.stringLocalizer["LoginError"];
             }
 
-            return this.LocalRedirect(returnUrl);
+            return this.View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> LogoutUser()
+        {
+            await this.usersService.LogoutUser();
+
+            return this.RedirectToAction("Users", "Login");
         }
 
         [HttpGet]
@@ -67,25 +86,6 @@
         public async Task<IActionResult> ResetPassword(RegistrationInputModel inputModel)
         {
             return this.View();
-        }
-
-        public async Task<IActionResult> GetUserById(int id)
-        {
-            var user = await this.usersService.GetUserByIdAsync(17);
-
-            throw new Exception();
-        }
-
-        private async Task SignInUser(LoginInputModel inputModel)
-        {
-            var claims = new List<Claim>
-                {
-                    new Claim(ClaimTypes.Name, inputModel.Username),
-                };
-
-            var claimsIdentity = new ClaimsIdentity(claims, "Login");
-
-            await this.HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
         }
     }
 }

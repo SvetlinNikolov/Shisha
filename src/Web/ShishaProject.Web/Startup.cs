@@ -101,7 +101,7 @@
 
             services.AddRazorPages();
             services.AddDatabaseDeveloperPageExceptionFilter();
-
+            services.AddSingleton<IHttpContextAccessor,HttpContextAccessor>();
             services.AddSingleton(this.configuration);
 
             // Localization

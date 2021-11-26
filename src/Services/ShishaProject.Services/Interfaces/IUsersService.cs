@@ -10,6 +10,11 @@
         //IEnumerable<User> GetAll();
         Task<UserDto> GetUserByIdAsync(int id);
         Task<bool> RegisterUserAsync(RegistrationInputModel user);
+
+        bool UserLoggedIn();
+        Task LoginUser(LoginInputModel inputModel);
+        Task LogoutUser();
+
         //void Update(int id, UpdateRequest model);
         //void Delete(int id);
     }
