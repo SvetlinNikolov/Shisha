@@ -60,8 +60,11 @@
                 opt =>
                 {
                     opt.DefaultRequestCulture = new RequestCulture(GlobalConstants.MainLanguage);
-                    opt.SupportedCultures = GlobalConstants.AvailableLanguages.Select(x => new CultureInfo(x)).ToList();
-                    opt.SupportedUICultures = GlobalConstants.AvailableLanguages.Select(x => new CultureInfo(x)).ToList();
+                    // add multi culture support
+                    //opt.SupportedCultures = GlobalConstants.AvailableLanguages.Select(x => new CultureInfo(x)).ToList();
+                    //opt.SupportedUICultures = GlobalConstants.AvailableLanguages.Select(x => new CultureInfo(x)).ToList();
+                    opt.SupportedCultures = new List<CultureInfo> { new CultureInfo(GlobalConstants.MainLanguage) };
+                    opt.SupportedUICultures = new List<CultureInfo> { new CultureInfo(GlobalConstants.MainLanguage) };
                     opt.RequestCultureProviders = new List<IRequestCultureProvider>
                     {
                         new QueryStringRequestCultureProvider(),
@@ -101,7 +104,7 @@
 
             services.AddRazorPages();
             services.AddDatabaseDeveloperPageExceptionFilter();
-            services.AddSingleton<IHttpContextAccessor,HttpContextAccessor>();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSingleton(this.configuration);
 
             // Localization

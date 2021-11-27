@@ -1,45 +1,52 @@
 ﻿@using ShishaProject.Services.Data.Models.Dtos
+@using ShishaProject.Common.Helpers
 
 @model ProductsFlavoursDto
 <!-- Products container -->
 
-    @foreach (var flavour in Model.Flavours)
-    {
-        <div class="product" data-product-number="@flavour.Id">
-            <div class="product-content">
-                <a asp-controller="Products" asp-action="FlavourDetails" asp-route-id="@flavour.Id">
-                    <img src="@flavour.Thumbnail" alt="Flavour Image">
-                </a>
+@foreach (var flavour in Model.Flavours)
+{
+    <div class="product" data-product-number="@flavour.Id">
+        <div class="product-content">
+            <a asp-controller="Products" asp-action="FlavourDetails" asp-route-id="@flavour.Id">
+                <img src="@flavour.Thumbnail" alt="Flavour Image">
+            </a>
 
-                <div class="product-text-and-price-container">
-                    <div class="product-text-container">
-                        <p class="product-title">@flavour.Title</p>
-                        <p>@flavour.ShortDescription</p>
+            <div class="product-text-and-price-container">
+                <div class="product-text-container">
+                    <p class="product-title">@flavour.Title</p>
+                    <p>@flavour.ShortDescription</p>
 
-                        <div class="packaging-choices-container">
-                            <button type="button" class="packaging-choice active">20 pcs</button> @*tuka tova active e stranno*@
-                            <button type="button" class="packaging-choice">40 pcs</button>
-                            <button type="button" class="packaging-choice">1.00 kg</button>
-                            <button type="button" class="packaging-choice">100 kg</button>
-                        </div>
-
+                    <div class="packaging-choices-container">
+                        @if (!flavour.Variations.IsNullOrEmpty())
+                        {
+                            @foreach (var variation in flavour.Variations)
+                            {
+                                <button type="button"
+                                        class="packaging-choice @(flavour.Variations.First().flavour_id==variation.flavour_id? "active": string.Empty)">
+                                    @variation.weight
+                                </button>
+                            }
+                        }
                     </div>
 
-                    <div class="price-container">
-                        <div class="quantity">
-                            <label for="quantity">Quantity:</label>
-                            <br>
-                            <input type="text" name="quantity" id="quantity" value="1">
-                        </div>
+                </div>
 
-                        <p class="price-container-og-price">420</p>
-                        <p class="price-container-discount-price">@flavour.Price BGN</p>
-
+                <div class="price-container">
+                    <div class="quantity">
+                        <label for="quantity">Quantity:</label>
+                        <br>
+                        <input type="text" name="quantity" id="quantity" value="1">
                     </div>
+
+                    <p class="price-container-og-price">420</p>
+                    <p class="price-container-discount-price">@flavour.Price BGN</p>
+
                 </div>
             </div>
-
-            <button type="button" class="product-add-to-cart-button">ADD TO CART</button>
         </div>
-    }
-    @await Html.PartialAsync("_Pagination", Model.PaginationData)
+
+        <a asp-controller="Cart" asp-action="AddToCart" asp-route-id="@flavour.Id"> </a><button type="button" class="product-add-to-cart-button">ADD TO CART</button>
+    </div>
+}
+@await Html.PartialAsync("_Pagination", Model.PaginationData)

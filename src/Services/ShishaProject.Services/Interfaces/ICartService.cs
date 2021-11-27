@@ -1,8 +1,11 @@
 ﻿namespace ShishaProject.Services.Interfaces
 {
+    using ShishaProject.Web.ViewModels.Cart;
+    using System.Threading.Tasks;
+
     public interface ICartService
     {
-        void AddToCart(int flavourId);
+        Task<bool> AddToCart(AddToCartInputModel inputModel);
 
         void RemoveFromCart(int flavourId);
 
