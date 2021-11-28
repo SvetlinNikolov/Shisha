@@ -1,4 +1,4 @@
-﻿namespace ShishaProject.Web.ViewModels.Users
+﻿namespace ShishaProject.Web.ViewModels.User
 {
     using Newtonsoft.Json;
     using System.ComponentModel.DataAnnotations;

@@ -1,0 +1,265 @@
+﻿
+
+<partial name="_Hero" />
+<partial name="_SearchBar" />
+
+<!-- Profile page -->
+<div class="profile-container" id="profile-container">
+    <div class="profile-navigation">
+        <button type="button" id="profile-info-container-btn" class="profile-nav-button active">Profile Data</button>
+        <button type="button" id="profile-orders-container-btn" class="profile-nav-button">Order History</button>
+        <form method="post">
+            <button type="submit" asp-action="LogoutUser" asp-controller="Users" class="profile-nav-button">Logout</button>
+        </form>
+    </div>
+
+    <div id="profile-info-container" class="profile-info-container profile-info-container-active">
+        <div class="profile-auth-form-container">
+            <form action="">
+                <label for="email">
+                    E-mail
+                    <input type="email" name="email" id="email">
+                </label>
+
+                <label for="username">
+                    Username
+                    <input type="text" name="username" id="username">
+                </label>
+
+                <label for="password">
+                    Password
+                    <input type="password" name="password" id="password">
+                </label>
+
+                <label for="repassword">
+                    Repeat Password
+                    <input type="password" name="repassword" id="repassword">
+                </label>
+
+                <label for="phone">
+                    Phone
+                    <input type="tel" name="phone" id="phone">
+                </label>
+
+                <label for="address">
+                    Address
+                    <input type="text" name="address" id="address">
+                </label>
+
+                <button type="submit">SAVE</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="profile-orders-container" class="profile-info-container">
+        <div class="profile-orders-container">
+            <!-- FOR CYCLE STARTS FOR THE ORDERS -->
+            <div class="profile-order">
+                <div class="profile-order-field">
+                    <span class="profile-order-title">
+                        Order #
+                    </span>
+
+                    <span class="profile-order-text">
+                        123456789
+                    </span>
+                </div>
+
+                <div class="profile-order-field">
+                    <span class="profile-order-title">
+                        Order Date
+                    </span>
+
+                    <span class="profile-order-text">
+                        12.12.1212
+                    </span>
+                </div>
+
+                <div class="profile-order-field">
+                    <span class="profile-order-title">
+                        Total Quantity
+                    </span>
+
+                    <span class="profile-order-text">
+                        123
+                    </span>
+                </div>
+
+                <div class="profile-order-field">
+                    <span class="profile-order-title">
+                        Total Price
+                    </span>
+
+                    <span class="profile-order-text">
+                        123.000 BGN
+                    </span>
+                </div>
+
+                <div class="profile-order-field">
+                    <span class="profile-order-title">
+                        Products
+                    </span>
+
+                    <span class="profile-order-image-container">
+                        <a href="#">
+                            <img src="../assets/images/products/coal_example_2.jpg" alt="1">
+                        </a>
+
+                        <a href="#">
+                            <img src="../assets/images/products/coal_example_2.jpg" alt="1">
+                        </a>
+
+                        <a href="#">
+                            <img src="../assets/images/products/coal_example_2.jpg" alt="1">
+                        </a>
+                    </span>
+                </div>
+            </div>
+
+            <div class="profile-order">
+                <div class="profile-order-field">
+                    <span class="profile-order-title">
+                        Order #
+                    </span>
+
+                    <span class="profile-order-text">
+                        123456789
+                    </span>
+                </div>
+
+                <div class="profile-order-field">
+                    <span class="profile-order-title">
+                        Order Date
+                    </span>
+
+                    <span class="profile-order-text">
+                        12.12.1212
+                    </span>
+                </div>
+
+                <div class="profile-order-field">
+                    <span class="profile-order-title">
+                        Total Quantity
+                    </span>
+
+                    <span class="profile-order-text">
+                        123
+                    </span>
+                </div>
+
+                <div class="profile-order-field">
+                    <span class="profile-order-title">
+                        Total Price
+                    </span>
+
+                    <span class="profile-order-text">
+                        123.000 BGN
+                    </span>
+                </div>
+
+                <div class="profile-order-field">
+                    <span class="profile-order-title">
+                        Products
+                    </span>
+
+                    <span class="profile-order-image-container">
+                        <a href="#">
+                            <img src="../assets/images/products/coal_example_2.jpg" alt="1">
+                        </a>
+
+                        <a href="#">
+                            <img src="../assets/images/products/coal_example_2.jpg" alt="1">
+                        </a>
+
+                        <a href="#">
+                            <img src="../assets/images/products/coal_example_2.jpg" alt="1">
+                        </a>
+                    </span>
+                </div>
+            </div>
+
+            <div class="profile-order">
+                <div class="profile-order-field">
+                    <span class="profile-order-title">
+                        Order #
+                    </span>
+
+                    <span class="profile-order-text">
+                        123456789
+                    </span>
+                </div>
+
+                <div class="profile-order-field">
+                    <span class="profile-order-title">
+                        Order Date
+                    </span>
+
+                    <span class="profile-order-text">
+                        12.12.1212
+                    </span>
+                </div>
+
+                <div class="profile-order-field">
+                    <span class="profile-order-title">
+                        Total Quantity
+                    </span>
+
+                    <span class="profile-order-text">
+                        123
+                    </span>
+                </div>
+
+                <div class="profile-order-field">
+                    <span class="profile-order-title">
+                        Total Price
+                    </span>
+
+                    <span class="profile-order-text">
+                        123.000 BGN
+                    </span>
+                </div>
+
+                <div class="profile-order-field">
+                    <span class="profile-order-title">
+                        Products
+                    </span>
+
+                    <span class="profile-order-image-container">
+                        <a href="#">
+                            <img src="../assets/images/products/coal_example_2.jpg" alt="1">
+                        </a>
+
+                        <a href="#">
+                            <img src="../assets/images/products/coal_example_2.jpg" alt="1">
+                        </a>
+
+                        <a href="#">
+                            <img src="../assets/images/products/coal_example_2.jpg" alt="1">
+                        </a>
+                    </span>
+                </div>
+            </div>
+            <!-- FOR CYCLE ENDS FOR THE ORDERS -->
+            <!-- Pagination -->
+            <div class="profile-order-pagination">
+                <button type="button" class="button-previous">Previous</button>
+                <button type="button" class="active">1</button>
+                <button type="button">2</button>
+                <button type="button">3</button>
+                <button type="button">4</button>
+                <button type="button">5</button>
+                <button type="button">6</button>
+                <button type="button">7</button>
+                <button type="button">8</button>
+                <button type="button">9</button>
+                <button type="button">10</button>
+                <button type="button" class="button-next">Next</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script src="~/js/profile.js" asp-append-version="true"></script>

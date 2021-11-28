@@ -14,7 +14,7 @@
     using ShishaProject.Services.Data.Models.Configs;
     using ShishaProject.Services.Data.Models.Dtos;
     using ShishaProject.Services.Interfaces;
-    using ShishaProject.Web.ViewModels.Users;
+    using ShishaProject.Web.ViewModels.User;
 
     public class UsersService : IUsersService
     {

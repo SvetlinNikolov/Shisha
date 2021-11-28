@@ -1,11 +1,11 @@
 ﻿namespace ShishaProject.Web.Controllers
 {
     using System.Threading.Tasks;
-
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Localization;
     using ShishaProject.Services.Interfaces;
-    using ShishaProject.Web.ViewModels.Users;
+    using ShishaProject.Web.ViewModels.User;
 
     public class UsersController : BaseController
     {
@@ -23,6 +23,11 @@
         [HttpGet]
         public IActionResult LoginUser(LoginInputModel inputModel)
         {
+            if (this.usersService.UserLoggedIn())
+            {
+                return this.RedirectToAction(nameof(this.UserProfile));
+            }
+
             return this.View(inputModel);
         }
 
@@ -40,8 +45,7 @@
             {
                 if (this.usersService.UserLoggedIn())
                 {
-                    return this.LocalRedirect(returnUrl);
-                    // this should be the profile page just like emag
+                    return this.RedirectToAction(nameof(this.UserProfile));
                 }
 
                 await this.usersService.LoginUser(inputModel);
@@ -56,12 +60,13 @@
             return this.View();
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> LogoutUser()
         {
             await this.usersService.LogoutUser();
 
-            return this.RedirectToAction("Users", "Login");
+            return this.RedirectToAction(nameof(this.LoginUser));
         }
 
         [HttpGet]
@@ -85,6 +90,19 @@
 
         public async Task<IActionResult> ResetPassword(RegistrationInputModel inputModel)
         {
+            return this.View();
+        }
+
+        [HttpGet]
+        public IActionResult UserProfile()
+        {
+            return this.View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UserProfile(object myVm)
+        {
+            // create vm so user can change his profile info
             return this.View();
         }
     }

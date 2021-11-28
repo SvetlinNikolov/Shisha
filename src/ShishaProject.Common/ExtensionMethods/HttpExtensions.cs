@@ -20,6 +20,11 @@
 
             if (message.StatusCode != (int)HttpStatusCode.OK)
             {
+                if (message.StatusCode == (int)HttpStatusCode.NoContent)
+                {
+                    return content;
+                }
+
                 throw new InvalidOperationException(FormatExceptionMessage(message));
             }
 

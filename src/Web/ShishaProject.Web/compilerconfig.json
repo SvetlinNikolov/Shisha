@@ -54,5 +54,9 @@
   {
     "outputFile": "wwwroot/css/_colors.css",
     "inputFile": "wwwroot/css/_colors.scss"
+  },
+  {
+    "outputFile": "wwwroot/js/profile.es5.js",
+    "inputFile": "wwwroot/js/profile.js"
   }
 ]

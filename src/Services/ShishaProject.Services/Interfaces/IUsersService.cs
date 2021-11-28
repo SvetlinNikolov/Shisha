@@ -2,7 +2,7 @@
 {
     using System.Threading.Tasks;
     using ShishaProject.Services.Data.Models.Dtos;
-    using ShishaProject.Web.ViewModels.Users;
+    using ShishaProject.Web.ViewModels.User;
 
     public interface IUsersService
     {

@@ -29,7 +29,7 @@
         public async Task<IActionResult> GetFilteredFlavours([FromBody] Filters filters)
         {
             var filteredFlavours = await this.productsService.GetFilteredFlavours(filters);
-
+            //variations are not returned correctly by burov api
             if (!filteredFlavours.Flavours.Any())
             {
                 return this.PartialView("_NoFlavours", filteredFlavours);

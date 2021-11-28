@@ -3,7 +3,6 @@
 
 @model ProductsFlavoursDto
 <!-- Products container -->
-
 @foreach (var flavour in Model.Flavours)
 {
     <div class="product" data-product-number="@flavour.Id">
@@ -23,7 +22,7 @@
                             @foreach (var variation in flavour.Variations)
                             {
                                 <button type="button"
-                                        class="packaging-choice @(flavour.Variations.First().flavour_id==variation.flavour_id? "active": string.Empty)">
+                            class="packaging-choice @(flavour.Variations.First().flavour_id==variation.flavour_id? "active": string.Empty)">
                                     @variation.weight
                                 </button>
                             }
@@ -39,8 +38,18 @@
                         <input type="text" name="quantity" id="quantity" value="1">
                     </div>
 
-                    <p class="price-container-og-price">420</p>
-                    <p class="price-container-discount-price">@flavour.Price BGN</p>
+                    <div class="price-variants">
+                        @if (!flavour.Variations.IsNullOrEmpty())
+                        {
+                            @foreach (var variation in flavour.Variations)
+                            {
+                                <div class="price @(variation.id!=flavour.Variations.First().id?"price-hidden" :string.Empty)">
+                                    <p class="price-container-og-price">nyes</p>
+                                    <p class="price-container-discount-price">@variation.price</p>
+                                </div>
+                            }
+                        }
+                    </div>
 
                 </div>
             </div>

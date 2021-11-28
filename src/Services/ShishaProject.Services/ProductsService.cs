@@ -6,6 +6,7 @@
     using AutoMapper;
     using Microsoft.Extensions.Options;
     using Newtonsoft.Json;
+    using ShishaProject.Common.Helpers;
     using ShishaProject.Services.Data.Models.Configs;
     using ShishaProject.Services.Data.Models.Dtos;
     using ShishaProject.Services.Data.Models.Dtos.Api;
@@ -80,6 +81,12 @@
                  .PostAsync<ProductsFlavoursDto>(
                      this.endpointConfig.Value.Filters,
                      filtersJson);
+
+            // veli api returns last filter not current filters
+            if (dto.Flavours.IsNullOrEmpty())
+            {
+                return dto;
+            }
 
             var pager = new Pager(dto.PaginationData.TotalProducts, dto.PaginationData.CurrentPage, dto.PaginationData.ItemsPerPage);
             dto.PaginationData.Pages = pager.Pages;

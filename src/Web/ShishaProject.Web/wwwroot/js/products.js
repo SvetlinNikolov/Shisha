@@ -7,8 +7,6 @@ let customPriceFilterBtn = document.getElementById('filter-price-custom-button')
 let checkBoxFilterPrice = document.querySelectorAll('.filter-left-container input[name="filter-price"]');
 let checkBoxFilterStock = document.querySelectorAll('.filter-left-container input[name="filter-stock"]');
 let language = document.getElementById("page_language").innerText;
-let pageNavigationButtons = document.querySelectorAll('.pagination button');
-
 
 // Function definitions
 function navigatePageNavigation(clickedElement) {
@@ -74,7 +72,7 @@ function updatePageNavigation() {
 
 function updateProducts() {
     // Get selected page from page navigation
-    let current_page = document.querySelector('.pagination button.active').innerHTML;
+    let currentPageNumber = document.querySelector('.pagination button.active').innerHTML;
 
     // Get select current select dropdown value
     let selectValue = selectDropdown.value;
@@ -137,7 +135,7 @@ function updateProducts() {
     }
 
     let data = {
-        'page': current_page,
+        'page': currentPageNumber,
         selectValue,
         price_from,
         price_to,
@@ -148,14 +146,13 @@ function updateProducts() {
         language
     }
 
-    postRequestHTML('Products/GetFilteredFlavours', data)
-        .then(results => {
-            let productsContainer = document.getElementById('products');
-            productsContainer.innerHTML = results;
+    postRequestHTML('Products/GetFilteredFlavours', data).then(results => {
+        let productsContainer = document.querySelector('.products');
+        productsContainer.innerHTML = results;
 
-            pageNavigation();
-            packagingOptions();
-            addToCart();
+        // Attach event listeners to the new DOM
+        pageNavigation();
+        packagingOptions();
     });
 }
 
@@ -192,84 +189,32 @@ function checkBoxToRadio(event, checkBoxArray) {
 
 function changePackaging() {
     // Get elements
-    let packagingChoices = this.parentNode.childNodes;
+    let parentContainer = this.parentNode;
+    let packagingChoices = parentContainer.children;
     let currentPackaging;
     let newPackaging = this;
+    let priceContainer = parentContainer.parentNode.parentNode.querySelector('.price-container .price-variants').children;
+    let prevIndex;
+    let newIndex;
 
     for (let packagingChoice of packagingChoices) {
         if (packagingChoice.classList) {
             if (packagingChoice.classList.contains('active')) {
                 currentPackaging = packagingChoice;
+                prevIndex = Array.prototype.indexOf.call(packagingChoices, packagingChoice);
+                newIndex = Array.prototype.indexOf.call(packagingChoices, this);
                 break;
             }
         }
     }
 
-    // Set 
+    // Set the price 
+    priceContainer[prevIndex].classList.add('price-hidden');
+    priceContainer[newIndex].classList.remove('price-hidden');
+
+    // Set the packaging
     currentPackaging.classList.remove('active');
     newPackaging.classList.add('active');
-}
-
-function addProductToCart() {
-    // Define variables
-    let productParentNode = this.parentNode;
-    let packaging = null;
-    let quantity = 1;
-    let productParent = productParentNode.attributes;
-
-    // Check if the button is on the product page
-    if (this.classList.contains('product-page')) {
-        productParent = document.querySelector('.product-text-container').attributes;
-        packaging = document.querySelector('.packaging-choices-container .packaging-choice.active').innerText;
-        quantity = Number(document.getElementById('quantity').value);
-
-        if (quantity < 1) {
-            quantity = 1;
-        }
-    }
-
-    if (!this.classList.contains('product-page')) {
-        // Set packaging on products page
-        let packagingChoicesContainer = productParentNode.childNodes[1].childNodes[3].childNodes[1].childNodes[5].childNodes;
-        for (let packagingChoice of packagingChoicesContainer) {
-            if (packagingChoice.classList) {
-                if (packagingChoice.classList.contains('active')) {
-                    packaging = packagingChoice.innerText;
-                    break;
-                }
-            }
-        }
-
-        // Set quantity on products page
-        let getQuantity = productParentNode.childNodes[1].childNodes[3].childNodes[3].childNodes[1].childNodes[5].value;
-        quantity = getQuantity;
-
-        if (quantity < 1) {
-            quantity = 1;
-        }
-    }
-
-    let productAttributeObject = {};
-
-    for (let attribute of productParent) {
-        productAttributeObject[attribute.name] = attribute.value;
-    }
-
-    let productNumber = productAttributeObject['data-product-number'];
-
-    let data = {
-        productNumber,
-        packaging,
-        quantity
-    };
-
-    // TO DO - SEND TO THE BE
-    console.log(data);
-    // postRequest('addUrl', { data })
-    // .then(data => {
-    //     console.log(data);
-    // });
-    // TO DO - SEND TO THE BE
 }
 
 // Add event listeners
@@ -322,16 +267,3 @@ function packagingOptions() {
 }
 // Run
 packagingOptions();
-
-function addToCart() {
-    // Define
-    let addToCartButtons = document.querySelectorAll('.product-add-to-cart-button');
-
-    // Set event listener
-    for (let button of addToCartButtons) {
-        button.addEventListener('click', addProductToCart);
-    }
-
-}
-// Run
-addToCart();
