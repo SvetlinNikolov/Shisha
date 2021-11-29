@@ -21,7 +21,6 @@
 
         public async Task<IActionResult> Index()
         {
-            throw new System.Exception("I am svetlio exception");
             var products = await this.productsService.GetAllFlavours(new GetAllFlavoursRequest { Language = this.Language });
             return this.View(products);
         }
