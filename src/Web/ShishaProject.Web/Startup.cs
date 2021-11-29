@@ -31,6 +31,9 @@
     using ShishaProject.Services.Interfaces;
     using ShishaProject.Services.Mapping;
     using ShishaProject.Services.Messaging;
+    using NLog;
+    using ShishaProject.Common.ExceptionHandling;
+    using ShishaProject.Web.Middlewares;
 
     public class Startup
     {
@@ -107,6 +110,9 @@
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSingleton(this.configuration);
 
+            //Logging
+            services.AddSingleton<IShishaLogger, ShishaLogger>();
+
             // Localization
             services.AddLocalization(opt => { opt.ResourcesPath = "Resources"; });
             services.AddMvc().AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix).AddDataAnnotationsLocalization();
@@ -138,7 +144,7 @@
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IShishaLogger shishaLogger)
         {
             AutoMapperConfig.RegisterMappings(Assembly.GetExecutingAssembly().GetReferencedAssemblies().Select((item) => Assembly.Load(item)).ToArray());
 
@@ -162,6 +168,7 @@
             app.UseAuthentication();
             app.UseAuthorization();
 
+            app.ConfigureExceptionHandler(shishaLogger);
             app.UseRequestLocalization(app.ApplicationServices.GetRequiredService<IOptions<RequestLocalizationOptions>>().Value);
 
             app.UseEndpoints(
