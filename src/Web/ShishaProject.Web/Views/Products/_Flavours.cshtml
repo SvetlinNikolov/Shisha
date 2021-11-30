@@ -22,7 +22,9 @@
                             @foreach (var variation in flavour.Variations)
                             {
                                 <button type="button"
-                            class="packaging-choice @(flavour.Variations.First().flavour_id==variation.flavour_id? "active": string.Empty)">
+                                        class="packaging-choice @(flavour.Variations.First().flavour_id==variation.flavour_id? "active": string.Empty)
+                                         data-variation-id=@variation.id">
+
                                     @variation.weight
                                 </button>
                             }
@@ -55,7 +57,7 @@
             </div>
         </div>
 
-        <a asp-controller="Cart" asp-action="AddToCart" asp-route-id="@flavour.Id"> </a><button type="button" class="product-add-to-cart-button">ADD TO CART</button>
+        <button type="button" class="product-add-to-cart-button">ADD TO CART</button>
     </div>
 }
 @await Html.PartialAsync("_Pagination", Model.PaginationData)
