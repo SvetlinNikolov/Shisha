@@ -23,7 +23,7 @@
                             {
                                 <button type="button" 
                                         class="packaging-choice @(flavour.Variations.First().id==variation.id? "active": string.Empty)" 
-                                        data-variation-id=@variation.id">
+                                        data-variation-id="@variation.id">
                                     @variation.weight
                                 </button>
                             }
