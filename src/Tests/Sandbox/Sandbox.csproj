@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
@@ -34,9 +34,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\ShishaProject.Common\ShishaProject.Common.csproj" />
-    <ProjectReference Include="..\..\Data\ShishaProject.Data.Common\ShishaProject.Data.Common.csproj" />
-    <ProjectReference Include="..\..\Data\ShishaProject.Data.Models\ShishaProject.Data.Models.csproj" />
-    <ProjectReference Include="..\..\Data\ShishaProject.Data\ShishaProject.Data.csproj" />
     <ProjectReference Include="..\..\Services\ShishaProject.Services.Data\ShishaProject.Services.Data.csproj" />
     <ProjectReference Include="..\..\Services\ShishaProject.Services.Mapping\ShishaProject.Services.Mapping.csproj" />
     <ProjectReference Include="..\..\Services\ShishaProject.Services.Messaging\ShishaProject.Services.Messaging.csproj" />

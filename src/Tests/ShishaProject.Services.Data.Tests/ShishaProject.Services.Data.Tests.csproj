@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
@@ -27,7 +27,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Data\ShishaProject.Data\ShishaProject.Data.csproj" />
     <ProjectReference Include="..\..\Services\ShishaProject.Services.Data\ShishaProject.Services.Data.csproj" />
   </ItemGroup>
 

@@ -23,8 +23,6 @@
     using ShishaProject.Data;
     using ShishaProject.Data.Common;
     using ShishaProject.Data.Common.Repositories;
-    using ShishaProject.Data.Models;
-    using ShishaProject.Data.Repositories;
     using ShishaProject.Services;
     using ShishaProject.Services.Data;
     using ShishaProject.Services.Data.Models.Configs;
@@ -53,11 +51,7 @@
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(
-                options => options.UseSqlServer(this.configuration.GetConnectionString("DefaultConnection")));
-
-            services.AddDefaultIdentity<ApplicationUser>(IdentityOptionsProvider.GetIdentityOptions)
-                .AddRoles<ApplicationRole>().AddEntityFrameworkStores<ApplicationDbContext>();
+           
 
             services.Configure<RequestLocalizationOptions>(
                 opt =>
@@ -117,11 +111,6 @@
             services.AddLocalization(opt => { opt.ResourcesPath = "Resources"; });
             services.AddMvc().AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix).AddDataAnnotationsLocalization();
 
-
-            // Data repositories
-            services.AddScoped(typeof(IDeletableEntityRepository<>), typeof(EfDeletableEntityRepository<>));
-            services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
-            services.AddScoped<IDbQueryRunner, DbQueryRunner>();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             // Config Registration
@@ -131,7 +120,6 @@
 
             // Application services
             services.AddTransient<IEmailSender, NullMessageSender>();
-            services.AddTransient<ISettingsService, SettingsService>();
 
             // Http
             services.AddTransient<IRestClient, RestClientService>();
