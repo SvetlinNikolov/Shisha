@@ -9,6 +9,9 @@
 
     public class UserDto
     {
+        [JsonProperty("id")]
+        public string UserId { get; set; }
+
         [Required]
         [JsonProperty("username")]
         public string Username { get; set; }

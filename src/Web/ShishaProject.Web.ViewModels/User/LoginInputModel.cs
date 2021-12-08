@@ -1,13 +1,14 @@
 ﻿namespace ShishaProject.Web.ViewModels.User
 {
-    using Newtonsoft.Json;
     using System.ComponentModel.DataAnnotations;
+
+    using Newtonsoft.Json;
 
     public class LoginInputModel
     {
         [JsonProperty("username")]
         [Required]
-        public string Username { get; set; }
+        public string UsernameOrEmail { get; set; }
 
         [JsonProperty("password")]
         [Required]

@@ -1,9 +1,9 @@
-﻿namespace ShishaProject.Common.Helpers
+﻿namespace ShishaProject.Common.ExtensionMethods
 {
     using System.Collections.Generic;
     using System.Linq;
 
-    public static class LinqHelper
+    public static class LinqExtensions
     {
         public static bool IsNullOrEmpty<T>(this IEnumerable<T> collection)
         {

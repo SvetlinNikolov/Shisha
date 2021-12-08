@@ -31,4 +31,8 @@
     <ProjectReference Include="..\ShishaProject.Services.Mapping\ShishaProject.Services.Mapping.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Models\Payment\" />
+  </ItemGroup>
+
 </Project>

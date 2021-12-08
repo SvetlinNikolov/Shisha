@@ -14,24 +14,21 @@
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Localization;
     using Microsoft.AspNetCore.Mvc.Razor;
-    using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
     using Microsoft.Extensions.Options;
     using ShishaProject.Common;
-    using ShishaProject.Data;
-    using ShishaProject.Data.Common;
-    using ShishaProject.Data.Common.Repositories;
     using ShishaProject.Services;
-    using ShishaProject.Services.Data;
     using ShishaProject.Services.Data.Models.Configs;
     using ShishaProject.Services.Interfaces;
     using ShishaProject.Services.Mapping;
     using ShishaProject.Services.Messaging;
-    using NLog;
     using ShishaProject.Common.ExceptionHandling;
     using ShishaProject.Web.Middlewares;
+    using ShishaProject.Common.Helpers;
+    using ShishaProject.Web.ViewModels.Payment;
+    using Stripe;
 
     public class Startup
     {
@@ -51,7 +48,7 @@
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-           
+            StripeConfiguration.ApiKey = this.configuration.GetSection("Stripe")["SecretKey"];
 
             services.Configure<RequestLocalizationOptions>(
                 opt =>
@@ -117,9 +114,13 @@
             services.AddOptions();
             services.Configure<ProductsEndpointsConfig>(this.configuration.GetSection("Endpoints"));
             services.Configure<UsersEndpointsConfig>(this.configuration.GetSection("Endpoints"));
+            services.Configure<StripeConfig>(this.configuration.GetSection("Stripe"));
 
             // Application services
             services.AddTransient<IEmailSender, NullMessageSender>();
+
+            // Payment
+            services.AddTransient<IStripeService, StripeService>();
 
             // Http
             services.AddTransient<IRestClient, RestClientService>();

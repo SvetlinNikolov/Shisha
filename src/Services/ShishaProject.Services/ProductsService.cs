@@ -6,7 +6,7 @@
     using AutoMapper;
     using Microsoft.Extensions.Options;
     using Newtonsoft.Json;
-    using ShishaProject.Common.Helpers;
+    using ShishaProject.Common.ExtensionMethods;
     using ShishaProject.Services.Data.Models.Configs;
     using ShishaProject.Services.Data.Models.Dtos;
     using ShishaProject.Services.Data.Models.Dtos.Api;

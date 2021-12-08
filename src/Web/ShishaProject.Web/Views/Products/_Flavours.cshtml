@@ -1,5 +1,5 @@
 ﻿@using ShishaProject.Services.Data.Models.Dtos
-@using ShishaProject.Common.Helpers
+@using ShishaProject.Common.ExtensionMethods
 
 @model ProductsFlavoursDto
 <!-- Products container -->
@@ -21,9 +21,9 @@
                         {
                             @foreach (var variation in flavour.Variations)
                             {
-                                <button type="button" 
-                                        class="packaging-choice @(flavour.Variations.First().Id==variation.Id? "active": string.Empty)" 
-                                        data-variation-id="@variation.Id">
+                                <button type="button"
+                            class="packaging-choice @(flavour.Variations.First().Id==variation.Id? "active": string.Empty)"
+                            data-variation-id="@variation.Id">
                                     @variation.Weight
                                 </button>
                             }

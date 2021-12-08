@@ -7,12 +7,17 @@
     public interface IUsersService
     {
         Task<bool> AuthenticateUser(LoginInputModel model);
-        //IEnumerable<User> GetAll();
+
         Task<UserDto> GetUserByIdAsync(int id);
+
+        Task<UserDto> GetUserByUsernameOrEmailAsync(string usernameOrEmail);
+
         Task<bool> RegisterUserAsync(RegistrationInputModel user);
 
         bool UserLoggedIn();
+
         Task LoginUser(LoginInputModel inputModel);
+
         Task LogoutUser();
 
         //void Update(int id, UpdateRequest model);

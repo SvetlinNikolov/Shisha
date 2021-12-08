@@ -6,6 +6,8 @@
 
         public string GetUserById { get; set; }
 
+        public string GetUserByUsernameOrEmail { get; set; }
+
         public string RegisterUser { get; set; }
 
         public string UpdateUser { get; set; }

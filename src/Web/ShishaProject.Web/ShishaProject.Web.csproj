@@ -54,6 +54,7 @@
     <PackageReference Include="NLog" Version="4.7.12" />
     <PackageReference Include="NLog.Web" Version="4.14.0" />
     <PackageReference Include="NLog.Web.AspNetCore" Version="4.14.0" />
+    <PackageReference Include="Stripe.net" Version="39.80.0" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.312" PrivateAssets="all">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>

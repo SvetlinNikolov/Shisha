@@ -10,6 +10,7 @@
     using Microsoft.Extensions.Options;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Linq;
+    using ShishaProject.Common.ExceptionHandling;
     using ShishaProject.Common.Helpers;
     using ShishaProject.Services.Data.Models.Configs;
     using ShishaProject.Services.Data.Models.Dtos;
@@ -21,29 +22,65 @@
         private readonly IRestClient restClient;
         private readonly IOptions<UsersEndpointsConfig> endpointConfig;
         private readonly IHttpContextAccessor httpContextAccessor;
+        private readonly IShishaLogger logger;
+        private readonly IEmailService emailService;
 
         public UsersService(
             IRestClient restClient,
             IOptions<UsersEndpointsConfig> endpointConfig,
-            IHttpContextAccessor httpContext)
+            IHttpContextAccessor httpContext,
+            IShishaLogger logger,
+            IEmailService emailService)
         {
             this.restClient = restClient;
             this.endpointConfig = endpointConfig;
             this.httpContextAccessor = httpContext;
+            this.logger = logger;
+            this.emailService = emailService;
         }
 
         public async Task<UserDto> GetUserByIdAsync(int id)
         {
-            var result = await this.restClient
+            try
+            {
+                var result = await this.restClient
                 .PostAsync<JObject>(
                  this.endpointConfig.Value.GetUserById,
                  JsonHelper.SerializeToPhpApiFormat("user_id", id));
 
-            var user = result.Value<JObject>("data")
-                .ToObject(typeof(UserDto)) as UserDto;
-            // tuka ako nqma su6to trqbva da grumne
+                var user = result.Value<JObject>("data")
+                    .ToObject(typeof(UserDto)) as UserDto;
 
-            return user;
+                return user;
+            }
+            catch (Exception ex)
+            {
+                this.logger.Error(ex.ToString());
+                return null;
+            }
+        }
+
+        public async Task<UserDto> GetUserByUsernameOrEmailAsync(string usernameOrEmail)
+        {
+            string request = this.emailService.IsValidEmail(usernameOrEmail) ? "email" : "username";
+
+            try
+            {
+                var result = await this.restClient
+              .PostAsync<JObject>(
+               this.endpointConfig.Value.GetUserByUsernameOrEmail,
+               JsonHelper.SerializeToPhpApiFormat(request, usernameOrEmail));
+
+                var user = result.Value<JObject>("data")
+                    .ToObject(typeof(UserDto)) as UserDto;
+
+                return user;
+            }
+            catch (Exception ex)
+            {
+                this.logger.Error(ex.ToString());
+                return null;
+            }
         }
 
         public async Task<bool> AuthenticateUser(LoginInputModel model)
@@ -58,11 +95,11 @@
                 var user = result.Value<JObject>("data")
                                  .ToObject(typeof(UserDto)) as UserDto;
 
-                isAuthenticated = user.Username != null;
+                isAuthenticated = !string.IsNullOrEmpty(user.UserId);
             }
             catch (Exception ex)
             {
-                //log exception
+                this.logger.Error(ex.ToString());
                 isAuthenticated = false;
             }
 
@@ -75,7 +112,7 @@
             var result = await this.restClient
                  .PostAsync<UserDto>(this.endpointConfig.Value.RegisterUser, JsonHelper.SerializeToPhpApiFormat("user_data", user));
 
-            return result != null;
+            return !string.IsNullOrEmpty(result.UserId);
         }
 
         public bool UserLoggedIn()
@@ -93,7 +130,7 @@
             {
                 var claims = new List<Claim>
                 {
-                    new Claim(ClaimTypes.Name, inputModel.Username),
+                    new Claim(ClaimTypes.Name, inputModel.UsernameOrEmail),
                 };
 
                 var claimsIdentity = new ClaimsIdentity(claims, "Login");
