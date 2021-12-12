@@ -75,8 +75,8 @@
             }).AddCookie(
               CookieAuthenticationDefaults.AuthenticationScheme, (options) =>
               {
-                  options.LoginPath = "/Users/LoginUser";
-                  options.LogoutPath = "/Users/LogoutUser";
+                  options.LoginPath = "/{culture?}/Users/LoginUser";
+                  options.LogoutPath = "/{culture?}/Users/LogoutUser";
               });
 
             services.Configure<CookiePolicyOptions>(
@@ -88,7 +88,6 @@
                         options.MinimumSameSitePolicy = SameSiteMode.Unspecified;
                     });
 
-
             services.AddControllersWithViews(
                 options =>
                     {
@@ -97,11 +96,12 @@
                       .AddNewtonsoftJson();
 
             services.AddRazorPages();
+
             services.AddDatabaseDeveloperPageExceptionFilter();
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
             services.AddSingleton(this.configuration);
 
-            //Logging
+            // Logging
             services.AddSingleton<IShishaLogger, ShishaLogger>();
 
             // Localization
@@ -116,20 +116,23 @@
             services.Configure<UsersEndpointsConfig>(this.configuration.GetSection("Endpoints"));
             services.Configure<StripeConfig>(this.configuration.GetSection("Stripe"));
 
-            // Application services
-            services.AddTransient<IEmailSender, NullMessageSender>();
-
             // Payment
             services.AddTransient<IStripeService, StripeService>();
+            services.AddTransient<ICartService, CartService>();
 
             // Http
             services.AddTransient<IRestClient, RestClientService>();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             // Products
             services.AddTransient<IProductsService, ProductsService>();
 
             // Users
             services.AddTransient<IUsersService, UsersService>();
+
+            // Email
+            services.AddTransient<IEmailSender, NullMessageSender>();
+            services.AddTransient<IEmailService, EmailService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

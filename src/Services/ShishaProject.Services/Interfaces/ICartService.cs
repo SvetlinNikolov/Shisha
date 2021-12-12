@@ -11,6 +11,6 @@
 
         void GetCartById(int cartId);
 
-        void GetCart();
+        Task GetCart();
     }
 }

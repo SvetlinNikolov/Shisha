@@ -150,5 +150,32 @@
                 await this.httpContextAccessor.HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             }
         }
+
+        public async Task<UserDto> GetLoggedInUserAsync()
+        {
+            try
+            {
+                if (this.UserLoggedIn())
+                {
+                    var usernameOrEmail = this.httpContextAccessor.HttpContext.User.Identity.Name;
+
+                    var user = await this.GetUserByUsernameOrEmailAsync(usernameOrEmail);
+
+                    if (user == null)
+                    {
+                        throw new ArgumentException($"User with username or email {usernameOrEmail} does not exist");
+                    }
+
+                    return user;
+                }
+
+                throw new InvalidOperationException("User not logged in");
+            }
+            catch (Exception ex)
+            {
+                this.logger.Error(ex.ToString());
+                return null;
+            }
+        }
     }
 }

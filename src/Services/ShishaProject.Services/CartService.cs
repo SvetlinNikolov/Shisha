@@ -2,8 +2,10 @@
 {
     using System;
     using System.Threading.Tasks;
+    using Microsoft.AspNetCore.Http;
     using Microsoft.Extensions.Options;
     using Newtonsoft.Json;
+    using ShishaProject.Common.Helpers;
     using ShishaProject.Services.Data.Models.Configs;
     using ShishaProject.Services.Interfaces;
     using ShishaProject.Web.ViewModels.Cart;
@@ -13,15 +15,18 @@
         private readonly IUsersService usersService;
         private readonly IRestClient restClient;
         private readonly IOptions<CartEndpointsConfig> endpointConfig;
+        private readonly IHttpContextAccessor httpContextAccessor;
 
         public CartService(
             IUsersService usersService,
             IRestClient restClient,
-            IOptions<CartEndpointsConfig> endpointConfig)
+            IOptions<CartEndpointsConfig> endpointConfig,
+            IHttpContextAccessor httpContextAccessor)
         {
             this.usersService = usersService;
             this.restClient = restClient;
             this.endpointConfig = endpointConfig;
+            this.httpContextAccessor = httpContextAccessor;
         }
 
         public async Task<bool> AddToCart(AddToCartInputModel request)
@@ -33,9 +38,13 @@
             throw new NotImplementedException();
         }
 
-        public void GetCart()
+        public async Task GetCart()
         {
-            throw new NotImplementedException();
+            var loggedInUser = await this.usersService.GetLoggedInUserAsync();
+
+            var asd = await this.restClient.PostAsync<dynamic>(
+                this.endpointConfig.Value.GetCart,
+                JsonHelper.SerializeToPhpApiFormat("user_id", loggedInUser.UserId));
         }
 
         public void GetCartById(int cartId)

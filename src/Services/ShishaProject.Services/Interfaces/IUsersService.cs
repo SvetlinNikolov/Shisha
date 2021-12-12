@@ -12,6 +12,8 @@
 
         Task<UserDto> GetUserByUsernameOrEmailAsync(string usernameOrEmail);
 
+        Task<UserDto> GetLoggedInUserAsync();
+
         Task<bool> RegisterUserAsync(RegistrationInputModel user);
 
         bool UserLoggedIn();

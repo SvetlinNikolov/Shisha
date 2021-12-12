@@ -6,6 +6,7 @@
     "RegisterUser": "users/register-user",
     "UpdateUser": "",
     "AuthenticateUser": "users/login-user",
-    "DeleteUser": ""
+    "DeleteUser": "",
+    "GetUserByUsernameOrEmail": "get-user-by-email-or-username"
   }
 }
