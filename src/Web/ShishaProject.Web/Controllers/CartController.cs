@@ -15,9 +15,15 @@
             this.cartService = cartService;
         }
 
-        public IActionResult AddToCart(AddToCartInputModel inputModel)
+        [HttpPost]
+        public async Task<IActionResult> AddToCart([FromBody]AddToCartInputModel inputModel)
         {
-            return this.View();
+            if (!this.ModelState.IsValid)
+            {
+                return this.Json("Something went wrong");
+            }
+
+            var result = await this.cartService.AddToCartAsync(inputModel);
         }
 
         [Authorize]

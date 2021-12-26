@@ -19,11 +19,15 @@
             return this.LocalRedirect(returnUrl);
         }
 
-        protected string Language => (string)this.ControllerContext.RouteData.Values["language"];
+        protected string GetLanguage()
+        {
+            return this.HttpContext.Request.Cookies[CookieRequestCultureProvider.DefaultCookieName] ??
+                   (string)this.ControllerContext.RouteData.Values["language"];
+        }
 
         public override void OnActionExecuted(ActionExecutedContext filterContext)
         {
-            this.ViewData["Language"] = this.Language;
+            this.ViewData["Language"] = this.GetLanguage();
 
             base.OnActionExecuted(filterContext);
         }

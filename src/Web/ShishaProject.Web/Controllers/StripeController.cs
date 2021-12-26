@@ -1,12 +1,9 @@
-﻿using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc;
-using ShishaProject.Services.Interfaces;
-using ShishaProject.Web.ViewModels.Payment;
-using Stripe;
-using Stripe.Checkout;
-
-namespace ShishaProject.Web.Controllers
+﻿namespace ShishaProject.Web.Controllers
 {
+    using Microsoft.AspNetCore.Mvc;
+    using ShishaProject.Services.Interfaces;
+    using ShishaProject.Web.ViewModels.Payment;
+
     public class StripeController : BaseController
     {
         private readonly IStripeService paymentService;

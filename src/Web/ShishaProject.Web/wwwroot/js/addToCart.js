@@ -53,18 +53,15 @@ function addProductToCart() {
     let productNumber = productAttributeObject['data-product-number'];
 
     let data = {
-        productNumber,
-        packaging,
-        quantity,
-        variationId
+        'flavour_id': productNumber,
+         quantity,
+        'flavour_variation_id': variationId
     };
 
-    // TO DO - SEND TO THE BE
-    console.log(data);
-    //postRequest('Cart/AddToCart', data)
-    //    .then(data => {
-    //        console.log(data);
-    //    });
+    postRequestHTML('Cart/AddToCart', data)
+        .then(data => {
+            console.log(data);
+        });
 }
 
 // Add event listeners

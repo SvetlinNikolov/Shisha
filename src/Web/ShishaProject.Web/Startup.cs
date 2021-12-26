@@ -29,6 +29,9 @@
     using ShishaProject.Common.Helpers;
     using ShishaProject.Web.ViewModels.Payment;
     using Stripe;
+    using Microsoft.AspNetCore.Authentication.JwtBearer;
+    using Microsoft.IdentityModel.Tokens;
+    using System.Text;
 
     public class Startup
     {
@@ -54,15 +57,12 @@
                 opt =>
                 {
                     opt.DefaultRequestCulture = new RequestCulture(GlobalConstants.MainLanguage);
-                    // add multi culture support
-                    //opt.SupportedCultures = GlobalConstants.AvailableLanguages.Select(x => new CultureInfo(x)).ToList();
-                    //opt.SupportedUICultures = GlobalConstants.AvailableLanguages.Select(x => new CultureInfo(x)).ToList();
-                    opt.SupportedCultures = new List<CultureInfo> { new CultureInfo(GlobalConstants.MainLanguage) };
-                    opt.SupportedUICultures = new List<CultureInfo> { new CultureInfo(GlobalConstants.MainLanguage) };
+                    opt.SupportedCultures = GlobalConstants.AvailableLanguages.Select(x => new CultureInfo(x)).ToList();
+                    opt.SupportedUICultures = GlobalConstants.AvailableLanguages.Select(x => new CultureInfo(x)).ToList();
                     opt.RequestCultureProviders = new List<IRequestCultureProvider>
                     {
-                        new QueryStringRequestCultureProvider(),
                         new CookieRequestCultureProvider(),
+                        new QueryStringRequestCultureProvider(),
                         new AcceptLanguageHeaderRequestCultureProvider(),
                     };
                 });
@@ -80,13 +80,13 @@
               });
 
             services.Configure<CookiePolicyOptions>(
-                options =>
-                    {
-                        options.CheckConsentNeeded = context => false;
-                        //options.MinimumSameSitePolicy = SameSiteMode.None;
-                        // this has to be none in production!!!!
-                        options.MinimumSameSitePolicy = SameSiteMode.Unspecified;
-                    });
+            options =>
+                {
+                    options.CheckConsentNeeded = context => false;
+                    //options.MinimumSameSitePolicy = SameSiteMode.None;
+                    // this has to be none in production!!!!
+                    options.MinimumSameSitePolicy = SameSiteMode.Unspecified;
+                });
 
             services.AddControllersWithViews(
                 options =>
@@ -114,7 +114,9 @@
             services.AddOptions();
             services.Configure<ProductsEndpointsConfig>(this.configuration.GetSection("Endpoints"));
             services.Configure<UsersEndpointsConfig>(this.configuration.GetSection("Endpoints"));
+            services.Configure<CartEndpointsConfig>(this.configuration.GetSection("Endpoints"));
             services.Configure<StripeConfig>(this.configuration.GetSection("Stripe"));
+            services.Configure<JwtConfig>(this.configuration.GetSection("Jwt"));
 
             // Payment
             services.AddTransient<IStripeService, StripeService>();
@@ -133,6 +135,9 @@
             // Email
             services.AddTransient<IEmailSender, NullMessageSender>();
             services.AddTransient<IEmailService, EmailService>();
+
+            //Security
+            services.AddTransient<IJwtService, JwtService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -160,8 +165,8 @@
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.ConfigureExceptionHandler(shishaLogger);
             app.UseRequestLocalization(app.ApplicationServices.GetRequiredService<IOptions<RequestLocalizationOptions>>().Value);
+            app.ConfigureExceptionHandler(shishaLogger);
 
             app.UseEndpoints(
                 endpoints =>

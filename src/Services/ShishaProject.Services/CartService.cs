@@ -7,6 +7,7 @@
     using Newtonsoft.Json;
     using ShishaProject.Common.Helpers;
     using ShishaProject.Services.Data.Models.Configs;
+    using ShishaProject.Services.Data.Models.Dtos;
     using ShishaProject.Services.Interfaces;
     using ShishaProject.Web.ViewModels.Cart;
 
@@ -29,22 +30,24 @@
             this.httpContextAccessor = httpContextAccessor;
         }
 
-        public async Task<bool> AddToCart(AddToCartInputModel request)
+        public async Task<bool> AddToCartAsync(AddToCartInputModel request)
         {
+            var loggedInUser = await this.usersService.GetLoggedInUserAsync();
+            request.UserId = int.Parse(loggedInUser.UserId);
+
             var requestJson = JsonConvert.SerializeObject(request);
-            //do the logic in view to add to your request
 
             var allProducts = await this.restClient.PostAsync<dynamic>(this.endpointConfig.Value.AddToCart, requestJson);
             throw new NotImplementedException();
         }
 
-        public async Task GetCart()
+        public async Task<ProductsFlavoursDto> GetCart()
         {
             var loggedInUser = await this.usersService.GetLoggedInUserAsync();
 
-            var asd = await this.restClient.PostAsync<dynamic>(
+            return await this.restClient.PostAsync<ProductsFlavoursDto>(
                 this.endpointConfig.Value.GetCart,
-                JsonHelper.SerializeToPhpApiFormat("user_id", loggedInUser.UserId));
+                JsonHelper.SerializeToPhpApiFormat("user_id", int.Parse(loggedInUser.UserId)));
         }
 
         public void GetCartById(int cartId)

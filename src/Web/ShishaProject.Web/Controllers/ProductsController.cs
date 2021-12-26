@@ -13,16 +13,21 @@
     {
         private readonly IProductsService productsService;
         private readonly IHtmlLocalizer<ProductsController> localizer;
+        private readonly IJwtService jwtService;
 
-        public ProductsController(IProductsService productsService, IHtmlLocalizer<ProductsController> localizer)
+        public ProductsController(
+            IProductsService productsService,
+            IHtmlLocalizer<ProductsController> localizer,
+            IJwtService jwtService)
         {
             this.productsService = productsService;
             this.localizer = localizer;
+            this.jwtService = jwtService;
         }
 
         public async Task<IActionResult> Index()
-        {
-            var products = await this.productsService.GetAllFlavours(new GetAllFlavoursRequest { Language = this.Language });
+        {;
+            var products = await this.productsService.GetAllFlavours(new GetAllFlavoursRequest { Language = this.GetLanguage() });
             return this.View(products);
         }
 
@@ -41,7 +46,7 @@
 
         public async Task<IActionResult> FlavourDetails(int id)
         {
-            var product = await this.productsService.GetFlavourById(new FlavourByIdRequest { FlavourId = id, Language = this.Language });
+            var product = await this.productsService.GetFlavourById(new FlavourByIdRequest { FlavourId = id, Language = this.GetLanguage() });
 
             return this.View(product);
         }

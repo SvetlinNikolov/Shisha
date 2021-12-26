@@ -62,14 +62,12 @@
 
         public async Task<UserDto> GetUserByUsernameOrEmailAsync(string usernameOrEmail)
         {
-            string request = this.emailService.IsValidEmail(usernameOrEmail) ? "email" : "username";
-
             try
             {
                 var result = await this.restClient
               .PostAsync<JObject>(
                this.endpointConfig.Value.GetUserByUsernameOrEmail,
-               JsonHelper.SerializeToPhpApiFormat(request, usernameOrEmail));
+               JsonHelper.SerializeToPhpApiFormat("username_or_email", usernameOrEmail));
 
                 var user = result.Value<JObject>("data")
                     .ToObject(typeof(UserDto)) as UserDto;

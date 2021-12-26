@@ -16,19 +16,19 @@
 
     public class RestClientService : HttpClient, IRestClient
     {
+        private readonly IJwtService jwtService;
         private string baseUri;
-        private TokenResponse token;
 
-        public RestClientService()
+        public RestClientService(IJwtService jwtService)
         {
-            this.token = new TokenResponse();
             this.InitializeTlsProtocol();
             this.baseUri = "http://shisha_project.localhost/api/";
+            this.jwtService = jwtService;
         }
 
         public async Task<T> GetAsync<T>(string url, Dictionary<string, string> query)
         {
-            await this.PrepairRequest();
+            this.SetToken();
 
             using (HttpResponseMessage response = await this.GetAsync(RestClientUtils.AddQueryString(this.baseUri + url, query)))
             {
@@ -43,7 +43,7 @@
 
         public async Task<T> GetAsync<T>(string url, string language)
         {
-            await this.PrepairRequest();
+            this.SetToken();
 
             using (HttpResponseMessage response = await this.GetAsync(this.baseUri + url + RestClientUtils.AddQueryLanguage(language)))
             {
@@ -59,7 +59,7 @@
 
         public async Task<T> GetAsync<T>(string url)
         {
-            await this.PrepairRequest();
+            this.SetToken();
 
             using (HttpResponseMessage response = await this.GetAsync(this.baseUri + url))
             {
@@ -75,9 +75,9 @@
 
         public async Task<T> PostAsync<T>(string url, string data)
         {
-            await this.PrepairRequest();
+            this.SetToken();
             var content = new StringContent(data, Encoding.Default, "application/json");
-            Debug.WriteLine(data);
+
             using (HttpResponseMessage response = await this.PostAsync(this.baseUri + url, content))
             {
                 var test = await response.Content.ReadAsAsync<dynamic>();
@@ -92,7 +92,7 @@
 
         public async Task<T> PostAsync<T>(string url, Dictionary<string, string> query)
         {
-            await this.PrepairRequest();
+            this.SetToken();
 
             var content = new StringContent(RestClientUtils.AddQueryString(this.baseUri + url, query), Encoding.UTF8, "application/json");
             using (HttpResponseMessage response = await this.PostAsync(this.baseUri + url, content))
@@ -108,7 +108,7 @@
 
         public async Task<T> PutAsync<T>(string url, FileStream fs)
         {
-            await this.PrepairRequest();
+            this.SetToken();
 
             using (HttpResponseMessage response = await this.PutAsync(this.baseUri + url, new StreamContent(fs)))
             {
@@ -126,37 +126,10 @@
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
         }
 
-        public async Task SetTokenAsync()
+        private void SetToken()
         {
-            return;
-            if (this.token == null || this.token.Expiration > DateTime.Now)
-            {
-                this.DefaultRequestHeaders.Clear();
-                this.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", "SOME CREDENTIAL SCHEME");
-
-                var content = new StringContent("grant_type=client_credentials", Encoding.UTF8, "application/x-www-form-urlencoded");
-
-                using (HttpResponseMessage response = await this.PostAsync(this.baseUri + "/some-path-to-get/token", content))
-                {
-                    if (response.IsSuccessStatusCode)
-                    {
-                        this.token = await response.Content.ReadAsAsync<TokenResponse>();
-                    }
-                    else
-                    {
-                        throw new Exception(response.ReasonPhrase);
-                    }
-                }
-            }
-        }
-
-        private async Task PrepairRequest()
-        {
-            await this.SetTokenAsync();
-
             this.DefaultRequestHeaders.Clear();
-            this.DefaultRequestHeaders.CacheControl = new CacheControlHeaderValue() { NoCache = true };
-            this.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", this.token.AccessToken);
+            this.DefaultRequestHeaders.Add("jwt_token", this.jwtService.GenerateToken());
         }
     }
 }

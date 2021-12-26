@@ -1,12 +1,12 @@
 {
   "Endpoints": {
-    "BaseUri": "http://shisha_project.localhost/api/",
     "GetAllUsers": "users/get-all-users",
     "GetUserById": "users/get-user-by-id",
     "RegisterUser": "users/register-user",
     "UpdateUser": "",
     "AuthenticateUser": "users/login-user",
     "DeleteUser": "",
-    "GetUserByUsernameOrEmail": "get-user-by-email-or-username"
+    "GetUserByUsernameOrEmail": "users/get-user-by-email-or-username"
   }
 }
+  

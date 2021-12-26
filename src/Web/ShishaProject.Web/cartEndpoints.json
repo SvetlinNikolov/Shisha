@@ -1,8 +1,8 @@
 {
   "Endpoints": {
     "BaseUri": "http://shisha_project.localhost/api/",
-    "GetCart": "cart/add-to-cart",
-    "AddToCart": "add-to-cart",
-    "RemoveFromCart": "remove-from-cart"
+    "GetCart": "cart/get-cart",
+    "AddToCart": "cart/add-to-cart",
+    "RemoveFromCart": "cart/remove-from-cart"
   }
 }

@@ -6,7 +6,7 @@
 
     public class LoginInputModel
     {
-        [JsonProperty("username")]
+        [JsonProperty("username_or_email")]
         [Required]
         public string UsernameOrEmail { get; set; }
 
