@@ -1,6 +1,7 @@
 ﻿namespace ShishaProject.Services
 {
     using System;
+    using System.Linq;
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Http;
     using Microsoft.Extensions.Options;
@@ -8,6 +9,7 @@
     using ShishaProject.Common.Helpers;
     using ShishaProject.Services.Data.Models.Configs;
     using ShishaProject.Services.Data.Models.Dtos;
+    using ShishaProject.Services.Data.Models.Pagination;
     using ShishaProject.Services.Interfaces;
     using ShishaProject.Web.ViewModels.Cart;
 
@@ -37,17 +39,33 @@
 
             var requestJson = JsonConvert.SerializeObject(request);
 
-            var allProducts = await this.restClient.PostAsync<dynamic>(this.endpointConfig.Value.AddToCart, requestJson);
-            throw new NotImplementedException();
+            var response = await this.restClient.PostAsync<ShishaResponseDto>(this.endpointConfig.Value.AddToCart, requestJson);
+
+            return !string.IsNullOrEmpty(response.Errors);
         }
 
-        public async Task<ProductsFlavoursDto> GetCart()
+        public async Task Checkout()
+        {
+            var cartProducts = await this.GetCartAsync();
+
+            if (!cartProducts.Flavours.Any())
+            {
+
+            }
+        }
+
+        public async Task<ProductsFlavoursDto> GetCartAsync()
         {
             var loggedInUser = await this.usersService.GetLoggedInUserAsync();
 
-            return await this.restClient.PostAsync<ProductsFlavoursDto>(
+            var products = await this.restClient.PostAsync<ProductsFlavoursDto>(
                 this.endpointConfig.Value.GetCart,
                 JsonHelper.SerializeToPhpApiFormat("user_id", int.Parse(loggedInUser.UserId)));
+
+            var pager = new Pager(products.Flavours.Count());
+            products.PaginationData.Pages = pager.Pages;
+
+            return products;
         }
 
         public void GetCartById(int cartId)

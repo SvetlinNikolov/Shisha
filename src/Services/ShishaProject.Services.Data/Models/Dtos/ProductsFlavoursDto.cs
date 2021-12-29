@@ -10,6 +10,7 @@
         public ProductsFlavoursDto()
         {
             this.Flavours = new List<ProductFlavourDto>();
+            this.PaginationData = new PaginationData();
         }
 
         [JsonProperty("status_code")]

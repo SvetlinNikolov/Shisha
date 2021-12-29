@@ -58,7 +58,7 @@ function addProductToCart() {
         'flavour_variation_id': variationId
     };
 
-    postRequestHTML('Cart/AddToCart', data)
+    postRequest('Cart/AddToCart', data)
         .then(data => {
             console.log(data);
         });

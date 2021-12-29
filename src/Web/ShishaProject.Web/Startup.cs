@@ -26,12 +26,9 @@
     using ShishaProject.Services.Messaging;
     using ShishaProject.Common.ExceptionHandling;
     using ShishaProject.Web.Middlewares;
-    using ShishaProject.Common.Helpers;
-    using ShishaProject.Web.ViewModels.Payment;
     using Stripe;
-    using Microsoft.AspNetCore.Authentication.JwtBearer;
-    using Microsoft.IdentityModel.Tokens;
-    using System.Text;
+    using ShishaProject.Services.Strategy;
+    using ShishaProject.Services.Data.Interfaces;
 
     public class Startup
     {
@@ -119,7 +116,9 @@
             services.Configure<JwtConfig>(this.configuration.GetSection("Jwt"));
 
             // Payment
-            services.AddTransient<IStripeService, StripeService>();
+            services.AddTransient<IPaymentStrategy, PaymentStrategy>();
+            services.AddTransient<IPaymentService, StripeService>();
+
             services.AddTransient<ICartService, CartService>();
 
             // Http

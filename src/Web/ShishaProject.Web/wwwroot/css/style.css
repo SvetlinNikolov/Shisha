@@ -1258,7 +1258,7 @@ footer .footer-bottom .social-icons-container a:hover img:last-of-type {
 .cart-container .cart-sections .cart-item-total-price-container .cart-order-button-container {
   display: flex;
 }
-.cart-container .cart-sections .cart-item-total-price-container .cart-order-button-container button {
+.cart-container .cart-sections .cart-item-total-price-container .cart-order-button-container a {
   padding: 20px;
   width: 100%;
   border: none;
@@ -1270,7 +1270,7 @@ footer .footer-bottom .social-icons-container a:hover img:last-of-type {
   cursor: pointer;
   text-transform: uppercase;
 }
-.cart-container .cart-sections .cart-item-total-price-container .cart-order-button-container button:hover {
+.cart-container .cart-sections .cart-item-total-price-container .cart-order-button-container a:hover {
   background-color: #ed5034;
 }
 @media (max-width: 1024px) {

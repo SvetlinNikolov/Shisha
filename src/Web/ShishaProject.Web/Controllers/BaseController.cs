@@ -31,5 +31,12 @@
 
             base.OnActionExecuted(filterContext);
         }
+
+        protected string RemoveController(string value)
+        {
+            string result = value.Replace("Controller", string.Empty);
+
+            return result;
+        }
     }
 }

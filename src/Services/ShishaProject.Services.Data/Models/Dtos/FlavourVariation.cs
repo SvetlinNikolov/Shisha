@@ -23,5 +23,8 @@
 
         [JsonProperty("flavour_id")]
         public int FlavourId { get; set; }
+
+        [JsonProperty("quantity")]
+        public int Quantity { get; set; }
     }
 }

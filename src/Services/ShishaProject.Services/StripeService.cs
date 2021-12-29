@@ -1,17 +1,14 @@
-﻿using System.Collections.Generic;
-using System.Net;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
-using ShishaProject.Services.Data.Models.Configs;
-using ShishaProject.Services.Interfaces;
-using ShishaProject.Web.ViewModels.Payment;
-using Stripe;
-using Stripe.Checkout;
-
-namespace ShishaProject.Services
+﻿namespace ShishaProject.Services
 {
-    public class StripeService : IStripeService
+    using System.Collections.Generic;
+    using System.Net;
+
+    using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Mvc;
+    using ShishaProject.Services.Data.Models.Payment;
+    using Stripe.Checkout;
+
+    public class StripeService : PaymentService<StripeChargeInputModel>
     {
         private readonly IHttpContextAccessor httpContextAccessor;
 
@@ -21,7 +18,7 @@ namespace ShishaProject.Services
             this.httpContextAccessor = httpContextAccessor;
         }
 
-        public StatusCodeResult CreatePayment(StripeChargeInputModel inputModel)
+        protected override StatusCodeResult MakePayment(StripeChargeInputModel inputModel)
         {
             var options = new SessionCreateOptions
             {
@@ -51,7 +48,5 @@ namespace ShishaProject.Services
             this.httpContextAccessor.HttpContext.Response.Headers.Add("Location", session.Url);
             return new StatusCodeResult((int)HttpStatusCode.SeeOther);
         }
-
-
     }
 }

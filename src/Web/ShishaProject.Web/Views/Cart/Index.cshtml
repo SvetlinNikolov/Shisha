@@ -1,315 +1,111 @@
-﻿<!-- Main content - different for every page -->
-<main>
+﻿@using ShishaProject.Services.Data.Models.Dtos
+@using ShishaProject.Common.ExtensionMethods
+@model ProductsFlavoursDto
 
-    <partial name="_SearchBar" />
+<partial name="_SearchBar" />
 
-    <!-- Products page -->
-    <div class="cart-container" id="cart-container">
-        <h2>Your cart</h2>
 
-        <div class="cart-sections">
-            <div class="cart-item-container">
-                <!-- FOR LOOP THIS - START -->
-                <div class="cart-item" data-product-number="1234567890">
-                    <button type="button" class="cart-item-remove-icon-container">
-                        <img src="../assets/icons/remove.svg" alt="Remove">
-                    </button>
+<!-- Products page --><div class="cart-container" id="cart-container">
+    <h2>Your cart</h2>
 
-                    <div class="cart-item-image-container">
-                        <img src="../assets/images/products/coal_example_2.jpg" alt="">
-                    </div>
+    <div class="cart-sections">
+        <div class="cart-item-container">
+            @foreach (var flavour in Model.Flavours)
+            {
+                foreach (var variation in flavour.Variations)
+                {
+                    <div class="cart-item" data-product-number="1234567890">
+                        <button type="button" class="cart-item-remove-icon-container">
+                            <img src="../assets/icons/remove.svg" alt="Remove">
+                        </button>
 
-                    <div class="cart-item-text-container">
-                        <div class="cart-item-name">
-                            LONG AND DESCRIPTIVE NAME OF THIS FINE PRODUCT
+                        <div class="cart-item-image-container">
+                            <img src="../assets/images/products/coal_example_2.jpg" alt="">
                         </div>
 
-                        <div class="cart-item-text">
-                            <div class="cart-item-text-left">
-                                <div class="item-ratings-container">
-                                    <span class="item-text-title">Ratings: </span>
-                                    <span class="ratings-container">
-                                        <img src="../assets/icons/star.svg" alt="">
-                                        <img src="../assets/icons/star.svg" alt="">
-                                        <img src="../assets/icons/star.svg" alt="">
-                                        <img src="../assets/icons/star.svg" alt="">
-                                        <img src="../assets/icons/star.svg" alt="">
-                                    </span>
-
-                                    <span>4.20 / 5.00</span>
-                                </div>
-
-                                <p>
-                                    <span class="item-text-title">Product code: </span>
-                                    <span>1234567890</span>
-                                </p>
-
-                                <p>
-                                    <span class="item-text-title">Flavor: </span>
-                                    <span>Chicken</span>
-                                </p>
+                        <div class="cart-item-text-container">
+                            <div class="cart-item-name">
+                                @flavour.Description
                             </div>
 
-                            <div class="cart-item-text-right">
-                                <div class="cart-item-packaging-container">
-                                    <p class="item-text-title">Packaging:</p>
-                                    <div class="packaging-choices-container">
-                                        <button type="button" class="packaging-choice active">20 pcs</button>
-                                        <button type="button" class="packaging-choice">40 pcs</button>
-                                        <button type="button" class="packaging-choice">1.00 kg</button>
-                                        <button type="button" class="packaging-choice">100 kg</button>
+                            <div class="cart-item-text">
+                                <div class="cart-item-text-left">
+                                    <div class="item-ratings-container">
+                                        <span class="item-text-title">Ratings: </span>
+                                        <span class="ratings-container">
+                                            <img src="../assets/icons/star.svg" alt="">
+                                            <img src="../assets/icons/star.svg" alt="">
+                                            <img src="../assets/icons/star.svg" alt="">
+                                            <img src="../assets/icons/star.svg" alt="">
+                                            <img src="../assets/icons/star.svg" alt="">
+                                        </span>
+
+                                        <span>4.20 / 5.00</span>
                                     </div>
+
+                                    <p>
+                                        <span class="item-text-title">Product code: </span>
+                                        <span>1234567890</span>
+                                    </p>
+
+                                    <p>
+                                        <span class="item-text-title">Flavor: </span>
+                                        <span>Chicken</span>
+                                    </p>
                                 </div>
 
-                                <div class="price-container">
-                                    <div class="quantity">
-                                        <label for="quantity">Quantity:</label>
-                                        <br>
-                                        <input type="text" name="quantity" id="quantity" value="1">
-                                        x
+                                <div class="cart-item-text-right">
+                                    <div class="cart-item-packaging-container">
+                                        <p class="item-text-title">Packaging:</p>
+                                        <div class="packaging-choices-container">
+                                            <button type="button" class="packaging-choice active">@variation.Weight</button>
+                                        </div>
                                     </div>
 
-                                    <div class="price">
-                                        <p class="price-container-og-price">200.00 BGN</p>
-                                        <p class="price-container-discount-price">100.00 BGN</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- FOR LOOP THIS - END -->
-                <!-- DELETE THESE - START -->
-                <div class="cart-item" data-product-number="1">
-                    <button type="button" class="cart-item-remove-icon-container">
-                        <img src="../assets/icons/remove.svg" alt="Remove">
-                    </button>
+                                    <div class="price-container">
+                                        <div class="quantity">
+                                            <label for="quantity">Quantity:</label>
+                                            <br>
+                                            <input type="text" name="quantity" id="quantity" value="@variation.Quantity">
 
-                    <div class="cart-item-image-container">
-                        <img src="../assets/images/products/coal_example_2.jpg" alt="">
-                    </div>
+                                        </div>
 
-                    <div class="cart-item-text-container">
-                        <div class="cart-item-name">
-                            LONG AND DESCRIPTIVE NAME OF THIS FINE PRODUCT
-                        </div>
-
-                        <div class="cart-item-text">
-                            <div class="cart-item-text-left">
-                                <div class="item-ratings-container">
-                                    <span class="item-text-title">Ratings: </span>
-                                    <span class="ratings-container">
-                                        <img src="../assets/icons/star.svg" alt="">
-                                        <img src="../assets/icons/star.svg" alt="">
-                                        <img src="../assets/icons/star.svg" alt="">
-                                        <img src="../assets/icons/star.svg" alt="">
-                                        <img src="../assets/icons/star.svg" alt="">
-                                    </span>
-
-                                    <span>4.20 / 5.00</span>
-                                </div>
-
-                                <p>
-                                    <span class="item-text-title">Product code: </span>
-                                    <span>1234567890</span>
-                                </p>
-
-                                <p>
-                                    <span class="item-text-title">Flavor: </span>
-                                    <span>Chicken</span>
-                                </p>
-                            </div>
-
-                            <div class="cart-item-text-right">
-                                <div class="cart-item-packaging-container">
-                                    <p class="item-text-title">Packaging:</p>
-                                    <div class="packaging-choices-container">
-                                        <button type="button" class="packaging-choice active">20 pcs</button>
-                                        <button type="button" class="packaging-choice">40 pcs</button>
-                                        <button type="button" class="packaging-choice">1.00 kg</button>
-                                        <button type="button" class="packaging-choice">100 kg</button>
-                                    </div>
-                                </div>
-
-                                <div class="price-container">
-                                    <div class="quantity">
-                                        <label for="quantity">Quantity:</label>
-                                        <br>
-                                        <input type="text" name="quantity" id="quantity" value="1">
-                                        x
-                                    </div>
-
-                                    <div class="price">
-                                        <p class="price-container-og-price">200.00 BGN</p>
-                                        <p class="price-container-discount-price">100.00 BGN</p>
+                                        <div class="price">
+                                            <p class="price-container-og-price">CENATA PREDI</p>
+                                            <p class="price-container-discount-price">@variation.Price</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                }
+            }
+        </div>
 
-                <div class="cart-item" data-product-number="2">
-                    <button type="button" class="cart-item-remove-icon-container">
-                        <img src="../assets/icons/remove.svg" alt="Remove">
-                    </button>
+        <div class="cart-item-total-price-container" id="cart-item-total-price-container">
+            <div class="cart-item-total-price-text">
+                <p class="cart-item-total-header">Total</p>
 
-                    <div class="cart-item-image-container">
-                        <img src="../assets/images/products/coal_example_2.jpg" alt="">
-                    </div>
+                <p>
+                    <span id="cart-item-total-price">100.00</span>
+                    <span>BGN</span>
+                </p>
 
-                    <div class="cart-item-text-container">
-                        <div class="cart-item-name">
-                            LONG AND DESCRIPTIVE NAME OF THIS FINE PRODUCT
-                        </div>
-
-                        <div class="cart-item-text">
-                            <div class="cart-item-text-left">
-                                <div class="item-ratings-container">
-                                    <span class="item-text-title">Ratings: </span>
-                                    <span class="ratings-container">
-                                        <img src="~/icons/star.svg" alt="">
-                                        <img src="~/icons/star.svg" alt="">
-                                        <img src="~/icons/star.svg" alt="">
-                                        <img src="~/icons/star.svg" alt="">
-                                        <img src="~/icons/star.svg" alt="">
-                                    </span>
-
-                                    <span>4.20 / 5.00</span>
-                                </div>
-
-                                <p>
-                                    <span class="item-text-title">Product code: </span>
-                                    <span>1234567890</span>
-                                </p>
-
-                                <p>
-                                    <span class="item-text-title">Flavor: </span>
-                                    <span>Chicken</span>
-                                </p>
-                            </div>
-
-                            <div class="cart-item-text-right">
-                                <div class="cart-item-packaging-container">
-                                    <p class="item-text-title">Packaging:</p>
-                                    <div class="packaging-choices-container">
-                                        <button type="button" class="packaging-choice active">20 pcs</button>
-                                        <button type="button" class="packaging-choice">40 pcs</button>
-                                        <button type="button" class="packaging-choice">1.00 kg</button>
-                                        <button type="button" class="packaging-choice">100 kg</button>
-                                    </div>
-                                </div>
-
-                                <div class="price-container">
-                                    <div class="quantity">
-                                        <label for="quantity">Quantity:</label>
-                                        <br>
-                                        <input type="text" name="quantity" id="quantity" value="1">
-                                        x
-                                    </div>
-
-                                    <div class="price">
-                                        <p class="price-container-og-price">200.00 BGN</p>
-                                        <p class="price-container-discount-price">100.00 BGN</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="cart-item" data-product-number="3">
-                    <button type="button" class="cart-item-remove-icon-container">
-                        <img src="~/icons/remove.svg" alt="Remove">
-                    </button>
-
-                    <div class="cart-item-image-container">
-                        <img src="../assets/images/products/coal_example_2.jpg" alt="">
-                    </div>
-
-                    <div class="cart-item-text-container">
-                        <div class="cart-item-name">
-                            LONG AND DESCRIPTIVE NAME OF THIS FINE PRODUCT
-                        </div>
-
-                        <div class="cart-item-text">
-                            <div class="cart-item-text-left">
-                                <div class="item-ratings-container">
-                                    <span class="item-text-title">Ratings: </span>
-                                    <span class="ratings-container">
-                                        <img src="~/icons/star.svg" alt="">
-                                        <img src="~/icons/star.svg" alt="">
-                                        <img src="~/icons/star.svg" alt="">
-                                        <img src="~/icons/star.svg" alt="">
-                                        <img src="~/icons/star.svg" alt="">
-                                    </span>
-
-                                    <span>4.20 / 5.00</span>
-                                </div>
-
-                                <p>
-                                    <span class="item-text-title">Product code: </span>
-                                    <span>1234567890</span>
-                                </p>
-
-                                <p>
-                                    <span class="item-text-title">Flavor: </span>
-                                    <span>Chicken</span>
-                                </p>
-                            </div>
-
-                            <div class="cart-item-text-right">
-                                <div class="cart-item-packaging-container">
-                                    <p class="item-text-title">Packaging:</p>
-                                    <div class="packaging-choices-container">
-                                        <button type="button" class="packaging-choice active">20 pcs</button>
-                                        <button type="button" class="packaging-choice">40 pcs</button>
-                                        <button type="button" class="packaging-choice">1.00 kg</button>
-                                        <button type="button" class="packaging-choice">100 kg</button>
-                                    </div>
-                                </div>
-
-                                <div class="price-container">
-                                    <div class="quantity">
-                                        <label for="quantity">Quantity:</label>
-                                        <br>
-                                        <input type="text" name="quantity" id="quantity" value="1">
-                                        x
-                                    </div>
-
-                                    <div class="price">
-                                        <p class="price-container-og-price">200.00 BGN</p>
-                                        <p class="price-container-discount-price">100.00 BGN</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- DELETE THESE - END -->
+                <p>
+                    <span id="cart-item-total-items">10</span>
+                    <span>items</span>
+                </p>
             </div>
 
-            <div class="cart-item-total-price-container" id="cart-item-total-price-container">
-                <div class="cart-item-total-price-text">
-                    <p class="cart-item-total-header">Total</p>
+            <div class="cart-order-button-container">
+                <a asp-controller="Payment" asp-action="Checkout" id="cart-oder-button">
+                    Place Order
+                </a>
 
-                    <p>
-                        <span id="cart-item-total-price">100.00</span>
-                        <span>BGN</span>
-                    </p>
-
-                    <p>
-                        <span id="cart-item-total-items">10</span>
-                        <span>items</span>
-                    </p>
-                </div>
-
-                <div class="cart-order-button-container">
-                    <button type="button" id="cart-oder-button">Place order</button>
-                </div>
             </div>
         </div>
     </div>
-</main>
+</div>
 
 <script src="~/js/cart.js" asp-append-version="true"></script>

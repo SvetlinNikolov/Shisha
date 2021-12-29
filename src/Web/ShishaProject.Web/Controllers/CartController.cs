@@ -1,12 +1,14 @@
 ﻿namespace ShishaProject.Web.Controllers
 {
+    using System.Linq;
+    using System.Threading.Tasks;
+
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using ShishaProject.Services.Interfaces;
     using ShishaProject.Web.ViewModels.Cart;
-    using System.Threading.Tasks;
 
-    public class CartController : Controller
+    public class CartController : BaseController
     {
         private readonly ICartService cartService;
 
@@ -15,22 +17,40 @@
             this.cartService = cartService;
         }
 
-        [HttpPost]
-        public async Task<IActionResult> AddToCart([FromBody]AddToCartInputModel inputModel)
-        {
-            if (!this.ModelState.IsValid)
-            {
-                return this.Json("Something went wrong");
-            }
-
-            var result = await this.cartService.AddToCartAsync(inputModel);
-        }
-
         [Authorize]
         public async Task<IActionResult> Index()
         {
-            await this.cartService.GetCart();
-            return this.View();
+            var cartProducts = await this.cartService.GetCartAsync();
+
+            if (!cartProducts.Flavours.Any())
+            {
+                return this.View("_CartEmpty");
+            }
+
+            return this.View(cartProducts);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddToCart([FromBody] AddToCartInputModel inputModel)
+        {
+            if (!this.User.Identity.IsAuthenticated)
+            {
+                return this.RedirectToAction(nameof(UsersController.LoginUser), this.RemoveController(nameof(UsersController)));
+            }
+
+            if (!this.ModelState.IsValid)
+            {
+                return this.Json("Something went wrong"); //TODO translation error goes here<<<
+            }
+
+            var isAdded = await this.cartService.AddToCartAsync(inputModel);
+
+            if (isAdded)
+            {
+                //this.UpdateCountOfProductsInCart
+            }
+
+            return this.Json("Something went wrong");
         }
     }
 }

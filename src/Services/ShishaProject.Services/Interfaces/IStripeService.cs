@@ -1,7 +1,7 @@
 ﻿namespace ShishaProject.Services.Interfaces
 {
     using Microsoft.AspNetCore.Mvc;
-    using ShishaProject.Web.ViewModels.Payment;
+    using ShishaProject.Services.Data.Models.Payment;
 
     public interface IStripeService
     {

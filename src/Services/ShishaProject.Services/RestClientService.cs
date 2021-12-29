@@ -81,6 +81,7 @@
             using (HttpResponseMessage response = await this.PostAsync(this.baseUri + url, content))
             {
                 var test = await response.Content.ReadAsAsync<dynamic>();
+
                 if (response.IsSuccessStatusCode)
                 {
                     return await response.Content.Validate().ReadAsAsync<T>();

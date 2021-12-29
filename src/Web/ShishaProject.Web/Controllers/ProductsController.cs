@@ -13,7 +13,6 @@
     {
         private readonly IProductsService productsService;
         private readonly IHtmlLocalizer<ProductsController> localizer;
-        private readonly IJwtService jwtService;
 
         public ProductsController(
             IProductsService productsService,
@@ -22,7 +21,6 @@
         {
             this.productsService = productsService;
             this.localizer = localizer;
-            this.jwtService = jwtService;
         }
 
         public async Task<IActionResult> Index()

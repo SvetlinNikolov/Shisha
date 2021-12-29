@@ -1,8 +1,9 @@
 ﻿namespace ShishaProject.Services.Interfaces
 {
+    using System.Threading.Tasks;
+
     using ShishaProject.Services.Data.Models.Dtos;
     using ShishaProject.Web.ViewModels.Cart;
-    using System.Threading.Tasks;
 
     public interface ICartService
     {
@@ -12,6 +13,6 @@
 
         void GetCartById(int cartId);
 
-        Task<ProductsFlavoursDto> GetCart();
+        Task<ProductsFlavoursDto> GetCartAsync();
     }
 }
