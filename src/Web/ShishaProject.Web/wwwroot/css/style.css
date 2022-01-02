@@ -1216,15 +1216,22 @@ footer .footer-bottom .social-icons-container a:hover img:last-of-type {
 .cart-container .cart-sections .cart-item-container .cart-item .cart-item-text-container .cart-item-text .cart-item-text-right .price-container .quantity input:focus {
   outline: none;
 }
-.cart-container .cart-sections .cart-item-container .cart-item .cart-item-text-container .cart-item-text .cart-item-text-right .price-container .price .price-container-og-price {
+.cart-container .cart-sections .cart-item-container .cart-item .cart-item-text-container .cart-item-text .cart-item-text-right .price-container .price-variants .price .price-container-og-price {
+  text-align: right;
   opacity: 0.75;
   font-weight: bold;
   text-decoration: line-through;
 }
-.cart-container .cart-sections .cart-item-container .cart-item .cart-item-text-container .cart-item-text .cart-item-text-right .price-container .price .price-container-discount-price {
+.cart-container .cart-sections .cart-item-container .cart-item .cart-item-text-container .cart-item-text .cart-item-text-right .price-container .price-variants .price .price-container-discount-price {
   font-size: 18px;
   font-weight: bold;
   color: #ed5034;
+}
+.cart-container .cart-sections .cart-item-container .cart-item .cart-item-text-container .cart-item-text .cart-item-text-right .price-container .price-variants .price-hidden {
+  display: none;
+}
+.cart-container .cart-sections .cart-item-container .cart-item-empty {
+  font-size: 14px;
 }
 .cart-container .cart-sections .cart-item-total-price-container {
   display: flex;
@@ -1267,8 +1274,9 @@ footer .footer-bottom .social-icons-container a:hover img:last-of-type {
   font-size: 16px;
   font-weight: bold;
   border-bottom: 2px solid #ed5034;
-  cursor: pointer;
   text-transform: uppercase;
+  text-align: center;
+  text-decoration: none;
 }
 .cart-container .cart-sections .cart-item-total-price-container .cart-order-button-container a:hover {
   background-color: #ed5034;
@@ -1534,6 +1542,21 @@ footer .footer-bottom .social-icons-container a:hover img:last-of-type {
 }
 .profile-container .profile-info-container-active {
   display: flex;
+}
+
+.error-container {
+  width: 970px;
+  margin: 60px auto;
+  text-align: center;
+}
+.error-container h2 {
+  font-size: 150px;
+  font-family: "Yeseva One";
+  color: #ed5034;
+}
+.error-container h3 {
+  font-size: 50px;
+  font-family: Overpass;
 }
 
 /*@import '../lib/bootstrap/dist/css/bootstrap.min.css';*/

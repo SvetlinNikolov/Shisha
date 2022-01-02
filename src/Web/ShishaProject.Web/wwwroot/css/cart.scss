@@ -145,23 +145,34 @@
                                     }
                                 }
 
-                                .price {
-                                    .price-container-og-price {
-                                        opacity: 0.75;
-                                        font-weight: bold;
-                                        text-decoration: line-through;
+                                .price-variants {
+                                    .price {
+                                        .price-container-og-price {
+                                            text-align: right;
+                                            opacity: 0.75;
+                                            font-weight: bold;
+                                            text-decoration: line-through;
+                                        }
+
+                                        .price-container-discount-price {
+                                            font-size: 18px;
+                                            font-weight: bold;
+                                            color: $primary;
+                                        }
                                     }
 
-                                    .price-container-discount-price {
-                                        font-size: 18px;
-                                        font-weight: bold;
-                                        color: $primary;
+                                    .price-hidden {
+                                        display: none;
                                     }
                                 }
                             }
                         }
                     }
                 }
+            }
+
+            .cart-item-empty {
+                font-size: 14px;
             }
         }
 
@@ -210,8 +221,9 @@
                     font-size: 16px;
                     font-weight: bold;
                     border-bottom: 2px solid $primary;
-                    cursor: pointer;
                     text-transform: uppercase;
+                    text-align: center;
+                    text-decoration: none;
 
                     &:hover {
                         background-color: $primary;

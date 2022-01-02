@@ -5,7 +5,7 @@
 <partial name="_SearchBar" />
 
 
-<!-- Products page --><div class="cart-container" id="cart-container">
+<div class="cart-container" id="cart-container">
     <h2>Your cart</h2>
 
     <div class="cart-sections">
@@ -69,10 +69,26 @@
                                             <input type="text" name="quantity" id="quantity" value="@variation.Quantity">
 
                                         </div>
+                                        <div class="price-variants">
+                                            <div class="price">
+                                                <p class="price-container-og-price">200.00 BGN</p>
+                                                <p class="price-container-discount-price">100.00 BGN</p>
+                                            </div>
 
-                                        <div class="price">
-                                            <p class="price-container-og-price">CENATA PREDI</p>
-                                            <p class="price-container-discount-price">@variation.Price</p>
+                                            <div class="price price-hidden">
+                                                <p class="price-container-og-price">300.00 BGN</p>
+                                                <p class="price-container-discount-price">200.00 BGN</p>
+                                            </div>
+
+                                            <div class="price price-hidden">
+                                                <p class="price-container-og-price">400.00 BGN</p>
+                                                <p class="price-container-discount-price">300.00 BGN</p>
+                                            </div>
+
+                                            <div class="price price-hidden">
+                                                <p class="price-container-og-price">500.00 BGN</p>
+                                                <p class="price-container-discount-price">400.00 BGN</p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -99,10 +115,7 @@
             </div>
 
             <div class="cart-order-button-container">
-                <a asp-controller="Payment" asp-action="Checkout" id="cart-oder-button">
-                    Place Order
-                </a>
-
+                <a asp-controller="Payment" asp-action="Checkout" id="cart-oder-button">Place order</a>
             </div>
         </div>
     </div>
