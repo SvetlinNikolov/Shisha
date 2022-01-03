@@ -9,23 +9,27 @@
 
 <!-- Product details page -->
 <div class="auth-form-container">
-    <form method="POST">
+    <form action="POST">
         <h2>LOGIN</h2>
 
         <label for="username">
-            Username
+            <p>
+                Username
+                <span>A long error message.</span>
+            </p>
             <input type="text" asp-for="@Model.UsernameOrEmail">
         </label>
 
         <label for="password">
-            Password
+            <p>
+                Password
+                <span> @string.IsNullOrEmpty(ViewData["LoginError"].ToString()) ? @ViewData["LoginError"] : string.Empty</span>
+            </p>
             <input type="password" asp-for="@Model.Password">
-            <span class="@ViewData["LoginError"]??" hidden">@ViewData["LoginError"]</span>
-
         </label>
 
         <div class="login-helpful-links-container">
-            <p>Forgotten password? <a asp-controller="Users" asp-action="ResetPassword">Reset!</a></p>
+            <p>Forgotten password?  <a asp-controller="Users" asp-action="ResetPassword">Reset!</a></p>
             <p>Don't have an account? <a asp-controller="Users" asp-action="RegisterUser">Register!</a></p>
         </div>
 

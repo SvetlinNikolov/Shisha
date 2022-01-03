@@ -62,5 +62,9 @@
   {
     "outputFile": "wwwroot/css/_error.css",
     "inputFile": "wwwroot/css/_error.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/profile.css",
+    "inputFile": "wwwroot/css/profile.scss"
   }
 ]

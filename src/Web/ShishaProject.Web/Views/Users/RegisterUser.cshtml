@@ -11,49 +11,73 @@
         <h2>REGISTER</h2>
 
         <label for="email">
-            E-mail
+            <p>
+                E-mail
+                <span>A long error message.</span>
+            </p>
             <input type="email" asp-for="@Model.Email">
         </label>
 
         <label for="username">
-            Username
+            <p>
+                Username
+                <span>A long error message.</span>
+            </p>
             <input asp-for="@Model.Username">
         </label>
 
         <label for="password">
-            Password
+            <p>
+                Password
+                <span>A long error message.</span>
+            </p>
             <input type="password" asp-for="@Model.Password">
         </label>
 
         <label for="repeat_password">
-            Repeat Password
+            <p>
+                Repeat Password
+                <span>A long error message.</span>
+            </p>
             <input type="password" asp-for="@Model.RepeatPassword">
         </label>
 
-        <label for="first_name">
-            First Name
-            <input asp-for="@Model.FirstName">
-        </label>
-
-        <label for="last_name">
-            Last Name
-            <input asp-for="@Model.LastName">
-        </label>
-
         <label for="phone_number">
-            Phone
-            <input type="tel" asp-for="@Model.PhoneNumber">
+            <p>
+                Phone
+                <span>A long error message.</span>
+            </p>
+            <input type="tel" name="phone" id="phone">
         </label>
 
         <label for="address">
-            Address
-            <input asp-for="@Model.Address">
+            <p>
+                Address
+                <span>A long error message.</span>
+            </p>
+            <input asp-for="@Model.Address" id="address">
         </label>
 
-        <div class="login-helpful-links-container login-helpful-links-container-one">
-            <p>Have an account? <a asp-controller="Users" asp-action="LoginUser">Login!</a></p>
-        </div>
+        <label for="first_name">
+            <p>
+                First Name
+                <span>A long error message.</span>
+            </p>
+            <input asp-for="@Model.FirstName">
+        </label>
 
-        <button type="submit" asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">REGISTER</button>
+          <label for="last_name">
+            <p>
+                Last Name
+                <span>A long error message.</span>
+            </p>
+            <input asp-for="@Model.LastName">
+        </label>
+
+
+        <div class="login-helpful-links-container login-helpful-links-container-one">
+         <p>Have an account? <a asp-controller="Users" asp-action="LoginUser">Login!</a></p>
+        </div>
+  <button type="submit" asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">REGISTER</button>
     </form>
 </div>

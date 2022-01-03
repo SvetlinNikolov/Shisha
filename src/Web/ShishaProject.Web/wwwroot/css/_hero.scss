@@ -1,37 +1,37 @@
 .hero-section {
-  width: 100%;
-  height: 600px;
-  background-image: url('../../assets/images/hero.jpg');
-  background-position: top;
-  background-repeat: no-repeat;
-  background-size: cover;
-  position: relative;
-
-  .text-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
     width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    color: $text-light;
-    background-color: rgba(0, 0, 0, 0.25);
+    height: 350px;
+    background-image: url('diger1s');
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
 
-    p {
-      font-size: 16px;
-      font-weight: bold;
+    .text-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: $text-light;
+        background-color: rgba(0, 0, 0, 0.25);
+        padding-top: 125px;
+
+        p {
+            font-size: 16px;
+            font-weight: bold;
+        }
     }
-  }
+    // Mobile responsiveness
+    @media (max-width: 568px) {
+        height: 550px;
 
-  // Mobile responsiveness
-  @media (max-width: 568px) {
-    height: 550px;
-
-    .text-container h1 {
-      font-size: 50px;
+        .text-container h1 {
+            font-size: 50px;
+        }
     }
-  }
 }

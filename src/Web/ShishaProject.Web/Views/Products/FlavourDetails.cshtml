@@ -12,8 +12,11 @@
 
 <partial name="_SearchBar" />
 
+
+<!-- Product details page -->
 <div class="product-details-container">
     <div class="product-header-container">
+        <!-- Crumb navigation -->
         <nav class="product-header-breadcrumbs">
             <ul>
                 <li>
@@ -37,15 +40,16 @@
                 </li>
             </ul>
         </nav>
+
         <h2>Product name</h2>
     </div>
 
+    <!-- Product info -->
     <div class="product-image-and-text-container">
         <div class="product-image-container">
             <img class="product-big-image" src="@Model.Thumbnail" alt="">
 
             <div class="product-image-navigation-container">
-
                 <button class="active">
                     <img src="@Model.Thumbnail" alt="">
                 </button>
@@ -56,6 +60,7 @@
                         <img src="@image" alt="">
                     </button>
                 }
+
             </div>
         </div>
 
@@ -85,6 +90,7 @@
 
             <p>
                 <span class="product-text-title">Description: </span>
+                <br>
                 @Html.Raw(Model.Description)
             </p>
         </div>
@@ -103,11 +109,29 @@
                     <label for="quantity">Quantity:</label>
                     <br>
                     <input type="text" name="quantity" id="quantity" value="1">
+                    
                 </div>
 
-                <div class="price">
-                    <p class="price-container-og-price">this needs to be set when there is a promotion not every product has to be discounted otherwise users will think we are scamming them</p>
-                    <p class="price-container-discount-price">@Model.Price BGN</p>
+                <div class="price-variants">
+                    <div class="price">
+                        <p class="price-container-og-price">200.00 BGN</p>
+                        <p class="price-container-discount-price">@Model.Price BGN</p>
+                    </div>
+
+                    <div class="price price-hidden">
+                        <p class="price-container-og-price">300.00 BGN OPRAVI GO</p>
+                        <p class="price-container-discount-price">200.00 BGN</p>
+                    </div>
+
+                    <div class="price price-hidden">
+                        <p class="price-container-og-price">400.00 BGN OPRAVI GO</p>
+                        <p class="price-container-discount-price">300.00 BGN OPRAVI GO</p>
+                    </div>
+
+                    <div class="price price-hidden">
+                        <p class="price-container-og-price">500.00 BGN OPRAVI GO</p>
+                        <p class="price-container-discount-price">400.00 BGN</p>
+                    </div>
                 </div>
             </div>
 
@@ -115,7 +139,170 @@
         </div>
     </div>
 
-
+    <!-- Add extra content under here - suggested products, last reviewed, etc. -->
 </div>
+
+<!-- Related products -->
+<div class="product-details-container">
+    <div class="product-header-container">
+        <h2>Related products</h2>
+    </div>
+
+    <!-- Related products container -->
+    <div class="product-related-container">
+        <!-- Container navigation -->
+        <div class="product-related-navigation">
+            <button class="product-related-button-nav product-related-button-nav-left product-related-button-nav-hidden">
+                <img src="../assets/icons/arrow-left.svg" alt="<">
+                <img src="../assets/icons/arrow-left-hover.svg" alt="<">
+            </button>
+
+            <button class="product-related-button-nav product-related-button-nav-right">
+                <img src="../assets/icons/arrow-right.svg" alt=">">
+                <img src="../assets/icons/arrow-right-hover.svg" alt=">">
+            </button>
+        </div>
+
+        <div class="product-related-products">
+            <div class="product-related-products-container">
+                <!-- FOR EACH THIS - START -->
+                <div class="product-related">
+                    <a href="./product.html" class="product-related-text-container">
+                        <img src="../assets/images/products/coal_example_2.jpg" alt="">
+
+                        <div class="product-text-container">
+                            <p class="product-title">Khartoum Sedona</p>
+
+                            <p>Chicken Flavor</p>
+                        </div>
+
+                        <div class="price">
+                            <p class="price-container-og-price">200.00 BGN</p>
+                            <p class="price-container-discount-price">100.00 BGN</p>
+                        </div>
+                    </a>
+
+                    <a href="./product.html" class="product-add-to-cart-button">VIEW PRODUCT</a>
+                </div>
+
+                <div class="product-related">
+                    <a href="./product.html" class="product-related-text-container">
+                        <img src="../assets/images/products/coal_example_2.jpg" alt="">
+
+                        <div class="product-text-container">
+                            <p class="product-title">Khartoum Sedona</p>
+
+                            <p>Chicken Flavor</p>
+                        </div>
+
+                        <div class="price">
+                            <p class="price-container-og-price">200.00 BGN</p>
+                            <p class="price-container-discount-price">100.00 BGN</p>
+                        </div>
+                    </a>
+
+                    <a href="./product.html" class="product-add-to-cart-button">VIEW PRODUCT</a>
+                </div>
+
+                <div class="product-related">
+                    <a href="./product.html" class="product-related-text-container">
+                        <img src="../assets/images/products/coal_example_2.jpg" alt="">
+
+                        <div class="product-text-container">
+                            <p class="product-title">Khartoum Sedona</p>
+
+                            <p>Chicken Flavor</p>
+                        </div>
+
+                        <div class="price">
+                            <p class="price-container-og-price">200.00 BGN</p>
+                            <p class="price-container-discount-price">100.00 BGN</p>
+                        </div>
+                    </a>
+
+                    <a href="./product.html" class="product-add-to-cart-button">VIEW PRODUCT</a>
+                </div>
+
+                <div class="product-related">
+                    <a href="./product.html" class="product-related-text-container">
+                        <img src="../assets/images/products/coal_example_2.jpg" alt="">
+
+                        <div class="product-text-container">
+                            <p class="product-title">Khartoum Sedona</p>
+
+                            <p>Chicken Flavor</p>
+                        </div>
+
+                        <div class="price">
+                            <p class="price-container-og-price">200.00 BGN</p>
+                            <p class="price-container-discount-price">100.00 BGN</p>
+                        </div>
+                    </a>
+
+                    <a href="./product.html" class="product-add-to-cart-button">VIEW PRODUCT</a>
+                </div>
+
+                <div class="product-related">
+                    <a href="./product.html" class="product-related-text-container">
+                        <img src="../assets/images/products/coal_example_2.jpg" alt="">
+
+                        <div class="product-text-container">
+                            <p class="product-title">Khartoum Sedona</p>
+
+                            <p>Chicken Flavor</p>
+                        </div>
+
+                        <div class="price">
+                            <p class="price-container-og-price">200.00 BGN</p>
+                            <p class="price-container-discount-price">100.00 BGN</p>
+                        </div>
+                    </a>
+
+                    <a href="./product.html" class="product-add-to-cart-button">VIEW PRODUCT</a>
+                </div>
+
+                <div class="product-related">
+                    <a href="./product.html" class="product-related-text-container">
+                        <img src="../assets/images/products/coal_example_2.jpg" alt="">
+
+                        <div class="product-text-container">
+                            <p class="product-title">Khartoum Sedona</p>
+
+                            <p>Chicken Flavor</p>
+                        </div>
+
+                        <div class="price">
+                            <p class="price-container-og-price">200.00 BGN</p>
+                            <p class="price-container-discount-price">100.00 BGN</p>
+                        </div>
+                    </a>
+
+                    <a href="./product.html" class="product-add-to-cart-button">VIEW PRODUCT</a>
+                </div>
+
+                <div class="product-related">
+                    <a href="./product.html" class="product-related-text-container">
+                        <img src="../assets/images/products/coal_example_2.jpg" alt="">
+
+                        <div class="product-text-container">
+                            <p class="product-title">Khartoum Sedona</p>
+
+                            <p>Chicken Flavor</p>
+                        </div>
+
+                        <div class="price">
+                            <p class="price-container-og-price">200.00 BGN</p>
+                            <p class="price-container-discount-price">100.00 BGN</p>
+                        </div>
+                    </a>
+
+                    <a href="./product.html" class="product-add-to-cart-button">VIEW PRODUCT</a>
+                </div>
+                <!-- FOR EACH THIS - END -->
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <script src="~/js/product.js" asp-append-version="true"></script>

@@ -7,20 +7,30 @@ let cartOrderButton = document.getElementById('cart-oder-button');
 // Function definitions
 function changePackaging() {
     // Get elements
-    let packagingChoices = this.parentNode.childNodes;
+    let parentContainer = this.parentNode;
+    let packagingChoices = parentContainer.children;
     let currentPackaging;
     let newPackaging = this;
+    let priceContainer = parentContainer.parentNode.parentNode.querySelector('.price-container .price-variants').children;
+    let prevIndex;
+    let newIndex;
 
     for (let packagingChoice of packagingChoices) {
         if (packagingChoice.classList) {
             if (packagingChoice.classList.contains('active')) {
                 currentPackaging = packagingChoice;
+                prevIndex = Array.prototype.indexOf.call(packagingChoices, packagingChoice);
+                newIndex = Array.prototype.indexOf.call(packagingChoices, this);
                 break;
             }
         }
     }
 
-    // Set 
+    // Set the price 
+    priceContainer[prevIndex].classList.add('price-hidden');
+    priceContainer[newIndex].classList.remove('price-hidden');
+
+    // Set the packaging
     currentPackaging.classList.remove('active');
     newPackaging.classList.add('active');
 }
