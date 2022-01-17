@@ -1,5 +1,6 @@
 ﻿namespace ShishaProject.Services.Interfaces
 {
+    using System.Collections.Generic;
     using System.Threading.Tasks;
 
     using ShishaProject.Services.Data.Models.Dtos;
@@ -14,10 +15,10 @@
 
         Task<ProductsFlavoursDto> GetFlavoursByCategoryId(FlavourByCategoryIdRequest request);
 
-        Task<ProductFlavourDto> GetFlavourById(FlavourByIdRequest request);
+        Task<ProductFlavourDto> GetFlavourById(FlavourByIdRequest request, bool includeRelatedFlavours = false);
 
         Task<ProductsFlavoursDto> GetFilteredFlavours(Filters filters);
 
-        // Task<ProductsFlavoursDto> GetFlavoursByIds(IEnumerable<string> flavourIds);
+        public Task<IEnumerable<ProductFlavourDto>> GetRelatedFlavours(RelatedFlavoursRequest request, int take = 5);
     }
 }

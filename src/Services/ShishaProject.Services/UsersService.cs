@@ -24,19 +24,22 @@
         private readonly IHttpContextAccessor httpContextAccessor;
         private readonly IShishaLogger logger;
         private readonly IEmailService emailService;
+        private readonly IUserSecurityService userSecurityService;
 
         public UsersService(
             IRestClient restClient,
             IOptions<UsersEndpointsConfig> endpointConfig,
             IHttpContextAccessor httpContext,
             IShishaLogger logger,
-            IEmailService emailService)
+            IEmailService emailService,
+            IUserSecurityService userSecurityService)
         {
             this.restClient = restClient;
             this.endpointConfig = endpointConfig;
             this.httpContextAccessor = httpContext;
             this.logger = logger;
             this.emailService = emailService;
+            this.userSecurityService = userSecurityService;
         }
 
         public async Task<UserDto> GetUserByIdAsync(int id)
@@ -87,6 +90,8 @@
 
             try
             {
+                model.Password = this.userSecurityService.EncryptPassword(model.Password);
+
                 var result = await this.restClient
                              .PostAsync<JObject>(this.endpointConfig.Value.AuthenticateUser, JsonConvert.SerializeObject(model));
 
@@ -106,7 +111,10 @@
 
         public async Task<bool> RegisterUserAsync(RegistrationInputModel user)
         {
-            user.City = "Ne sam go napravil o6te";
+            user.City = "Ne sam go napravil o6te"; // E napravi go de
+
+            user.Password = this.userSecurityService.EncryptPassword(user.Password);
+
             var result = await this.restClient
                  .PostAsync<UserDto>(this.endpointConfig.Value.RegisterUser, JsonHelper.SerializeToPhpApiFormat("user_data", user));
 

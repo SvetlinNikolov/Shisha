@@ -6,6 +6,7 @@
     "GetFlavourById": "get-flavour-by-id",
     "GetFlavoursByIds": "get-flavour-by-ids",
     "GetAllCategories": "get-all-categories",
-    "Filters": "filter-flavours"
+    "Filters": "filter-flavours",
+    "GetRelatedFlavours": "related-products"
   }
 }

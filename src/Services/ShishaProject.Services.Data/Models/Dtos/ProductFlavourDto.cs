@@ -3,6 +3,7 @@
     using System.Collections.Generic;
 
     using Newtonsoft.Json;
+    using ShishaProject.Services.Data.Enums;
 
     public class ProductFlavourDto
     {
@@ -36,7 +37,13 @@
         [JsonProperty("updated_at")]
         public string UpdatedAt { get; set; }
 
+        [JsonProperty("flavour_type")]
+        public FlavourType? FlavourType { get; set; }
+
         [JsonProperty("flavour_variations")]
         public IEnumerable<FlavourVariation> Variations { get; set; }
+
+        [JsonProperty("related_products")]
+        public IEnumerable<ProductFlavourDto> RelatedFlavours { get; set; }
     }
 }

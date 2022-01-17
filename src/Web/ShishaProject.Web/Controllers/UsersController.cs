@@ -10,13 +10,16 @@
     public class UsersController : BaseController
     {
         private readonly IUsersService usersService;
+        private readonly IUserSecurityService userSecurityService;
         private readonly IStringLocalizer<UsersController> stringLocalizer;
 
         public UsersController(
             IUsersService usersService,
+            IUserSecurityService userSecurityService,
             IStringLocalizer<UsersController> stringLocalizer)
         {
             this.usersService = usersService;
+            this.userSecurityService = userSecurityService;
             this.stringLocalizer = stringLocalizer;
         }
 
@@ -31,7 +34,7 @@
             return this.View(inputModel);
         }
 
-        [HttpPost]
+        //[HttpPost]
         public async Task<IActionResult> LoginUser(LoginInputModel inputModel, string returnUrl = "")
         {
             if (!this.ModelState.IsValid)
@@ -83,7 +86,7 @@
                 return this.View(inputModel);
             }
 
-            var result = await this.usersService.RegisterUserAsync(inputModel);
+            var result = await this.usersService.RegisterUserAsync(inputModel); // Throw errors or show 500
 
             return this.View();
         }

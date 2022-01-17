@@ -20,7 +20,7 @@
         }
 
         protected string GetLanguage()
-        {
+         {
             return this.HttpContext.Request.Cookies[CookieRequestCultureProvider.DefaultCookieName] ??
                    (string)this.ControllerContext.RouteData.Values["language"];
         }

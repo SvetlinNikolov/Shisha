@@ -9,7 +9,7 @@
 
 <!-- Product details page -->
 <div class="auth-form-container">
-    <form action="POST">
+    <form asp-controller="Users" asp-action="LoginUser">
         <h2>LOGIN</h2>
 
         <label for="username">
@@ -23,7 +23,7 @@
         <label for="password">
             <p>
                 Password
-                <span> @string.IsNullOrEmpty(ViewData["LoginError"].ToString()) ? @ViewData["LoginError"] : string.Empty</span>
+                <span>Error is placed here</span>
             </p>
             <input type="password" asp-for="@Model.Password">
         </label>

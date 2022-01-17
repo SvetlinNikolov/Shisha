@@ -24,7 +24,7 @@
         }
 
         public async Task<IActionResult> Index()
-        {;
+        {
             var products = await this.productsService.GetAllFlavours(new GetAllFlavoursRequest { Language = this.GetLanguage() });
             return this.View(products);
         }
@@ -44,7 +44,12 @@
 
         public async Task<IActionResult> FlavourDetails(int id)
         {
-            var product = await this.productsService.GetFlavourById(new FlavourByIdRequest { FlavourId = id, Language = this.GetLanguage() });
+            var product = await this.productsService.GetFlavourById(
+                new FlavourByIdRequest
+                {
+                    FlavourId = id,
+                    Language = this.GetLanguage(),
+                }, includeRelatedFlavours: true);
 
             return this.View(product);
         }

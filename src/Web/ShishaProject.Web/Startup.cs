@@ -124,6 +124,7 @@
             // Http
             services.AddTransient<IRestClient, RestClientService>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddHttpClient();
 
             // Products
             services.AddTransient<IProductsService, ProductsService>();
@@ -135,8 +136,9 @@
             services.AddTransient<IEmailSender, NullMessageSender>();
             services.AddTransient<IEmailService, EmailService>();
 
-            //Security
+            // Security
             services.AddTransient<IJwtService, JwtService>();
+            services.AddTransient<IUserSecurityService, UserSecurityService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

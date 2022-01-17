@@ -13,5 +13,7 @@
         public string GetAllCategories { get; set; }
 
         public string Filters { get; set; }
+
+        public string GetRelatedFlavours { get; set; }
     }
 }

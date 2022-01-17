@@ -1,5 +1,6 @@
 ﻿namespace ShishaProject.Services
 {
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -7,6 +8,7 @@
     using Microsoft.Extensions.Options;
     using Newtonsoft.Json;
     using ShishaProject.Common.ExtensionMethods;
+    using ShishaProject.Services.Data.Enums;
     using ShishaProject.Services.Data.Models.Configs;
     using ShishaProject.Services.Data.Models.Dtos;
     using ShishaProject.Services.Data.Models.Dtos.Api;
@@ -59,7 +61,7 @@
             return dto;
         }
 
-        public async Task<ProductFlavourDto> GetFlavourById(FlavourByIdRequest request)
+        public async Task<ProductFlavourDto> GetFlavourById(FlavourByIdRequest request, bool includeRelatedFlavours = false)
         {
             var requestJson = JsonConvert.SerializeObject(request);
 
@@ -69,6 +71,16 @@
                     requestJson);
 
             var dto = result.Flavours?.FirstOrDefault();
+
+            if (includeRelatedFlavours && dto.FlavourType != null && dto.FlavourType != FlavourType.Unspecified)
+            {
+                dto.RelatedFlavours = await this.GetRelatedFlavours(
+              new RelatedFlavoursRequest
+              {
+                  FlavourType = dto.FlavourType,
+                  Language = request.Language,
+              });   
+            }
 
             return dto;
         }
@@ -92,6 +104,18 @@
             dto.PaginationData.Pages = pager.Pages;
 
             return dto;
+        }
+
+        public async Task<IEnumerable<ProductFlavourDto>> GetRelatedFlavours(RelatedFlavoursRequest request, int take = 5)
+        {
+            var requestJson = JsonConvert.SerializeObject(request);
+
+            var dto = await this.restClient
+               .PostAsync<ProductsFlavoursDto>(
+                   this.endpointConfig.Value.GetRelatedFlavours,
+                   requestJson);
+
+            return dto.Flavours.Take(take);
         }
     }
 }
