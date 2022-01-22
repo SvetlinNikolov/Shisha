@@ -7,6 +7,7 @@
     using AutoMapper;
     using Microsoft.Extensions.Options;
     using Newtonsoft.Json;
+    using ShishaProject.Common;
     using ShishaProject.Common.ExtensionMethods;
     using ShishaProject.Services.Data.Enums;
     using ShishaProject.Services.Data.Models.Configs;
@@ -36,12 +37,12 @@
         {
             var requestJson = JsonConvert.SerializeObject(request);
 
-            var allProducts = await this.restClient.PostAsync<ProductsFlavoursDto>(this.endpointConfig.Value.GetAllFlavours, requestJson);
+            var allFlavours = await this.restClient.PostAsync<ProductsFlavoursDto>(this.endpointConfig.Value.GetAllFlavours, requestJson);
 
-            var pager = new Pager(allProducts.PaginationData.TotalProducts, allProducts.PaginationData.CurrentPage, allProducts.PaginationData.ItemsPerPage);
-            allProducts.PaginationData.Pages = pager.Pages;
+            var pager = new Pager(allFlavours.PaginationData.TotalProducts, allFlavours.PaginationData.CurrentPage, allFlavours.PaginationData.ItemsPerPage);
+            allFlavours.PaginationData.Pages = pager.Pages;
 
-            return allProducts;
+            return allFlavours;
         }
 
         public async Task<ProductsCategoriesDto> GetAllCategories()
@@ -79,7 +80,8 @@
               {
                   FlavourType = dto.FlavourType,
                   Language = request.Language,
-              });   
+                  FlavourId = request.FlavourId,
+              });
             }
 
             return dto;
@@ -94,7 +96,7 @@
                      this.endpointConfig.Value.Filters,
                      filtersJson);
 
-            // veli api returns last filter not current filters
+            // burov api returns last filter not current filters
             if (dto.Flavours.IsNullOrEmpty())
             {
                 return dto;
@@ -106,7 +108,7 @@
             return dto;
         }
 
-        public async Task<IEnumerable<ProductFlavourDto>> GetRelatedFlavours(RelatedFlavoursRequest request, int take = 5)
+        public async Task<IEnumerable<ProductFlavourDto>> GetRelatedFlavours(RelatedFlavoursRequest request, int take = GlobalConstants.RelatedFlavoursCount)
         {
             var requestJson = JsonConvert.SerializeObject(request);
 

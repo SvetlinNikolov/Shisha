@@ -11,5 +11,8 @@
 
         [JsonProperty("flavour_type")]
         public FlavourType? FlavourType { get; set; }
+
+        [JsonProperty("related_flavour_id")]
+        public int FlavourId { get; set; }
     }
 }

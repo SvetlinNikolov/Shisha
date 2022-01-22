@@ -1,4 +1,5 @@
-﻿@using ShishaProject.Services.Data.Models.Dtos
+﻿@using ShishaProject.Common
+@using ShishaProject.Services.Data.Models.Dtos
 
 @model ProductFlavourDto
 
@@ -109,7 +110,7 @@
                     <label for="quantity">Quantity:</label>
                     <br>
                     <input type="text" name="quantity" id="quantity" value="1">
-                    
+
                 </div>
 
                 <div class="price-variants">
@@ -151,153 +152,46 @@
     <!-- Related products container -->
     <div class="product-related-container">
         <!-- Container navigation -->
-        <div class="product-related-navigation">
-            <button class="product-related-button-nav product-related-button-nav-left product-related-button-nav-hidden">
-                <img src="../assets/icons/arrow-left.svg" alt="<">
-                <img src="../assets/icons/arrow-left-hover.svg" alt="<">
-            </button>
+        @if (@Model.RelatedFlavours.Count() > GlobalConstants.RelatedFlavoursCount)
+        {
+            <div class="product-related-navigation">
+                <button class="product-related-button-nav product-related-button-nav-left product-related-button-nav-hidden">
+                    <img src="~/icons/arrow-left.svg" alt="<">
+                    <img src="~/icons/arrow-left-hover.svg" alt="<">
+                </button>
 
-            <button class="product-related-button-nav product-related-button-nav-right">
-                <img src="../assets/icons/arrow-right.svg" alt=">">
-                <img src="../assets/icons/arrow-right-hover.svg" alt=">">
-            </button>
-        </div>
+                <button class="product-related-button-nav product-related-button-nav-right">
+                    <img src="/icons/arrow-right.svg" alt=">">
+                    <img src="/icons/arrow-right-hover.svg" alt=">">
+                </button>
+            </div>
+        }
 
         <div class="product-related-products">
             <div class="product-related-products-container">
                 <!-- FOR EACH THIS - START -->
-                <div class="product-related">
-                    <a href="./product.html" class="product-related-text-container">
-                        <img src="../assets/images/products/coal_example_2.jpg" alt="">
+                @foreach (var relatedFlavour in Model.RelatedFlavours)
+                {
+                    <div class="product-related">
+                        <a asp-controller="Products" asp-action="FlavourDetails" asp-route-id="@relatedFlavour.Id" class="product-related-text-container">
+                            <img src="@relatedFlavour.Thumbnail" alt="">
 
-                        <div class="product-text-container">
-                            <p class="product-title">Khartoum Sedona</p>
+                            <div class="product-text-container">
+                                <p class="product-title">@relatedFlavour.Title</p>
 
-                            <p>Chicken Flavor</p>
-                        </div>
+                                <p>Island boy</p>
+                            </div>
 
-                        <div class="price">
-                            <p class="price-container-og-price">200.00 BGN</p>
-                            <p class="price-container-discount-price">100.00 BGN</p>
-                        </div>
-                    </a>
+                            <div class="price">
+                                <p class="price-container-og-price">ORIGINALNA  CENA</p>
+                                <p class="price-container-discount-price">@relatedFlavour.Price</p>
+                            </div>
+                        </a>
 
-                    <a href="./product.html" class="product-add-to-cart-button">VIEW PRODUCT</a>
-                </div>
+                        <a href="./product.html" class="product-add-to-cart-button">VIEW PRODUCT translate this</a>
+                    </div>
+                }
 
-                <div class="product-related">
-                    <a href="./product.html" class="product-related-text-container">
-                        <img src="../assets/images/products/coal_example_2.jpg" alt="">
-
-                        <div class="product-text-container">
-                            <p class="product-title">Khartoum Sedona</p>
-
-                            <p>Chicken Flavor</p>
-                        </div>
-
-                        <div class="price">
-                            <p class="price-container-og-price">200.00 BGN</p>
-                            <p class="price-container-discount-price">100.00 BGN</p>
-                        </div>
-                    </a>
-
-                    <a href="./product.html" class="product-add-to-cart-button">VIEW PRODUCT</a>
-                </div>
-
-                <div class="product-related">
-                    <a href="./product.html" class="product-related-text-container">
-                        <img src="../assets/images/products/coal_example_2.jpg" alt="">
-
-                        <div class="product-text-container">
-                            <p class="product-title">Khartoum Sedona</p>
-
-                            <p>Chicken Flavor</p>
-                        </div>
-
-                        <div class="price">
-                            <p class="price-container-og-price">200.00 BGN</p>
-                            <p class="price-container-discount-price">100.00 BGN</p>
-                        </div>
-                    </a>
-
-                    <a href="./product.html" class="product-add-to-cart-button">VIEW PRODUCT</a>
-                </div>
-
-                <div class="product-related">
-                    <a href="./product.html" class="product-related-text-container">
-                        <img src="../assets/images/products/coal_example_2.jpg" alt="">
-
-                        <div class="product-text-container">
-                            <p class="product-title">Khartoum Sedona</p>
-
-                            <p>Chicken Flavor</p>
-                        </div>
-
-                        <div class="price">
-                            <p class="price-container-og-price">200.00 BGN</p>
-                            <p class="price-container-discount-price">100.00 BGN</p>
-                        </div>
-                    </a>
-
-                    <a href="./product.html" class="product-add-to-cart-button">VIEW PRODUCT</a>
-                </div>
-
-                <div class="product-related">
-                    <a href="./product.html" class="product-related-text-container">
-                        <img src="../assets/images/products/coal_example_2.jpg" alt="">
-
-                        <div class="product-text-container">
-                            <p class="product-title">Khartoum Sedona</p>
-
-                            <p>Chicken Flavor</p>
-                        </div>
-
-                        <div class="price">
-                            <p class="price-container-og-price">200.00 BGN</p>
-                            <p class="price-container-discount-price">100.00 BGN</p>
-                        </div>
-                    </a>
-
-                    <a href="./product.html" class="product-add-to-cart-button">VIEW PRODUCT</a>
-                </div>
-
-                <div class="product-related">
-                    <a href="./product.html" class="product-related-text-container">
-                        <img src="../assets/images/products/coal_example_2.jpg" alt="">
-
-                        <div class="product-text-container">
-                            <p class="product-title">Khartoum Sedona</p>
-
-                            <p>Chicken Flavor</p>
-                        </div>
-
-                        <div class="price">
-                            <p class="price-container-og-price">200.00 BGN</p>
-                            <p class="price-container-discount-price">100.00 BGN</p>
-                        </div>
-                    </a>
-
-                    <a href="./product.html" class="product-add-to-cart-button">VIEW PRODUCT</a>
-                </div>
-
-                <div class="product-related">
-                    <a href="./product.html" class="product-related-text-container">
-                        <img src="../assets/images/products/coal_example_2.jpg" alt="">
-
-                        <div class="product-text-container">
-                            <p class="product-title">Khartoum Sedona</p>
-
-                            <p>Chicken Flavor</p>
-                        </div>
-
-                        <div class="price">
-                            <p class="price-container-og-price">200.00 BGN</p>
-                            <p class="price-container-discount-price">100.00 BGN</p>
-                        </div>
-                    </a>
-
-                    <a href="./product.html" class="product-add-to-cart-button">VIEW PRODUCT</a>
-                </div>
                 <!-- FOR EACH THIS - END -->
             </div>
         </div>

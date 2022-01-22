@@ -8,6 +8,8 @@
 
         public const string MainLanguage = "bg";
 
+        public const int RelatedFlavoursCount = 5;
+
         public static readonly string[] AvailableLanguages = new string[] { "bg", "en" };
     }
 }
