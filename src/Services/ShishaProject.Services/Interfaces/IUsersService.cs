@@ -25,9 +25,12 @@
 
         Task ResetUserPasswordAsync(string passwordToken);
 
-        Task<bool> UpdateUserConfirmedEmail(string confirmEmailToken);
+        Task<bool> UpdateUserConfirmedEmailAsync(string confirmEmailToken);
 
-        Task UpdateUserAsync(UserDto userModel, IEnumerable<string> ignoreProperties);
+        Task UpdateUserAsync(UserDto userModel);
+
+        Task ConfirmUserEmail(ConfirmUserEmailDto userModel);
+
         //void Delete(int id);
     }
 }

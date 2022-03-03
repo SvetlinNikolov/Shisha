@@ -39,7 +39,7 @@
 
             var requestJson = JsonConvert.SerializeObject(request);
 
-            var response = await this.restClient.PostAsync<ShishaResponseDto>(this.endpointConfig.Value.AddToCart, requestJson);
+            var response = await this.restClient.PostAsync<ShishaResponseDto<string>>(this.endpointConfig.Value.AddToCart, requestJson);
 
             return !string.IsNullOrEmpty(response.Errors);
         }

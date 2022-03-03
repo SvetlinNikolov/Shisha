@@ -7,12 +7,12 @@
 
     public static class JsonHelper
     {
-        public static string SerializeToPhpApiFormat<T>(string name, T obj)
+        public static string SerializeToPhpApiFormat<T>(string name, T obj, JsonSerializerSettings settings = null)
         {
             var expandoObject = new ExpandoObject();
             expandoObject.TryAdd(name, obj);
 
-            var result = JsonConvert.SerializeObject(expandoObject);
+            var result = JsonConvert.SerializeObject(expandoObject, settings);
 
             return result;
         }

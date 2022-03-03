@@ -1,5 +1,6 @@
 ﻿namespace ShishaProject.Web.Controllers
 {
+    using System;
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
@@ -30,26 +31,33 @@
             this.linkGenerator = linkGenerator;
         }
 
-
         [HttpGet("confirmEmail/{confirmEmailToken}")]
-        public async Task ConfirmUserEmail(string confirmEmailToken)
+        public async Task<IActionResult> ConfirmUserEmail(string confirmEmailToken)
         {
-            throw new System.Exception("");
-            //ConfirmUserEmailDto
+            if (!string.IsNullOrEmpty(confirmEmailToken))
+            {
+                if (!await this.usersService.UpdateUserConfirmedEmailAsync(confirmEmailToken))
+                {
+                    throw new InvalidOperationException("User has already confirmed email"); // FIX this maybe
+                }
+
+                return this.RedirectToAction(nameof(this.LoginUser));
+            }
+
+            return this.RedirectToAction(this.RemoveController(nameof(HomeController)), nameof(HomeController.Index));
         }
 
         [HttpGet]
-        public IActionResult LoginUser(LoginInputModel inputModel)
+        public IActionResult LoginUser()
         {
             if (this.usersService.UserLoggedIn())
             {
                 return this.RedirectToAction(nameof(this.UserProfile));
             }
 
-            return this.View(inputModel);
+            return this.View(new LoginInputModel());
         }
 
-        //[HttpPost]
         public async Task<IActionResult> LoginUser(LoginInputModel inputModel, string returnUrl = "")
         {
             if (!this.ModelState.IsValid)
@@ -114,7 +122,6 @@
 
                 await this.emailService.SendConfirmEmailMessageAsync(user.Email, "Confirm Email", "Potvardi si emaila we", confirmationLink);
             }
-
 
             return this.View();
         }

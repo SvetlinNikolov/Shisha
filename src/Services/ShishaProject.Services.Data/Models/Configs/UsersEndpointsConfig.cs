@@ -13,5 +13,7 @@
         public string UpdateUser { get; set; }
 
         public string AuthenticateUser { get; set; }
+
+        public string GetUserByEmailToken { get; set; }
     }
 }

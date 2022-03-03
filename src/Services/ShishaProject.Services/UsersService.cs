@@ -204,11 +204,11 @@
             //var user = this.GetUserByPasswordResetToken(passwordToken);
         }
 
-        public async Task<bool> UpdateUserConfirmedEmail(string confirmEmailToken)
+        public async Task<bool> UpdateUserConfirmedEmailAsync(string confirmEmailToken)
         {
             var result = await this.restClient
                       .PostAsync<ShishaResponseDto<UserDto>>(
-                          this.endpointConfig.Value.UpdateUser,
+                          this.endpointConfig.Value.GetUserByEmailToken,
                           JsonHelper.SerializeToPhpApiFormat("email_token", confirmEmailToken));
 
             var user = result.Data;
@@ -216,12 +216,7 @@
             if (user.ConfirmEmail == false)
             {
                 user.ConfirmEmail = true;
-                await this.UpdateUserAsync(
-                    user,
-                    user.GetType()
-                        .GetProperties()
-                        .Where(x => x.Name != nameof(UserDto.ConfirmEmail))
-                        .Select(x => x.Name));
+                await this.ConfirmUserEmail(new ConfirmUserEmailDto { ConfirmEmail = true, UserId = user.UserId });
 
                 return true;
             }
@@ -229,20 +224,30 @@
             return false;
         }
 
-        public async Task UpdateUserAsync(UserDto userDto, IEnumerable<string> ignoreProperties = null)
+        public async Task UpdateUserAsync(UserDto userDto)
         {
             try
             {
-                if (ignoreProperties?.Any() == true)
-                {
-                    var jsonResolver = new PropertyRenameAndIgnoreSerializerContractResolver();
-                    jsonResolver.IgnoreProperty(typeof(UserDto), ignoreProperties);
-                }
-
                 var result = await this.restClient
-                     .PostAsync<ShishaResponseDto>(
+                     .PutAsync<ShishaResponseDto<string>>(
                          this.endpointConfig.Value.UpdateUser,
                          JsonHelper.SerializeToPhpApiFormat("user_data", userDto));
+            }
+            catch (Exception ex)
+            {
+                this.logger.Error(ex.ToString());
+                throw;
+            }
+        }
+
+        public async Task ConfirmUserEmail(ConfirmUserEmailDto userModel)
+        {
+            try
+            {
+                var result = await this.restClient
+                     .PutAsync<ShishaResponseDto<string>>(
+                         this.endpointConfig.Value.UpdateUser,
+                         JsonHelper.SerializeToPhpApiFormat("user_data", userModel));
             }
             catch (Exception ex)
             {

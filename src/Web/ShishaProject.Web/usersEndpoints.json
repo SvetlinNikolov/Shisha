@@ -3,10 +3,10 @@
     "GetAllUsers": "users/get-all-users",
     "GetUserById": "users/get-user-by-id",
     "RegisterUser": "users/register-user",
-    "UpdateUser": "",
+    "UpdateUser": "users/update-user",
     "AuthenticateUser": "users/login-user",
     "DeleteUser": "",
-    "GetUserByUsernameOrEmail": "users/get-user-by-email-or-username"
+    "GetUserByUsernameOrEmail": "users/get-user-by-email-or-username",
+    "GetUserByEmailToken": "users/get-user-by-email-token"
   }
 }
-  

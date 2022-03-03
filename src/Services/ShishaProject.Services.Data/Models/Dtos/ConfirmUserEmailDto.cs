@@ -5,7 +5,7 @@
     public class ConfirmUserEmailDto
     {
         [JsonProperty("id")]
-        public int UserId { get; set; }
+        public string UserId { get; set; }
 
         [JsonProperty("confirmed_email")]
         public bool ConfirmEmail { get; set; }

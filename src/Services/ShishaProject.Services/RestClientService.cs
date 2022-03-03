@@ -120,6 +120,24 @@
             }
         }
 
+        public async Task<T> PutAsync<T>(string url, string data)
+        {
+            var httpClient = this.CreateHttpClient();
+            var content = new StringContent(data, Encoding.Default, "application/json");
+
+            using (HttpResponseMessage response = await httpClient.PutAsync(EndpointConstants.BaseUri + url, content))
+            {
+                var test = await response.Content.ReadAsAsync<dynamic>();
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return await response.Content.Validate().ReadAsAsync<T>();
+                }
+
+                throw new Exception(response.ReasonPhrase);
+            }
+        }
+
         private void SetJwtToken(HttpClient httpClient)
         {
             httpClient.DefaultRequestHeaders.Clear();
