@@ -13,16 +13,16 @@
         public string SortBy { get; set; }
 
         [JsonProperty("price_from")]
-        public string PriceFrom { get; set; }
+        public decimal? PriceFrom { get; set; }
 
         [JsonProperty("price_to")]
-        public string PriceTo { get; set; }
+        public decimal? PriceTo { get; set; }
 
         [JsonProperty("category_id")]
         public IEnumerable<int> CategoryIds { get; set; }
 
         [JsonProperty("in_stock")]
-        public short InStock { get; set; }
+        public short InStock => 1;
 
         [JsonProperty("language")]
         public string Language { get; set; }

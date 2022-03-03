@@ -2,7 +2,7 @@
 {
     using Newtonsoft.Json;
 
-    public class ShishaResponseDto
+    public class ShishaResponseDto<T>
     {
         [JsonProperty("status_code")]
         public int StatusCode { get; set; }
@@ -11,6 +11,6 @@
         public string Errors { get; set; }
 
         [JsonProperty("data")]
-        public string Data { get; set; }
+        public T Data { get; set; }
     }
 }

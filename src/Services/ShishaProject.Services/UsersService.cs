@@ -2,16 +2,21 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Security.Claims;
+    using System.Security.Policy;
     using System.Threading.Tasks;
+
     using Microsoft.AspNetCore.Authentication;
     using Microsoft.AspNetCore.Authentication.Cookies;
     using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Options;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Linq;
     using ShishaProject.Common.ExceptionHandling;
     using ShishaProject.Common.Helpers;
+    using ShishaProject.Common.Utils;
     using ShishaProject.Services.Data.Models.Configs;
     using ShishaProject.Services.Data.Models.Dtos;
     using ShishaProject.Services.Interfaces;
@@ -84,13 +89,13 @@
             }
         }
 
-        public async Task<bool> AuthenticateUser(LoginInputModel model)
+        public async Task<bool> AuthenticateUserAsync(LoginInputModel model)
         {
             bool isAuthenticated;
 
             try
             {
-                model.Password = this.userSecurityService.EncryptPassword(model.Password);
+                model.Password = this.userSecurityService.EncryptPassword(model.Password).Password; //FIX THIS
 
                 var result = await this.restClient
                              .PostAsync<JObject>(this.endpointConfig.Value.AuthenticateUser, JsonConvert.SerializeObject(model));
@@ -109,16 +114,24 @@
             return isAuthenticated;
         }
 
-        public async Task<bool> RegisterUserAsync(RegistrationInputModel user)
+        public async Task<UserDto> RegisterUserAsync(RegistrationInputModel user)
         {
-            user.City = "Ne sam go napravil o6te"; // E napravi go de
-
-            user.Password = this.userSecurityService.EncryptPassword(user.Password);
+            this.SetPasswordAndSalt(user);
 
             var result = await this.restClient
-                 .PostAsync<UserDto>(this.endpointConfig.Value.RegisterUser, JsonHelper.SerializeToPhpApiFormat("user_data", user));
+                 .PostAsync<JObject>(this.endpointConfig.Value.RegisterUser, JsonHelper.SerializeToPhpApiFormat("user_data", user));
 
-            return !string.IsNullOrEmpty(result.UserId);
+            var userDto = result.Value<JObject>("data")
+               .ToObject(typeof(UserDto)) as UserDto;
+
+            var userRegistered = !string.IsNullOrEmpty(userDto.UserId); // Better to check status code from result
+
+            if (userRegistered)
+            {
+                return userDto;
+            }
+
+            return null;
         }
 
         public bool UserLoggedIn()
@@ -129,7 +142,7 @@
             return isCurrentlyLoggedIn;
         }
 
-        public async Task LoginUser(LoginInputModel inputModel)
+        public async Task LoginUserAsync(LoginInputModel inputModel)
         {
             // the null check below is a bit redundant but lets keep it for now
             if (!this.UserLoggedIn())
@@ -149,7 +162,7 @@
             }
         }
 
-        public async Task LogoutUser()
+        public async Task LogoutUserAsync()
         {
             if (this.UserLoggedIn())
             {
@@ -182,6 +195,68 @@
                 this.logger.Error(ex.ToString());
                 return null;
             }
+        }
+
+        //Get
+        public Task ResetUserPasswordAsync(string passwordToken)
+        {
+            throw new NotImplementedException();
+            //var user = this.GetUserByPasswordResetToken(passwordToken);
+        }
+
+        public async Task<bool> UpdateUserConfirmedEmail(string confirmEmailToken)
+        {
+            var result = await this.restClient
+                      .PostAsync<ShishaResponseDto<UserDto>>(
+                          this.endpointConfig.Value.UpdateUser,
+                          JsonHelper.SerializeToPhpApiFormat("email_token", confirmEmailToken));
+
+            var user = result.Data;
+
+            if (user.ConfirmEmail == false)
+            {
+                user.ConfirmEmail = true;
+                await this.UpdateUserAsync(
+                    user,
+                    user.GetType()
+                        .GetProperties()
+                        .Where(x => x.Name != nameof(UserDto.ConfirmEmail))
+                        .Select(x => x.Name));
+
+                return true;
+            }
+
+            return false;
+        }
+
+        public async Task UpdateUserAsync(UserDto userDto, IEnumerable<string> ignoreProperties = null)
+        {
+            try
+            {
+                if (ignoreProperties?.Any() == true)
+                {
+                    var jsonResolver = new PropertyRenameAndIgnoreSerializerContractResolver();
+                    jsonResolver.IgnoreProperty(typeof(UserDto), ignoreProperties);
+                }
+
+                var result = await this.restClient
+                     .PostAsync<ShishaResponseDto>(
+                         this.endpointConfig.Value.UpdateUser,
+                         JsonHelper.SerializeToPhpApiFormat("user_data", userDto));
+            }
+            catch (Exception ex)
+            {
+                this.logger.Error(ex.ToString());
+                throw;
+            }
+        }
+
+        private void SetPasswordAndSalt(RegistrationInputModel user)
+        {
+            var (password, salt) = this.userSecurityService.EncryptPassword(user.Password);
+
+            user.Password = password;
+            user.Salt = salt;
         }
     }
 }

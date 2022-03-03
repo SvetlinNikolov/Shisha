@@ -12,6 +12,9 @@
         [JsonProperty("password")]
         public string Password { get; set; }
 
+        [JsonProperty("salt")]
+        public string Salt { get; set; }
+
         [JsonProperty("repeat_password")]
         public string RepeatPassword { get; set; }
 
@@ -36,5 +39,11 @@
 
         [JsonProperty("created_at")]
         public DateTime CreatedAt => DateTime.Now;
+
+        [JsonProperty("password_reset_token")]
+        public string PasswordResetToken => Guid.NewGuid().ToString();
+
+        [JsonProperty("email_token")]
+        public string EmailConfirmToken => Guid.NewGuid().ToString();
     }
 }

@@ -57,7 +57,7 @@
 
         public async Task<T> GetAsync<T>(string url)
         {
-            var httpClient = this.CreateHttpClient(); ;
+            var httpClient = this.CreateHttpClient();
 
             using (HttpResponseMessage response = await httpClient.GetAsync(EndpointConstants.BaseUri + url))
             {

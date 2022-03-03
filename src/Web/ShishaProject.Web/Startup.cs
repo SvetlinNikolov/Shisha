@@ -29,6 +29,9 @@
     using Stripe;
     using ShishaProject.Services.Strategy;
     using ShishaProject.Services.Data.Interfaces;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Mvc.Infrastructure;
+    using Microsoft.AspNetCore.Mvc.Routing;
 
     public class Startup
     {
@@ -114,6 +117,7 @@
             services.Configure<CartEndpointsConfig>(this.configuration.GetSection("Endpoints"));
             services.Configure<StripeConfig>(this.configuration.GetSection("Stripe"));
             services.Configure<JwtConfig>(this.configuration.GetSection("Jwt"));
+            services.Configure<SendGridConfig>(this.configuration.GetSection("SendGrid"));
 
             // Payment
             services.AddTransient<IPaymentStrategy, PaymentStrategy>();
@@ -133,7 +137,7 @@
             services.AddTransient<IUsersService, UsersService>();
 
             // Email
-            services.AddTransient<IEmailSender, NullMessageSender>();
+            services.AddTransient<IEmailSender, SendGridEmailSender>();
             services.AddTransient<IEmailService, EmailService>();
 
             // Security
@@ -174,6 +178,7 @@
                     {
                         endpoints.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapControllerRoute("default", "{language}/{controller=Home}/{action=Index}/{id?}", new { language = GlobalConstants.MainLanguage });
+                        //endpoints.MapControllerRoute("confirmEmail", "{action=ConfirmEmail}/{confirmEmailToken}");
                         endpoints.MapRazorPages();
                     });
         }

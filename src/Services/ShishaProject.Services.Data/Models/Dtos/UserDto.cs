@@ -40,5 +40,8 @@
 
         [JsonProperty("created_at")]
         public DateTime CreatedAt { get; set; }
+
+        [JsonProperty("confirmed_email")]
+        public bool ConfirmEmail { get; set; }
     }
 }

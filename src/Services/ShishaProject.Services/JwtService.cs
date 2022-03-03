@@ -29,7 +29,7 @@
                 Issuer = this.config.Value.Issuer,
                 Audience = this.config.Value.Audience,
                 SigningCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256),
-                Expires = DateTime.UtcNow.AddMinutes(5),
+                Expires = DateTime.UtcNow.AddYears(5),
             };
 
             string jws = tokenHandler.CreateToken(jwt);

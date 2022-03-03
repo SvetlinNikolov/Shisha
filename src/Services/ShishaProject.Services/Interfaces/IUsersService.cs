@@ -1,12 +1,13 @@
 ﻿namespace ShishaProject.Services.Interfaces
 {
+    using System.Collections.Generic;
     using System.Threading.Tasks;
     using ShishaProject.Services.Data.Models.Dtos;
     using ShishaProject.Web.ViewModels.User;
 
     public interface IUsersService
     {
-        Task<bool> AuthenticateUser(LoginInputModel model);
+        Task<bool> AuthenticateUserAsync(LoginInputModel model);
 
         Task<UserDto> GetUserByIdAsync(int id);
 
@@ -14,15 +15,19 @@
 
         Task<UserDto> GetLoggedInUserAsync();
 
-        Task<bool> RegisterUserAsync(RegistrationInputModel user);
+        Task<UserDto> RegisterUserAsync(RegistrationInputModel user);
 
         bool UserLoggedIn();
 
-        Task LoginUser(LoginInputModel inputModel);
+        Task LoginUserAsync(LoginInputModel inputModel);
 
-        Task LogoutUser();
+        Task LogoutUserAsync();
 
-        //void Update(int id, UpdateRequest model);
+        Task ResetUserPasswordAsync(string passwordToken);
+
+        Task<bool> UpdateUserConfirmedEmail(string confirmEmailToken);
+
+        Task UpdateUserAsync(UserDto userModel, IEnumerable<string> ignoreProperties);
         //void Delete(int id);
     }
 }
