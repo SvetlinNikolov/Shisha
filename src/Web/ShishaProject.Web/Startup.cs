@@ -121,7 +121,7 @@
 
             // Payment
             services.AddTransient<IPaymentStrategy, PaymentStrategy>();
-            services.AddTransient<IPaymentService, StripeService>();
+            services.AddTransient<IStripeService, StripeService>();
 
             services.AddTransient<ICartService, CartService>();
 

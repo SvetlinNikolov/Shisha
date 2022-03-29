@@ -43,5 +43,8 @@
 
         [JsonProperty("confirmed_email")]
         public bool ConfirmEmail { get; set; }
+
+        [JsonProperty("password_reset_token")]
+        public string PasswordResetToken { get; set; }
     }
 }

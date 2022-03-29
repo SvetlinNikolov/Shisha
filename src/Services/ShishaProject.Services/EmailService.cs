@@ -25,6 +25,16 @@
             await this.emailSender.SendEmailAsync(to, subject, sb.ToString());
         }
 
+        public async Task SendUserResetPasswordEmailAsync(string to, string subject, string message, string confirmPasswordLink)
+        {
+            var sb = new StringBuilder();
+
+            sb.AppendLine(message)
+                    .AppendLine(confirmPasswordLink);
+
+            await this.emailSender.SendEmailAsync(to, subject, sb.ToString());
+        }
+
         public async Task ReceiveConfirmEmailMessage()
         {
 

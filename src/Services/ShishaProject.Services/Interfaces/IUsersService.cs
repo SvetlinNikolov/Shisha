@@ -31,6 +31,5 @@
 
         Task ConfirmUserEmail(ConfirmUserEmailDto userModel);
 
-        //void Delete(int id);
     }
 }

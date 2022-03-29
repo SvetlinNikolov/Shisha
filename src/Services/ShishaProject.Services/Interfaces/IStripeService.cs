@@ -2,9 +2,10 @@
 {
     using Microsoft.AspNetCore.Mvc;
     using ShishaProject.Services.Data.Models.Payment;
+    using Stripe;
 
     public interface IStripeService
     {
-        StatusCodeResult CreatePayment(StripeChargeInputModel inputModel);
+        PaymentIntent CreatePaymentIntent(StripeChargeInputModel inputModel);
     }
 }

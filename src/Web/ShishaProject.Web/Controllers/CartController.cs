@@ -52,5 +52,13 @@
 
             return this.Json("Something went wrong");
         }
+
+        [Route("create-payment-intent")]
+        public async Task<IActionResult> Checkout()
+        {
+            var result = await this.cartService.Checkout();
+
+            return result;
+        }
     }
 }

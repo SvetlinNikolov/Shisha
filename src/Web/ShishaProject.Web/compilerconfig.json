@@ -66,5 +66,9 @@
   {
     "outputFile": "wwwroot/css/profile.css",
     "inputFile": "wwwroot/css/profile.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/checkout.css",
+    "inputFile": "wwwroot/css/checkout.scss"
   }
 ]

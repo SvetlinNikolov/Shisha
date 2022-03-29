@@ -19,6 +19,6 @@
             this.MakePayment((TModel)(object)model);
         }
 
-        protected abstract StatusCodeResult MakePayment(TModel model);
+        protected abstract TResponse MakePayment<TResponse>(TModel model);
     }
 }

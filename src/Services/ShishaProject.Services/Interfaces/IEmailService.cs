@@ -7,5 +7,7 @@
         bool IsValidEmail(string email);
 
         Task SendConfirmEmailMessageAsync(string to, string subject, string message, string confirmEmailLink);
+
+        Task SendUserResetPasswordEmailAsync(string to, string subject, string message, string confirmPasswordLink);
     }
 }

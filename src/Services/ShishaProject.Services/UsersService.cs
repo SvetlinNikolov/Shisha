@@ -215,7 +215,6 @@
 
             if (user.ConfirmEmail == false)
             {
-                user.ConfirmEmail = true;
                 await this.ConfirmUserEmail(new ConfirmUserEmailDto { ConfirmEmail = true, UserId = user.UserId });
 
                 return true;
@@ -229,7 +228,7 @@
             try
             {
                 var result = await this.restClient
-                     .PutAsync<ShishaResponseDto<string>>(
+                     .PutAsync<ShishaResponseDto>(
                          this.endpointConfig.Value.UpdateUser,
                          JsonHelper.SerializeToPhpApiFormat("user_data", userDto));
             }
@@ -245,7 +244,7 @@
             try
             {
                 var result = await this.restClient
-                     .PutAsync<ShishaResponseDto<string>>(
+                     .PutAsync<ShishaResponseDto>(
                          this.endpointConfig.Value.UpdateUser,
                          JsonHelper.SerializeToPhpApiFormat("user_data", userModel));
             }

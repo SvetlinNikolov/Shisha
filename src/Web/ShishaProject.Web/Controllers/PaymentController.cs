@@ -1,29 +1,55 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using ShishaProject.Services;
-using ShishaProject.Services.Data.Interfaces;
-using ShishaProject.Services.Data.Models.Payment;
-using ShishaProject.Services.Interfaces;
-using ShishaProject.Services.Strategy;
-using System.Threading.Tasks;
+﻿//using System;
+//using System.Collections.Generic;
+//using Microsoft.AspNetCore;
+//using Microsoft.AspNetCore.Builder;
+//using Microsoft.AspNetCore.Hosting;
+//using Microsoft.AspNetCore.Mvc;
+//using Microsoft.Extensions.DependencyInjection;
+//using Microsoft.Extensions.Hosting;
+//using Newtonsoft.Json;
+//using Stripe;
 
-namespace ShishaProject.Web.Controllers
-{
-    public class PaymentController : BaseController
-    {
-        private readonly IPaymentStrategy paymentStrategy;
+//namespace StripeExample
+//{
+//    [Route("create-payment-intent")]
+//    [ApiController]
+//    public class PaymentIntentApiController : Controller
+//    {
+//        [HttpPost]
+//        public ActionResult Create(PaymentIntentCreateRequest request)
+//        {
+//            var paymentIntentService = new PaymentIntentService();
+//            var paymentIntent = paymentIntentService.Create(new PaymentIntentCreateOptions
+//            {
+//                Amount = CalculateOrderAmount(request.Items),
+//                Currency = "bgn",
+//                AutomaticPaymentMethods = new PaymentIntentAutomaticPaymentMethodsOptions
+//                {
+//                    Enabled = true,
+//                },
+//            });
 
-        public PaymentController(IPaymentStrategy paymentStrategy)
-        {
-            this.paymentStrategy = paymentStrategy;
-        }
+//            return Json(new { clientSecret = paymentIntent.ClientSecret });
+//        }
 
-        public async Task<IActionResult> Checkout()
-        {
-            this.paymentStrategy.MakePayment(new StripeChargeInputModel());
+//        private int CalculateOrderAmount(Item[] items)
+//        {
+//            // Replace this constant with a calculation of the order's amount
+//            // Calculate the order total on the server to prevent
+//            // people from directly manipulating the amount on the client
+//            return 1400;
+//        }
 
+//        public class Item
+//        {
+//            [JsonProperty("id")]
+//            public string Id { get; set; }
+//        }
 
-            this.paymentStrategy.MakePayment(new StripeChargeInputModel());
-            throw new System.Exception("pesho");
-        }
-    }
-}
+//        public class PaymentIntentCreateRequest
+//        {
+//            [JsonProperty("items")]
+//            public Item[] Items { get; set; }
+//        }
+//    }
+//}

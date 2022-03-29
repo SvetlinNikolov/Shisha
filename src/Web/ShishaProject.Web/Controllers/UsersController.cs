@@ -1,6 +1,7 @@
 ﻿namespace ShishaProject.Web.Controllers
 {
     using System;
+    using System.ComponentModel.DataAnnotations;
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
@@ -117,7 +118,7 @@
                                                              this.HttpContext,
                                                              nameof(UsersController.ConfirmUserEmail),
                                                              nameof(UsersController),
-                                                             values: new { userId = user.UserId, token = inputModel.EmailConfirmToken },
+                                                             values: new { token = inputModel.EmailConfirmToken },
                                                              scheme: this.HttpContext.Request.Scheme);
 
                 await this.emailService.SendConfirmEmailMessageAsync(user.Email, "Confirm Email", "Potvardi si emaila we", confirmationLink);
@@ -126,8 +127,32 @@
             return this.View();
         }
 
-        public async Task<IActionResult> ResetPassword(RegistrationInputModel inputModel)
+        public IActionResult ResetPassword()
         {
+            return this.View();
+        }
+
+        public async Task<IActionResult> ResetPassword([Required] string email)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(email);
+            }
+
+            var user = await this.usersService.GetUserByUsernameOrEmailAsync(email);
+
+            if (user != null)
+            {
+                string confirmationLink = this.linkGenerator.GetUriByAction(
+                                                             this.HttpContext,
+                                                             nameof(UsersController.ResetPassword),
+                                                             nameof(UsersController),
+                                                             values: new { userId = user.UserId },
+                                                             scheme: this.HttpContext.Request.Scheme);
+
+                await this.emailService.SendConfirmEmailMessageAsync(user.Email, "Confirm Email", "Potvardi si emaila we", confirmationLink);
+            }
+
             return this.View();
         }
 
