@@ -5,16 +5,8 @@
     using System.IO;
     using System.Threading.Tasks;
 
-    using ShishaProject.Data;
-    using ShishaProject.Data.Common;
-    using ShishaProject.Data.Common.Repositories;
-    using ShishaProject.Data.Models;
-    using ShishaProject.Services.Data;
-    using ShishaProject.Services.Messaging;
-
     using CommandLine;
 
-    using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
