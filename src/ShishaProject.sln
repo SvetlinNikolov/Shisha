@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShishaProject.Services", "S
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShishaProject.Services.Messaging", "Services\ShishaProject.Services.Messaging\ShishaProject.Services.Messaging.csproj", "{43FDC0C4-F250-45DE-93F8-3CA8A9247CC9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShishaProject.Common", "ShishaProject.Common\ShishaProject.Common.csproj", "{A2288C46-0FBF-43B6-80B6-3072FD65BC32}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShishaProject.Common", "ShishaProject.Common\ShishaProject.Common.csproj", "{A2288C46-0FBF-43B6-80B6-3072FD65BC32}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShishaProject.Web.Infrastructure", "Web\ShishaProject.Web.Infrastructure\ShishaProject.Web.Infrastructure.csproj", "{7A7A7986-1F5B-4EBD-9B17-8B41F8FABA58}"
 EndProject

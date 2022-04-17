@@ -11,6 +11,11 @@
             return collection == null || !collection.Any();
         }
 
+        public static IEnumerable<T> EmptyIfNull<T>(this IEnumerable<T> collection)
+        {
+            return collection ?? Enumerable.Empty<T>();
+        }
+
         public static IEnumerable<T> FilterNulls<T>(this IEnumerable<T> collection)
         {
             return collection.Where(x => x != null);

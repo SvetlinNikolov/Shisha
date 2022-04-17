@@ -124,7 +124,7 @@
                 await this.emailService.SendConfirmEmailMessageAsync(user.Email, "Confirm Email", "Potvardi si emaila we", confirmationLink);
             }
 
-            return this.View();
+            return this.RedirectToAction(nameof(this.LoginUser));
         }
 
         public IActionResult ResetPassword()

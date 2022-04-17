@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using NLog;
+
 namespace ShishaProject.Common.ExceptionHandling
 {
     public class ShishaLogger : IShishaLogger
