@@ -1,8 +1,8 @@
 ﻿namespace ShishaProject.Web.Controllers
 {
-    using System;
     using System.Linq;
     using System.Threading.Tasks;
+
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Localization;
     using ShishaProject.Services.Data.Models.Dtos.Api;

@@ -44,7 +44,8 @@ namespace ShishaProject.Services
             var requestJson = JsonConvert.SerializeObject(request);
 
             var allFlavours =
-                await this.restClient.PostAsync<ProductsFlavoursDto>(this.endpointConfig.Value.GetAllFlavours,
+                await this.restClient.PostAsync<ProductsFlavoursDto>(
+                    this.endpointConfig.Value.GetAllFlavours,
                     requestJson);
 
             var pager = new Pager(allFlavours.PaginationData.TotalProducts, allFlavours.PaginationData.CurrentPage,
@@ -83,7 +84,7 @@ namespace ShishaProject.Services
 
             var dto = result.Flavours?.FirstOrDefault();
 
-            if (includeRelatedFlavours && dto.FlavourType != null && dto.FlavourType != FlavourType.Unspecified)
+            if (includeRelatedFlavours && dto != null && dto.FlavourType != null && dto.FlavourType != FlavourType.Unspecified)
             {
                 dto.RelatedFlavours = await this.GetRelatedFlavours(
                     new RelatedFlavoursRequest

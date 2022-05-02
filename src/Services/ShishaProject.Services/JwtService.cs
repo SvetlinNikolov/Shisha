@@ -33,7 +33,7 @@
             };
 
             string jws = tokenHandler.CreateToken(jwt);
-            return jws; 
+            return jws;
         }
     }
 }
