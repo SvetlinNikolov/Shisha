@@ -111,7 +111,12 @@
                 return this.View(inputModel);
             }
 
-            var user = await this.usersService.RegisterUserAsync(inputModel); // Throw errors or show 500
+            var user = await this.usersService.RegisterUserAsync(inputModel);
+
+            if (user == null) // TODO return error that api returned
+            {
+
+            }
 
             if (user != null)
             {

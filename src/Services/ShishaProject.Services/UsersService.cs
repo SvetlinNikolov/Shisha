@@ -73,12 +73,11 @@
             try
             {
                 var result = await this.restClient
-              .PostAsync<JObject>(
+              .PostAsync<ShishaResponseDto<UserDto>>(
                this.endpointConfig.Value.GetUserByUsernameOrEmail,
                JsonHelper.SerializeToPhpApiFormat("username_or_email", usernameOrEmail));
 
-                var user = result.Value<JObject>("data")
-                    .ToObject(typeof(UserDto)) as UserDto;
+                var user = result.Data;
 
                 return user;
             }
@@ -95,7 +94,12 @@
 
             try
             {
-                  var user = await this.GetUserByUsernameOrEmailAsync(model.UsernameOrEmail);
+                var user = await this.GetUserByUsernameOrEmailAsync(model.UsernameOrEmail);
+
+                if (user == null)
+                {
+                    return isAuthenticated = false;
+                }
 
                 model.Password = this.userSecurityService.EncryptPassword(model.Password, user.Salt).HashedPassword;
 
