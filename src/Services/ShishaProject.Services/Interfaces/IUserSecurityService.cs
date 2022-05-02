@@ -2,6 +2,6 @@
 {
     public interface IUserSecurityService
     {
-        (string Password, string Salt) EncryptPassword(string inputString);
+        (string HashedPassword, string Salt) EncryptPassword(string inputString, string inputSalt = null);
     }
 }

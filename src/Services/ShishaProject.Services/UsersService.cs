@@ -95,15 +95,14 @@
 
             try
             {
-                model.Password = this.userSecurityService.EncryptPassword(model.Password).Password; //FIX THIS
+                  var user = await this.GetUserByUsernameOrEmailAsync(model.UsernameOrEmail);
+
+                model.Password = this.userSecurityService.EncryptPassword(model.Password, user.Salt).HashedPassword;
 
                 var result = await this.restClient
-                             .PostAsync<JObject>(this.endpointConfig.Value.AuthenticateUser, JsonConvert.SerializeObject(model));
+                             .PostAsync<ShishaResponseDto<UserDto>>(this.endpointConfig.Value.AuthenticateUser, JsonConvert.SerializeObject(model));
 
-                var user = result.Value<JObject>("data")
-                                 .ToObject(typeof(UserDto)) as UserDto;
-
-                isAuthenticated = !string.IsNullOrEmpty(user.UserId);
+                isAuthenticated = result?.Data != null;
             }
             catch (Exception ex)
             {
@@ -119,19 +118,9 @@
             this.SetPasswordAndSalt(user);
 
             var result = await this.restClient
-                 .PostAsync<JObject>(this.endpointConfig.Value.RegisterUser, JsonHelper.SerializeToPhpApiFormat("user_data", user));
+                 .PostAsync<ShishaResponseDto<UserDto>>(this.endpointConfig.Value.RegisterUser, JsonHelper.SerializeToPhpApiFormat("user_data", user));
 
-            var userDto = result.Value<JObject>("data")
-               .ToObject(typeof(UserDto)) as UserDto;
-
-            var userRegistered = !string.IsNullOrEmpty(userDto.UserId); // Better to check status code from result
-
-            if (userRegistered)
-            {
-                return userDto;
-            }
-
-            return null;
+            return result?.Data;
         }
 
         public bool UserLoggedIn()

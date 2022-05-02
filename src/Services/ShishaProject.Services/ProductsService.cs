@@ -72,7 +72,8 @@ namespace ShishaProject.Services
             return dto;
         }
 
-        public async Task<ProductFlavourDto> GetFlavourById(FlavourByIdRequest request,
+        public async Task<ProductFlavourDto> GetFlavourById(
+            FlavourByIdRequest request,
             bool includeRelatedFlavours = false)
         {
             var requestJson = JsonConvert.SerializeObject(request);

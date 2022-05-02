@@ -38,6 +38,9 @@
         [JsonProperty("phone_number")]
         public string PhoneNumber { get; set; }
 
+        [JsonProperty("salt")]
+        public string Salt { get; set; }
+
         [JsonProperty("created_at")]
         public DateTime CreatedAt { get; set; }
 

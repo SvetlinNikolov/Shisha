@@ -9,12 +9,12 @@
 
     public class UserSecurityService : IUserSecurityService
     {
-        public (string Password, string Salt) EncryptPassword(string inputString)
+        public (string HashedPassword, string Salt) EncryptPassword(string inputString, string inputSalt = null)
         {
             //pasword reset token-a ще е рандом за всеки усер и ще се пази в базата
             // и като иска пас ресет му пращаме тоя в базата и като я ресетне и генерираме нов токен и трием стария от базата
 
-            var salt = Guid.NewGuid().ToString();
+            var salt = inputSalt ?? Guid.NewGuid().ToString();
             var sha512 = SHA512.Create();
 
             byte[] bytes = Encoding.UTF8.GetBytes(salt + inputString);
