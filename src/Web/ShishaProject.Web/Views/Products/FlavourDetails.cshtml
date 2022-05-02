@@ -144,17 +144,17 @@
 </div>
 
 <!-- Related products -->
-<div class="product-details-container">
-    <div class="product-header-container">
-        <h2>Related products</h2>
-    </div>
+@if (@Model.RelatedFlavours.Count() > GlobalConstants.RelatedFlavoursCount)
+{
+    <div class="product-details-container">
+        <div class="product-header-container">
+            <h2>Related products</h2>
+        </div>
 
-    <!-- Related products container -->
+        <!-- Related products container -->
     <div class="product-related-container">
-        <!-- Container navigation -->
-        @if (@Model.RelatedFlavours.Count() > GlobalConstants.RelatedFlavoursCount)
-        {
-            <div class="product-related-navigation">
+            <!-- Container navigation -->
+        <div class="product-related-navigation">
                 <button class="product-related-button-nav product-related-button-nav-left product-related-button-nav-hidden">
                     <img src="~/icons/arrow-left.svg" alt="<">
                     <img src="~/icons/arrow-left-hover.svg" alt="<">
@@ -165,38 +165,37 @@
                     <img src="/icons/arrow-right-hover.svg" alt=">">
                 </button>
             </div>
-        }
 
-        <div class="product-related-products">
-            <div class="product-related-products-container">
-                <!-- FOR EACH THIS - START -->
-                @foreach (var relatedFlavour in Model.RelatedFlavours)
-                {
-                    <div class="product-related">
-                        <a asp-controller="Products" asp-action="FlavourDetails" asp-route-id="@relatedFlavour.Id" class="product-related-text-container">
-                            <img src="@relatedFlavour.Thumbnail" alt="">
+            <div class="product-related-products">
+                <div class="product-related-products-container">
+                    <!-- FOR EACH THIS - START -->
+                    @foreach (var relatedFlavour in Model.RelatedFlavours)
+                    {
+                        <div class="product-related">
+                            <a asp-controller="Products" asp-action="FlavourDetails" asp-route-id="@relatedFlavour.Id" class="product-related-text-container">
+                                <img src="@relatedFlavour.Thumbnail" alt="">
 
-                            <div class="product-text-container">
-                                <p class="product-title">@relatedFlavour.Title</p>
+                                <div class="product-text-container">
+                                    <p class="product-title">@relatedFlavour.Title</p>
 
-                                <p>Island boy</p>
-                            </div>
+                                    <p>Island boy</p>
+                                </div>
 
-                            <div class="price">
-                                <p class="price-container-og-price">ORIGINALNA  CENA</p>
-                                <p class="price-container-discount-price">@relatedFlavour.Price</p>
-                            </div>
-                        </a>
+                                <div class="price">
+                                    <p class="price-container-og-price">ORIGINALNA  CENA</p>
+                                    <p class="price-container-discount-price">@relatedFlavour.Price</p>
+                                </div>
+                            </a>
 
-                        <a href="./product.html" class="product-add-to-cart-button">VIEW PRODUCT translate this</a>
-                    </div>
-                }
+                            <a href="./product.html" class="product-add-to-cart-button">VIEW PRODUCT translate this</a>
+                        </div>
+                    }
 
-                <!-- FOR EACH THIS - END -->
+                    <!-- FOR EACH THIS - END -->
+            </div>
             </div>
         </div>
     </div>
-</div>
-
+}
 
 <script src="~/js/product.js" asp-append-version="true"></script>
