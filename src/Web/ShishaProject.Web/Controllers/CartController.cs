@@ -5,6 +5,8 @@
 
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
+    using ShishaProject.Common.ExtensionMethods;
+    using ShishaProject.Services.Data.Models.Dtos.Api;
     using ShishaProject.Services.Interfaces;
     using ShishaProject.Web.ViewModels.Cart;
 
@@ -22,7 +24,7 @@
         {
             var cartProducts = await this.cartService.GetCartAsync();
 
-            if (!cartProducts.Flavours.Any())
+            if (!cartProducts.Flavours.EmptyIfNull().Any())
             {
                 return this.View("_CartEmpty");
             }
@@ -51,6 +53,11 @@
             }
 
             return this.Json("Something went wrong");
+        }
+
+        public async Task RemoveFromCart([FromBody] RemoveFromCartRequest inputModel)
+        {
+            await this.cartService.RemoveFromCartAsync(inputModel);
         }
 
         [Route("create-payment-intent")]

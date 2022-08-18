@@ -57,7 +57,7 @@ function addProductToCart() {
          quantity,
         'flavour_variation_id': variationId
     };
-
+    console.log('Svetlio',data)
     postRequest('Cart/AddToCart', data)
         .then(data => {
             console.log(data);

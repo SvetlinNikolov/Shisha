@@ -20,7 +20,7 @@
 
             if (message.StatusCode != (int)HttpStatusCode.OK)
             {
-                if (message.StatusCode == (int)HttpStatusCode.NoContent)
+                if (message.StatusCode == (int)HttpStatusCode.NotFound)
                 {
                     return content;
                 }

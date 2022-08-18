@@ -14,9 +14,9 @@
             {
                 foreach (var variation in flavour.Variations)
                 {
-                    <div class="cart-item" data-product-number="1234567890">
+                    <div class="cart-item" data-product-id="@flavour.Id" data-product-variation-id="@variation.Id">
                         <button type="button" class="cart-item-remove-icon-container">
-                            <img src="../assets/icons/remove.svg" alt="Remove">
+                          <img src="~/icons/remove.svg" alt="Remove">
                         </button>
 
                         <div class="cart-item-image-container">

@@ -8,9 +8,11 @@
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Options;
     using Newtonsoft.Json;
+    using ShishaProject.Common.ExtensionMethods;
     using ShishaProject.Common.Helpers;
     using ShishaProject.Services.Data.Models.Configs;
     using ShishaProject.Services.Data.Models.Dtos;
+    using ShishaProject.Services.Data.Models.Dtos.Api;
     using ShishaProject.Services.Data.Models.Pagination;
     using ShishaProject.Services.Data.Models.Payment;
     using ShishaProject.Services.Interfaces;
@@ -46,9 +48,10 @@
 
             var requestJson = JsonConvert.SerializeObject(request);
 
-            var response = await this.restClient.PostAsync<ShishaResponseDto<string>>(this.endpointConfig.Value.AddToCart, requestJson);
+            var response = await this.restClient.PostAsync<ShishaResponseDto>(this.endpointConfig.Value.AddToCart, requestJson);
 
-            return !string.IsNullOrEmpty(response.Errors);
+            var isAdded = response.Errors.IsNullOrEmpty() == true;
+            return isAdded;
         }
 
         public async Task<JsonResult> Checkout()
@@ -75,7 +78,7 @@
                 this.endpointConfig.Value.GetCart,
                 JsonHelper.SerializeToPhpApiFormat("user_id", int.Parse(loggedInUser.UserId)));
 
-            var pager = new Pager(products.Flavours.Count());
+            var pager = new Pager(products.Flavours.EmptyIfNull().Count());
             products.PaginationData.Pages = pager.Pages;
 
             return products;
@@ -86,9 +89,16 @@
             throw new NotImplementedException();
         }
 
-        public void RemoveFromCart(int flavourId)
+        public async Task RemoveFromCartAsync(RemoveFromCartRequest inputModel)
         {
-            throw new NotImplementedException();
+            inputModel.UserId = await this.usersService.GetUserIdAsync();
+            inputModel.Quantity = inputModel.Quantity == 0 ? int.MaxValue : inputModel.Quantity;
+
+            var request = JsonConvert.SerializeObject(inputModel);
+
+            var response = await this.restClient.PostAsync<ShishaResponseDto>(
+                  this.endpointConfig.Value.RemoveFromCart,
+                  request);
         }
 
         private long CalculatePrice(ProductsFlavoursDto cartProducts)

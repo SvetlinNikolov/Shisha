@@ -38,9 +38,20 @@ function changePackaging() {
 function removeItem() {
     this.parentNode.remove();
 
-    // TO DO
-    // Also remove from localstorage
-    // Also send a remove request to the cart saved on BE
+    let productId = this.parentNode.dataset.productId;
+    let productVariationId = this.parentNode.dataset.productVariationId
+    let quantity = 0;
+
+    let data = {
+        'flavour_variation_id': productVariationId,
+        'flavour_id': productId,
+        'quantity_remove': quantity
+    };
+  
+    postRequest('Cart/RemoveFromCart', data)
+        .then(data => {
+            console.log(data);
+        });
 }
 
 function placeOrder() {
@@ -124,3 +135,5 @@ cartOrderButton.addEventListener('click', placeOrder);
 
 // Track the window scroll for the cart container
 window.addEventListener('scroll', checkScrollPosition);
+
+// Remove from cart

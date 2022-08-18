@@ -35,7 +35,7 @@
 
         [JsonProperty("flavour_type")] public FlavourType? FlavourType { get; set; }
 
-        [JsonProperty("variations")] public IEnumerable<FlavourVariation> Variations { get; set; }
+        [JsonProperty("flavour_variations")] public IEnumerable<FlavourVariation> Variations { get; set; }
 
         [JsonProperty("related_products")] public IEnumerable<ProductFlavourDto> RelatedFlavours { get; set; }
     }

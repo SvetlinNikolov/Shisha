@@ -248,6 +248,19 @@
             }
         }
 
+        public async Task<int> GetUserIdAsync()
+        {
+            var currentUser = await this.GetLoggedInUserAsync();
+            int.TryParse(currentUser?.UserId, out int userId);
+
+            if (userId == 0)
+            {
+                throw new Exception($"Invalid user id {userId}");
+            }
+
+            return userId;
+        }
+
         private void SetPasswordAndSalt(RegistrationInputModel user)
         {
             var (password, salt) = this.userSecurityService.EncryptPassword(user.Password);

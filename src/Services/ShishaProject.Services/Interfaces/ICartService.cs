@@ -3,13 +3,14 @@
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Mvc;
     using ShishaProject.Services.Data.Models.Dtos;
+    using ShishaProject.Services.Data.Models.Dtos.Api;
     using ShishaProject.Web.ViewModels.Cart;
 
     public interface ICartService
     {
         Task<bool> AddToCartAsync(AddToCartInputModel inputModel);
 
-        void RemoveFromCart(int flavourId);
+        Task RemoveFromCartAsync(RemoveFromCartRequest inputModel);
 
         void GetCartById(int cartId);
 
