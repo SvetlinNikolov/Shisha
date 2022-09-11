@@ -84,7 +84,6 @@
 
   <ItemGroup>
     <_ContentIncludedByDefault Remove="wwwroot\css\style.css" />
-    <_ContentIncludedByDefault Remove="wwwroot\css\_layout.css" />
     <_ContentIncludedByDefault Remove="Views\Settings\Index.cshtml" />
     <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap.css" />
     <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap.min.css" />

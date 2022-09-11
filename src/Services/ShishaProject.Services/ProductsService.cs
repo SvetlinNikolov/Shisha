@@ -1,16 +1,15 @@
-﻿using System;
-using NLog;
-using ShishaProject.Common.ExceptionHandling;
-
-namespace ShishaProject.Services
+﻿namespace ShishaProject.Services
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+
     using AutoMapper;
     using Microsoft.Extensions.Options;
     using Newtonsoft.Json;
     using ShishaProject.Common;
+    using ShishaProject.Common.ExceptionHandling;
     using ShishaProject.Common.ExtensionMethods;
     using ShishaProject.Services.Data.Enums;
     using ShishaProject.Services.Data.Models.Configs;

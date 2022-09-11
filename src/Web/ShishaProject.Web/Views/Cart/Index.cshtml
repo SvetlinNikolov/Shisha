@@ -16,7 +16,7 @@
                 {
                     <div class="cart-item" data-product-id="@flavour.Id" data-product-variation-id="@variation.Id">
                         <button type="button" class="cart-item-remove-icon-container">
-                          <img src="~/icons/remove.svg" alt="Remove">
+                            <img src="~/icons/remove.svg" alt="Remove">
                         </button>
 
                         <div class="cart-item-image-container">
@@ -64,10 +64,11 @@
 
                                     <div class="price-container">
                                         <div class="quantity">
-                                            <label for="quantity">Quantity:</label>
+                                            <label for="quantity">Quantity</label>
                                             <br>
-                                            <input type="text" name="quantity" id="quantity" value="@variation.Quantity">
-
+                                            <button type="button" class="quantity-decrement">-</button>
+                                            <input type="text" name="quantity" id="quantity" value="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');">
+                                            <button type="button" class="quantity-increment">+</button>
                                         </div>
                                         <div class="price-variants">
                                             <div class="price">

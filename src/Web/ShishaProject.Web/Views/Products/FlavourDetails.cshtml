@@ -107,10 +107,11 @@
 
             <div class="price-container">
                 <div class="quantity">
-                    <label for="quantity">Quantity:</label>
+                    <label for="quantity">Quantity</label>
                     <br>
-                    <input type="text" name="quantity" id="quantity" value="1">
-
+                    <button type="button" class="quantity-decrement">-</button>
+                    <input type="text" name="quantity" id="quantity" value="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');">
+                    <button type="button" class="quantity-increment">+</button>
                 </div>
 
                 <div class="price-variants">
@@ -137,7 +138,7 @@
             </div>
 
             <button type="button" class="product-add-to-cart-button product-page">ADD TO CART</button>
-           @*  <a asp-controller="Cart" asp-action="AddToCart" asp-route-id="@relatedFlavour.Id" class="product-related-text-container">*@
+            @*  <a asp-controller="Cart" asp-action="AddToCart" asp-route-id="@relatedFlavour.Id" class="product-related-text-container">*@
         </div>
     </div>
 

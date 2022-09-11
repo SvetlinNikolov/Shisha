@@ -17,7 +17,6 @@
     using ShishaProject.Services.Data.Models.Payment;
     using ShishaProject.Services.Interfaces;
     using ShishaProject.Web.ViewModels.Cart;
-    using Stripe;
 
     public class CartService : ICartService
     {
@@ -96,9 +95,9 @@
 
             var request = JsonConvert.SerializeObject(inputModel);
 
-            var response = await this.restClient.PostAsync<ShishaResponseDto>(
-                  this.endpointConfig.Value.RemoveFromCart,
-                  request);
+            await this.restClient.PostAsync<ShishaResponseDto>(
+                 this.endpointConfig.Value.RemoveFromCart,
+                 request);
         }
 
         private long CalculatePrice(ProductsFlavoursDto cartProducts)
