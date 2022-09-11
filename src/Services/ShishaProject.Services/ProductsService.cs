@@ -84,7 +84,7 @@
 
             var dto = result.Flavours?.FirstOrDefault();
 
-            if (includeRelatedFlavours && dto != null && dto.FlavourType != null && dto.FlavourType != FlavourType.Unspecified)
+            if (includeRelatedFlavours && dto?.FlavourType != null && dto.FlavourType != FlavourType.Unspecified)
             {
                 dto.RelatedFlavours = await this.GetRelatedFlavours(
                     new RelatedFlavoursRequest

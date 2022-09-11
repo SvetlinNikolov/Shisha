@@ -17,5 +17,7 @@
         Task<ProductsFlavoursDto> GetCartAsync();
 
         Task<JsonResult> Checkout();
+
+        Task<int> GetProductsInCartCount();
     }
 }

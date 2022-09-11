@@ -7,4 +7,6 @@ public class CartEndpointsConfig
     public string AddToCart { get; set; }
 
     public string RemoveFromCart { get;set; }
+
+    public string GetProductsInCartCount { get; set; }
 }

@@ -1,4 +1,7 @@
-﻿<header>
+﻿@using ShishaProject.Web.ViewModels.Shared
+
+@model LayoutViewModel
+<header>
     <nav>
         <div class="mobile-navigation">
             <a href="/">
@@ -33,9 +36,9 @@
                 <a href="/contact-us">Contact Us</a>
             </li>
 
-             <li>
+            <li>
                 <partial name="_Culture" />
-                </li>
+            </li>
         </ul>
     </nav>
 
@@ -54,9 +57,13 @@
                 <span>Cart :</span>
             </div>
 
-            <span class="cart-item-container">
-                0 items
-            </span>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <span class="cart-item-container">
+                  @Model.ProductsInCartCount items
+                </span>
+            }
+
         </a>
     </div>
 </header>

@@ -3,6 +3,7 @@
     "BaseUri": "http://shisha_project.localhost/api/",
     "GetCart": "cart/get-cart",
     "AddToCart": "cart/add-to-cart",
-    "RemoveFromCart": "cart/remove-from-cart"
+    "RemoveFromCart": "cart/remove-from-cart",
+    "GetProductsInCartCount": "cart/get-cart-quantity"
   }
 }

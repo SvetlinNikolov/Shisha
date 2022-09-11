@@ -88,6 +88,17 @@
             throw new NotImplementedException();
         }
 
+        public async Task<int> GetProductsInCartCount()
+        {
+            var userId = await this.usersService.GetUserIdAsync();
+
+            var productsInCartCount = await this.restClient.PostAsync<ShishaResponseDto<int>>(
+                          this.endpointConfig.Value.GetProductsInCartCount,
+                          JsonHelper.SerializeToPhpApiFormat("user_id", userId));
+
+            return productsInCartCount.Data;
+        }
+
         public async Task RemoveFromCartAsync(RemoveFromCartRequest inputModel)
         {
             inputModel.UserId = await this.usersService.GetUserIdAsync();

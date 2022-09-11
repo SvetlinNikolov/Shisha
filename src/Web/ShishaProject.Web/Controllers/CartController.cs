@@ -10,6 +10,7 @@
     using ShishaProject.Services.Interfaces;
     using ShishaProject.Web.ViewModels.Cart;
 
+    [Authorize]
     public class CartController : BaseController
     {
         private readonly ICartService cartService;
@@ -19,7 +20,6 @@
             this.cartService = cartService;
         }
 
-        [Authorize]
         public async Task<IActionResult> Index()
         {
             var cartProducts = await this.cartService.GetCartAsync();
@@ -30,6 +30,13 @@
             }
 
             return this.View(cartProducts);
+        }
+
+        public async Task<int> GetProductsInCartCount()
+        {
+            var count = await this.cartService.GetProductsInCartCount();
+
+            return count;
         }
 
         [HttpPost]
