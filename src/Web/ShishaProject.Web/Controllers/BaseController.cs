@@ -1,10 +1,13 @@
 ﻿namespace ShishaProject.Web.Controllers
 {
     using System;
+    using System.Threading.Tasks;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Localization;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Filters;
+    using ShishaProject.Services.Interfaces;
+    using ShishaProject.Web.ViewModels.Shared;
 
     public class BaseController : Controller
     {
@@ -20,7 +23,7 @@
         }
 
         protected string GetLanguage()
-         {
+        {
             return this.HttpContext.Request.Cookies[CookieRequestCultureProvider.DefaultCookieName] ??
                    (string)this.ControllerContext.RouteData.Values["language"];
         }

@@ -29,9 +29,6 @@
     using Stripe;
     using ShishaProject.Services.Strategy;
     using ShishaProject.Services.Data.Interfaces;
-    using Microsoft.AspNetCore.Mvc;
-    using Microsoft.AspNetCore.Mvc.Infrastructure;
-    using Microsoft.AspNetCore.Mvc.Routing;
 
     public class Startup
     {
@@ -95,11 +92,14 @@
                     }).AddRazorRuntimeCompilation()
                       .AddNewtonsoftJson();
 
+            services.AddMemoryCache();
+
             services.AddRazorPages();
 
             services.AddDatabaseDeveloperPageExceptionFilter();
 
             services.AddSingleton(this.configuration);
+
 
             // Logging
             services.AddSingleton<IShishaLogger, ShishaLogger>();

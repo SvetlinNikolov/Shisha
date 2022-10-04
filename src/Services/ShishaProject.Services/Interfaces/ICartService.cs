@@ -18,6 +18,6 @@
 
         Task<JsonResult> Checkout();
 
-        Task<int> GetProductsInCartCount();
+        Task<int> GetProductsInCartCountAsync();
     }
 }

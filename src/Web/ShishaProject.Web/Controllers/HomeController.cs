@@ -21,12 +21,7 @@
 
         public async Task<IActionResult> Index()
         {
-            var viewModel = new LayoutViewModel()
-            {
-                ProductsInCartCount = 123,
-            };
-
-            return this.View(viewModel);
+            return this.View();
         }
 
         public IActionResult Privacy()

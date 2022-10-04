@@ -11,9 +11,11 @@
     using Microsoft.AspNetCore.Authentication.Cookies;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Extensions.Caching.Memory;
     using Microsoft.Extensions.Options;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Linq;
+    using ShishaProject.Common.Constants;
     using ShishaProject.Common.ExceptionHandling;
     using ShishaProject.Common.Helpers;
     using ShishaProject.Common.Utils;
@@ -30,6 +32,7 @@
         private readonly IShishaLogger logger;
         private readonly IEmailService emailService;
         private readonly IUserSecurityService userSecurityService;
+        private readonly IMemoryCache memoryCache;
 
         public UsersService(
             IRestClient restClient,
@@ -37,7 +40,8 @@
             IHttpContextAccessor httpContext,
             IShishaLogger logger,
             IEmailService emailService,
-            IUserSecurityService userSecurityService)
+            IUserSecurityService userSecurityService,
+            IMemoryCache memoryCache)
         {
             this.restClient = restClient;
             this.endpointConfig = endpointConfig;
@@ -45,10 +49,12 @@
             this.logger = logger;
             this.emailService = emailService;
             this.userSecurityService = userSecurityService;
+            this.memoryCache = memoryCache;
         }
 
         public async Task<UserDto> GetUserByIdAsync(int id)
         {
+            //implement caching
             try
             {
                 var result = await this.restClient
@@ -68,16 +74,31 @@
             }
         }
 
-        public async Task<UserDto> GetUserByUsernameOrEmailAsync(string usernameOrEmail)
+        public async Task<UserDto> GetUserByUsernameOrEmailAsync(string usernameOrEmail) // this needs to be only email
         {
             try
             {
+                this.memoryCache.TryGetValue<ICollection<UserDto>>(CachingConstants.USERS_CACHE_KEY, out var cachedUsers);
+
+                var cachedUser = cachedUsers?.FirstOrDefault(x => x.Email == usernameOrEmail);
+
+                if (cachedUser != null)
+                {
+                    return cachedUser;
+                }
+
                 var result = await this.restClient
-              .PostAsync<ShishaResponseDto<UserDto>>(
-               this.endpointConfig.Value.GetUserByUsernameOrEmail,
-               JsonHelper.SerializeToPhpApiFormat("username_or_email", usernameOrEmail));
+                            .PostAsync<ShishaResponseDto<UserDto>>(
+                             this.endpointConfig.Value.GetUserByUsernameOrEmail,
+                             JsonHelper.SerializeToPhpApiFormat("username_or_email", usernameOrEmail));
 
                 var user = result.Data;
+
+                if (user != null)
+                {
+                    this.memoryCache.Set(user,new object(),);   
+                    cachedUsers.Add(user);
+                }
 
                 return user;
             }
@@ -248,7 +269,7 @@
             }
         }
 
-        public async Task<int> GetUserIdAsync()
+        public async Task<int> GetLoggedInUserIdAsync()
         {
             var currentUser = await this.GetLoggedInUserAsync();
             int.TryParse(currentUser?.UserId, out int userId);

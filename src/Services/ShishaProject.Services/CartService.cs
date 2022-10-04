@@ -88,9 +88,9 @@
             throw new NotImplementedException();
         }
 
-        public async Task<int> GetProductsInCartCount()
+        public async Task<int> GetProductsInCartCountAsync()
         {
-            var userId = await this.usersService.GetUserIdAsync();
+            var userId = await this.usersService.GetLoggedInUserIdAsync();
 
             var productsInCartCount = await this.restClient.PostAsync<ShishaResponseDto<int>>(
                           this.endpointConfig.Value.GetProductsInCartCount,
@@ -101,7 +101,7 @@
 
         public async Task RemoveFromCartAsync(RemoveFromCartRequest inputModel)
         {
-            inputModel.UserId = await this.usersService.GetUserIdAsync();
+            inputModel.UserId = await this.usersService.GetLoggedInUserIdAsync();
             inputModel.Quantity = inputModel.Quantity == 0 ? int.MaxValue : inputModel.Quantity;
 
             var request = JsonConvert.SerializeObject(inputModel);

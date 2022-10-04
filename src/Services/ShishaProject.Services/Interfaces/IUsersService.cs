@@ -31,6 +31,6 @@
 
         Task ConfirmUserEmail(ConfirmUserEmailDto userModel);
 
-        Task<int> GetUserIdAsync();
+        Task<int> GetLoggedInUserIdAsync();
     }
 }
