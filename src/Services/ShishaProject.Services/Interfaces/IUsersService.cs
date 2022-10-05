@@ -11,7 +11,7 @@
 
         Task<UserDto> GetUserByIdAsync(int id);
 
-        Task<UserDto> GetUserByUsernameOrEmailAsync(string usernameOrEmail);
+        Task<UserDto> GetUserByEmailAsync(string usernameOrEmail);
 
         Task<UserDto> GetLoggedInUserAsync();
 

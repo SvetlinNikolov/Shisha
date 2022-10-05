@@ -18,7 +18,7 @@
         {
             this.memoryCache.TryGetValue<ConcurrentDictionary<string, T>>(typeof(T), out var collection);
 
-            if (string.IsNullOrEmpty(key) && collection != null && collection.ContainsKey(key))
+            if (!string.IsNullOrEmpty(key) && collection != null && collection.ContainsKey(key))
             {
                 return collection[key];
             }
@@ -26,11 +26,18 @@
             return default(T);
         }
 
-        public void Set<T>(string key, T value)
+        public bool TryGet<T>(string key, out T value)
         {
-            var collection = this.memoryCache.GetOrCreate<ConcurrentDictionary<string, T>>(typeof(T), x =>
+            value = this.Get<T>(key);
+
+            return !value.Equals(default(T));
+        }
+
+        public void SetOrUpdate<T>(string key, T value)
+        {
+            var collection = this.memoryCache.GetOrCreate<ConcurrentDictionary<string, T>>(typeof(T), cacheEntry =>
             {
-                x.AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(2);
+                cacheEntry.AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(3);
                 return new ConcurrentDictionary<string, T>();
             });
 

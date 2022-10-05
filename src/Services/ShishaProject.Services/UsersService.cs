@@ -75,13 +75,11 @@
             }
         }
 
-        public async Task<UserDto> GetUserByUsernameOrEmailAsync(string usernameOrEmail) // this needs to be only email
+        public async Task<UserDto> GetUserByEmailAsync(string email) 
         {
             try
             {
-                var cachedUser = this.shishaCache.Get<UserDto>(usernameOrEmail);
-
-                if (cachedUser != null)
+                if (this.shishaCache.TryGet<UserDto>(email, out var cachedUser))
                 {
                     return cachedUser;
                 }
@@ -89,10 +87,10 @@
                 var result = await this.restClient
                             .PostAsync<ShishaResponseDto<UserDto>>(
                              this.endpointConfig.Value.GetUserByUsernameOrEmail,
-                             JsonHelper.SerializeToPhpApiFormat("username_or_email", usernameOrEmail));
+                             JsonHelper.SerializeToPhpApiFormat("username_or_email", email));
 
                 var user = result.Data;
-                this.shishaCache.Set<UserDto>(usernameOrEmail, user);
+                this.shishaCache.SetOrUpdate<UserDto>(email, user);
 
                 return user;
             }
@@ -109,7 +107,7 @@
 
             try
             {
-                var user = await this.GetUserByUsernameOrEmailAsync(model.UsernameOrEmail);
+                var user = await this.GetUserByEmailAsync(model.UsernameOrEmail);
 
                 if (user == null)
                 {
@@ -186,7 +184,7 @@
                 {
                     var usernameOrEmail = this.httpContextAccessor.HttpContext.User.Identity.Name;
 
-                    var user = await this.GetUserByUsernameOrEmailAsync(usernameOrEmail);
+                    var user = await this.GetUserByEmailAsync(usernameOrEmail);
 
                     if (user == null)
                     {

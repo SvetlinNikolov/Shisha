@@ -4,6 +4,8 @@
     {
         public T Get<T>(string key);
 
-        public void Set<T>(string key, T value);
+        public bool TryGet<T>(string key, out T value);
+
+        public void SetOrUpdate<T>(string key, T value);
     }
 }

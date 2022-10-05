@@ -145,7 +145,7 @@
                 return this.View(email);
             }
 
-            var user = await this.usersService.GetUserByUsernameOrEmailAsync(email);
+            var user = await this.usersService.GetUserByEmailAsync(email);
 
             if (user != null)
             {
