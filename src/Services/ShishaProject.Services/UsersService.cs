@@ -15,6 +15,7 @@
     using Microsoft.Extensions.Options;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Linq;
+    using ShishaProject.Common.Caching;
     using ShishaProject.Common.Constants;
     using ShishaProject.Common.ExceptionHandling;
     using ShishaProject.Common.Helpers;
@@ -32,7 +33,7 @@
         private readonly IShishaLogger logger;
         private readonly IEmailService emailService;
         private readonly IUserSecurityService userSecurityService;
-        private readonly IMemoryCache memoryCache;
+        private readonly IShishaCache shishaCache;
 
         public UsersService(
             IRestClient restClient,
@@ -41,7 +42,7 @@
             IShishaLogger logger,
             IEmailService emailService,
             IUserSecurityService userSecurityService,
-            IMemoryCache memoryCache)
+            IShishaCache shishaCache)
         {
             this.restClient = restClient;
             this.endpointConfig = endpointConfig;
@@ -49,7 +50,7 @@
             this.logger = logger;
             this.emailService = emailService;
             this.userSecurityService = userSecurityService;
-            this.memoryCache = memoryCache;
+            this.shishaCache = shishaCache;
         }
 
         public async Task<UserDto> GetUserByIdAsync(int id)
@@ -78,9 +79,7 @@
         {
             try
             {
-                this.memoryCache.TryGetValue<ICollection<UserDto>>(CachingConstants.USERS_CACHE_KEY, out var cachedUsers);
-
-                var cachedUser = cachedUsers?.FirstOrDefault(x => x.Email == usernameOrEmail);
+                var cachedUser = this.shishaCache.Get<UserDto>(usernameOrEmail);
 
                 if (cachedUser != null)
                 {
@@ -93,12 +92,7 @@
                              JsonHelper.SerializeToPhpApiFormat("username_or_email", usernameOrEmail));
 
                 var user = result.Data;
-
-                if (user != null)
-                {
-                    this.memoryCache.Set(user,new object(),);   
-                    cachedUsers.Add(user);
-                }
+                this.shishaCache.Set<UserDto>(usernameOrEmail, user);
 
                 return user;
             }

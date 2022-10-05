@@ -1,11 +1,10 @@
-﻿using Microsoft.Extensions.Caching.Memory;
-using ShishaProject.Common.Enums;
-using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-
-namespace ShishaProject.Common.Caching
+﻿namespace ShishaProject.Common.Caching
 {
+    using System;
+    using System.Collections.Concurrent;
+
+    using Microsoft.Extensions.Caching.Memory;
+
     public class ShishaCache : IShishaCache
     {
         private readonly IMemoryCache memoryCache;
@@ -15,16 +14,11 @@ namespace ShishaProject.Common.Caching
             this.memoryCache = memoryCache;
         }
 
-        public bool Contains(string key)
-        {
-            throw new NotImplementedException();
-        }
-
         public T Get<T>(string key)
         {
             this.memoryCache.TryGetValue<ConcurrentDictionary<string, T>>(typeof(T), out var collection);
 
-            if (collection != null && collection.ContainsKey(key))
+            if (string.IsNullOrEmpty(key) && collection != null && collection.ContainsKey(key))
             {
                 return collection[key];
             }
@@ -32,19 +26,15 @@ namespace ShishaProject.Common.Caching
             return default(T);
         }
 
-        //public void Set<T>(string key, T value, TimeSpan expires) =>
-        //   this.memoryCache.Set<T>(key, value, expires);
-
         public void Set<T>(string key, T value)
         {
-
-            var itemToGet = this.Get<T>(key);
-
-            if (itemToGet == null)
+            var collection = this.memoryCache.GetOrCreate<ConcurrentDictionary<string, T>>(typeof(T), x =>
             {
-                //this.memoryCache.Set<>
-            }
+                x.AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(2);
+                return new ConcurrentDictionary<string, T>();
+            });
 
+            collection.AddOrUpdate(key, value, (oldkey, oldvalue) => value);
         }
     }
 }

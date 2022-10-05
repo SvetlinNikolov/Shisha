@@ -29,6 +29,7 @@
     using Stripe;
     using ShishaProject.Services.Strategy;
     using ShishaProject.Services.Data.Interfaces;
+    using ShishaProject.Common.Caching;
 
     public class Startup
     {
@@ -103,6 +104,9 @@
 
             // Logging
             services.AddSingleton<IShishaLogger, ShishaLogger>();
+
+            //Caching
+            services.AddSingleton<IShishaCache, ShishaCache>();
 
             // Localization
             services.AddLocalization(opt => { opt.ResourcesPath = "Resources"; });
