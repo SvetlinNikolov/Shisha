@@ -134,7 +134,10 @@
                         this.endpointConfig.Value.GetRelatedFlavours,
                         requestJson);
 
-                relatedFlavours = dto.Flavours;
+                if (!dto.Flavours.IsNullOrEmpty())
+                {
+                    relatedFlavours = dto.Flavours;
+                }
             }
             catch (Exception e)
             {

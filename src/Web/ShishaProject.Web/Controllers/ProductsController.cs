@@ -17,8 +17,7 @@
 
         public ProductsController(
             IProductsService productsService,
-            IHtmlLocalizer<ProductsController> localizer,
-            IJwtService jwtService)
+            IHtmlLocalizer<ProductsController> localizer)
         {
             this.productsService = productsService;
             this.localizer = localizer;
