@@ -55,16 +55,24 @@
 
         public async Task<UserDto> GetUserByIdAsync(int id)
         {
-            //implement caching
+            if (this.shishaCache.TryGet<UserDto>(id.ToString(), out var cachedUser))
+            {
+                return cachedUser;
+            }
+
             try
             {
                 var result = await this.restClient
-                .PostAsync<JObject>(
-                 this.endpointConfig.Value.GetUserById,
-                 JsonHelper.SerializeToPhpApiFormat("user_id", id));
+                           .PostAsync<ShishaResponseDto<UserDto>>(
+                            this.endpointConfig.Value.GetUserById,
+                            JsonHelper.SerializeToPhpApiFormat("user_id", id));
 
-                var user = result.Value<JObject>("data")
-                    .ToObject(typeof(UserDto)) as UserDto;
+                var user = result.Data;
+
+                if (user != null)
+                {
+                    this.shishaCache.SetOrUpdate<UserDto>(id.ToString(), user);
+                }
 
                 return user;
             }
@@ -75,7 +83,7 @@
             }
         }
 
-        public async Task<UserDto> GetUserByEmailAsync(string email) 
+        public async Task<UserDto> GetUserByEmailAsync(string email)
         {
             try
             {
@@ -86,11 +94,15 @@
 
                 var result = await this.restClient
                             .PostAsync<ShishaResponseDto<UserDto>>(
-                             this.endpointConfig.Value.GetUserByUsernameOrEmail,
-                             JsonHelper.SerializeToPhpApiFormat("username_or_email", email));
+                             this.endpointConfig.Value.GetUserByEmail,
+                             JsonHelper.SerializeToPhpApiFormat("email", email));
 
                 var user = result.Data;
-                this.shishaCache.SetOrUpdate<UserDto>(email, user);
+
+                if (user != null)
+                {
+                    this.shishaCache.SetOrUpdate<UserDto>(email, user);
+                }
 
                 return user;
             }
@@ -107,7 +119,7 @@
 
             try
             {
-                var user = await this.GetUserByEmailAsync(model.UsernameOrEmail);
+                var user = await this.GetUserByEmailAsync(model.Email);
 
                 if (user == null)
                 {
@@ -155,7 +167,7 @@
             {
                 var claims = new List<Claim>
                 {
-                    new Claim(ClaimTypes.Name, inputModel.UsernameOrEmail),
+                    new Claim(ClaimTypes.Name, inputModel.Email),
                 };
 
                 var claimsIdentity = new ClaimsIdentity(claims, "Login");
