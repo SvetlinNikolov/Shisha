@@ -60,7 +60,9 @@
             @if (User.Identity.IsAuthenticated)
             {
                 <span class="cart-item-container">
-                  10000 items
+                    @{
+                        ViewData["ItemsInCart"]?.ToString();
+                    } items in cart
                 </span>
             }
 
