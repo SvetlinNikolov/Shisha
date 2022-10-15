@@ -125,7 +125,7 @@
 
             if (isRemoved)
             {
-                this.shishaCache.SetOrUpdate(PRODUCTS_IN_CART_COUNT_CACHE_KEY, PRODUCTS_IN_CART_INVALID_CACHE_COUNT);
+                this.shishaCache.SetOrUpdate(CacheConstants.PRODUCTS_IN_CART_COUNT_CACHE_KEY, CacheConstants.PRODUCTS_IN_CART_INVALID_CACHE_COUNT);
             }
 
             return isRemoved;
