@@ -7,5 +7,7 @@
         public bool TryGet<T>(string key, out T value);
 
         public void SetOrUpdate<T>(string key, T value);
+
+        public bool RemoveFromCache<T>(string key);
     }
 }

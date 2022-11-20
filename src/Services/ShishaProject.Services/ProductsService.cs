@@ -113,8 +113,10 @@
                 return dto;
             }
 
-            var pager = new Pager(dto.PaginationData.TotalProducts, dto.PaginationData.CurrentPage,
-                dto.PaginationData.ItemsPerPage);
+            var pager = new Pager(dto.PaginationData.TotalProducts,
+                                  dto.PaginationData.CurrentPage,
+                                  itemsPerPage: dto.PaginationData.ItemsPerPage);
+
             dto.PaginationData.Pages = pager.Pages;
 
             return dto;

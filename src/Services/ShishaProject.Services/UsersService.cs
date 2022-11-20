@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Runtime.InteropServices;
     using System.Security.Claims;
     using System.Security.Policy;
     using System.Threading.Tasks;
@@ -75,7 +76,7 @@
             }
         }
 
-        public async Task<UserDto> GetUserByEmailAsync(string email) 
+        public async Task<UserDto> GetUserByEmailAsync(string email)
         {
             try
             {
@@ -172,6 +173,9 @@
         {
             if (this.UserLoggedIn())
             {
+                var user = await this.GetLoggedInUserAsync();
+                this.shishaCache.RemoveFromCache<UserDto>(user.Email); //this will only work if we only let users login with their email
+
                 await this.httpContextAccessor.HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             }
         }
