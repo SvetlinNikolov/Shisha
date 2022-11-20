@@ -6,6 +6,8 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Caching.Memory;
+    using ShishaProject.Common.Caching;
+    using ShishaProject.Common.Constants;
     using ShishaProject.Common.ExtensionMethods;
     using ShishaProject.Services.Data.Models.Dtos.Api;
     using ShishaProject.Services.Interfaces;
@@ -15,14 +17,13 @@
     public class CartController : BaseController
     {
         private readonly ICartService cartService;
-        private readonly IMemoryCache memoryCache;
+        private readonly IShishaCache shishaCache;
         private readonly IUsersService usersService;
-        private const string PRODUCTS_IN_CART_COUNT_CACHE_KEY = $"Products_In_Cart_Count_";
 
-        public CartController(ICartService cartService, IMemoryCache memoryCache, IUsersService usersService)
+        public CartController(ICartService cartService, IShishaCache shishaCache, IUsersService usersService)
         {
             this.cartService = cartService;
-            this.memoryCache = memoryCache;
+            this.shishaCache = shishaCache;
             this.usersService = usersService;
         }
 
@@ -40,15 +41,17 @@
 
         public async Task<int> GetProductsInCartCount()
         {
-            var count = this.memoryCache.Get<int?>(nameof(this.GetProductsInCartCount));this.usersService.GetLoggedInUserAsync();
+            // TODO JS THAT CALLS THIS METHOD
+            var count = this.shishaCache.Get<int>(CacheConstants.PRODUCTS_IN_CART_COUNT_CACHE_KEY);
 
-            if (count != null)
+            if (count.Equals(CacheConstants.PRODUCTS_IN_CART_INVALID_CACHE_COUNT))
             {
-                count = await this.cartService.GetProductsInCartCountAsync();
-                this.memoryCache.Set(PRODUCTS_IN_CART_COUNT_CACHE_KEY + this.usersService, count);
+                count = await this.cartService.GetProductsInCartCountAsync(); //could have problem with async caching
+                this.shishaCache.SetOrUpdate(CacheConstants.PRODUCTS_IN_CART_COUNT_CACHE_KEY, count);
+                this.ViewData["ItemsInCart"] = count;
             }
 
-            return count.GetValueOrDefault();
+            return count;
         }
 
         [HttpPost]
@@ -64,14 +67,9 @@
                 return this.Json("Something went wrong"); //TODO translation error goes here<<<
             }
 
-            var isAdded = await this.cartService.AddToCartAsync(inputModel);
+            await this.cartService.AddToCartAsync(inputModel);
 
-            if (isAdded)
-            {
-                //this.UpdateCountOfProductsInCart
-            }
-
-            return this.Json("Something went wrong");
+            return this.Json("THIS IS RETURNED AFTER SUCCESSFULL ADD");
         }
 
         public async Task RemoveFromCart([FromBody] RemoveFromCartRequest inputModel)

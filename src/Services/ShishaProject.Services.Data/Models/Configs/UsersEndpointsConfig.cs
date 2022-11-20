@@ -6,7 +6,7 @@
 
         public string GetUserById { get; set; }
 
-        public string GetUserByUsernameOrEmail { get; set; }
+        public string GetUserByEmail { get; set; }
 
         public string RegisterUser { get; set; }
 

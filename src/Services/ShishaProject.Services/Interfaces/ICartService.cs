@@ -10,7 +10,7 @@
     {
         Task<bool> AddToCartAsync(AddToCartInputModel inputModel);
 
-        Task RemoveFromCartAsync(RemoveFromCartRequest inputModel);
+        Task<bool> RemoveFromCartAsync(RemoveFromCartRequest inputModel);
 
         void GetCartById(int cartId);
 

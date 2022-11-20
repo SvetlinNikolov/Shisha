@@ -8,6 +8,8 @@
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Options;
     using Newtonsoft.Json;
+    using ShishaProject.Common.Caching;
+    using ShishaProject.Common.Constants;
     using ShishaProject.Common.ExtensionMethods;
     using ShishaProject.Common.Helpers;
     using ShishaProject.Services.Data.Models.Configs;
@@ -25,19 +27,22 @@
         private readonly IOptions<CartEndpointsConfig> endpointConfig;
         private readonly IHttpContextAccessor httpContextAccessor;
         private readonly IStripeService stripeService;
+        private readonly IShishaCache shishaCache;
 
         public CartService(
             IUsersService usersService,
             IRestClient restClient,
             IOptions<CartEndpointsConfig> endpointConfig,
             IHttpContextAccessor httpContextAccessor,
-            IStripeService stripeService)
+            IStripeService stripeService,
+            IShishaCache shishaCache)
         {
             this.usersService = usersService;
             this.restClient = restClient;
             this.endpointConfig = endpointConfig;
             this.httpContextAccessor = httpContextAccessor;
             this.stripeService = stripeService;
+            this.shishaCache = shishaCache;
         }
 
         public async Task<bool> AddToCartAsync(AddToCartInputModel request)
@@ -50,6 +55,12 @@
             var response = await this.restClient.PostAsync<ShishaResponseDto>(this.endpointConfig.Value.AddToCart, requestJson);
 
             var isAdded = response.Errors.IsNullOrEmpty() == true;
+
+            if (isAdded)
+            {
+                this.shishaCache.SetOrUpdate(CacheConstants.PRODUCTS_IN_CART_COUNT_CACHE_KEY, CacheConstants.PRODUCTS_IN_CART_INVALID_CACHE_COUNT);
+            }
+
             return isAdded;
         }
 
@@ -99,16 +110,25 @@
             return productsInCartCount.Data;
         }
 
-        public async Task RemoveFromCartAsync(RemoveFromCartRequest inputModel)
+        public async Task<bool> RemoveFromCartAsync(RemoveFromCartRequest inputModel)
         {
             inputModel.UserId = await this.usersService.GetLoggedInUserIdAsync();
             inputModel.Quantity = inputModel.Quantity == 0 ? int.MaxValue : inputModel.Quantity;
 
             var request = JsonConvert.SerializeObject(inputModel);
 
-            await this.restClient.PostAsync<ShishaResponseDto>(
+            var response = await this.restClient.PostAsync<ShishaResponseDto>(
                  this.endpointConfig.Value.RemoveFromCart,
                  request);
+
+            var isRemoved = response.Errors.IsNullOrEmpty() == true;
+
+            if (isRemoved)
+            {
+                this.shishaCache.SetOrUpdate(CacheConstants.PRODUCTS_IN_CART_COUNT_CACHE_KEY, CacheConstants.PRODUCTS_IN_CART_INVALID_CACHE_COUNT);
+            }
+
+            return isRemoved;
         }
 
         private long CalculatePrice(ProductsFlavoursDto cartProducts)

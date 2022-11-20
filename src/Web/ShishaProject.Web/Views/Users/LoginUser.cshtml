@@ -10,14 +10,14 @@
 <!-- Product details page -->
 <div class="auth-form-container">
     <form asp-controller="Users" asp-action="LoginUser">
-        <h2>LOGIN</h2>
+        <h2>Login</h2>
 
-        <label for="username">
+        <label for="email">
             <p>
-                Username
+                Email
                 <span>A long error message.</span>
             </p>
-            <input type="text" asp-for="@Model.UsernameOrEmail">
+            <input type="text" asp-for="@Model.Email">
         </label>
 
         <label for="password">
