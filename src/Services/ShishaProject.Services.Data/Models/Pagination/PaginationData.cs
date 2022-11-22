@@ -3,6 +3,7 @@
     using System.Collections.Generic;
 
     using Newtonsoft.Json;
+    using ShishaProject.Common;
 
     public class PaginationData
     {
@@ -21,7 +22,7 @@
         public int CurrentPage { get; set; } = 1;
 
         [JsonProperty("per_page")]
-        public int ItemsPerPage { get; set; } = 9;
+        public int ItemsPerPage { get; set; } = GlobalConstants.DefaultItemsPerPage;
 
         [JsonIgnore]
         public IEnumerable<int> Pages { get; set; }
