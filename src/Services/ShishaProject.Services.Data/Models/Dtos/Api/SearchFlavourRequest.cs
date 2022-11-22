@@ -6,7 +6,6 @@
     public class SearchFlavourRequest
     {
         [JsonProperty("term")]
-        [JsonRequired]
         public string SearchQuery { get; set; }
 
         [JsonProperty("per_page")]
