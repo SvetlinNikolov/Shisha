@@ -2,6 +2,6 @@
 {
     public class LayoutViewModel
     {
-        public int ProductsInCartCount { get; set; }
+        public HeaderViewModel HeaderViewModel { get; set; }
     }
 }

@@ -47,11 +47,33 @@
                     this.endpointConfig.Value.GetAllFlavours,
                     requestJson);
 
-            var pager = new Pager(allFlavours.PaginationData.TotalProducts, allFlavours.PaginationData.CurrentPage,
+            var pager = new Pager(
+                allFlavours.PaginationData.TotalProducts,
+                allFlavours.PaginationData.CurrentPage,
                 allFlavours.PaginationData.ItemsPerPage);
+
             allFlavours.PaginationData.Pages = pager.Pages;
 
             return allFlavours;
+        }
+
+        public async Task<ProductsFlavoursDto> SearchAsync(SearchFlavourRequest request)
+        {
+            var requestJson = JsonConvert.SerializeObject(request);
+
+            var searchResults =
+               await this.restClient.PostAsync<ProductsFlavoursDto>(
+                   this.endpointConfig.Value.Search,
+                   requestJson);
+
+            var pager = new Pager(
+               searchResults.PaginationData.TotalProducts,
+               searchResults.PaginationData.CurrentPage,
+               searchResults.PaginationData.ItemsPerPage);
+
+            searchResults.PaginationData.Pages = pager.Pages;
+
+            return searchResults;
         }
 
         public async Task<ProductsCategoriesDto> GetAllCategories()
@@ -107,7 +129,7 @@
                     this.endpointConfig.Value.Filters,
                     filtersJson);
 
-            // burov api returns last filter not current filters
+            //  api returns last filter not current filters
             if (dto.Flavours.IsNullOrEmpty())
             {
                 return dto;

@@ -29,6 +29,19 @@
             return this.View(products);
         }
 
+        public async Task<IActionResult> Search(SearchFlavourRequest request)
+        {
+            // JS needs to send this request
+            var searchResults = await this.productsService.SearchAsync(request);
+
+            if (!searchResults.Flavours.Any())
+            {
+                return this.PartialView("_NoFlavours", searchResults);
+            }
+
+            return this.PartialView("_Flavours", searchResults);
+        }
+
         [HttpPost]
         public async Task<IActionResult> GetFilteredFlavours([FromBody] Filters filters)
         {

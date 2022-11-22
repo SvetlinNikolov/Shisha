@@ -6,7 +6,7 @@
     "UpdateUser": "users/update-user",
     "AuthenticateUser": "users/login-user",
     "DeleteUser": "",
-    "GetUserByUsernameOrEmail": "users/get-user-by-email",
+    "GetUserByEmail": "users/get-user-by-email",
     "GetUserByEmailToken": "users/get-user-by-email-token"
   }
 }

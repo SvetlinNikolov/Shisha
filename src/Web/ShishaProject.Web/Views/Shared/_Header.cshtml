@@ -1,6 +1,5 @@
 ﻿@using ShishaProject.Web.ViewModels.Shared
 
-@*@model LayoutViewModel*@
 <header>
     <nav>
         <div class="mobile-navigation">
@@ -50,22 +49,21 @@
             </div>
         </a>
 
-        <a asp-controller="Cart" asp-action="Index" class="cart-section-container">
-            <div class="cart-icon-container">
-                <img src="~/icons/cart.svg" alt="">
-                <img src="~/icons/cart-hover.svg" alt="">
-                <span>Cart :</span>
-            </div>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <a asp-controller="Cart" asp-action="Index" class="cart-section-container">
+                <div class="cart-icon-container">
+                    <img src="~/icons/cart.svg" alt="">
+                    <img src="~/icons/cart-hover.svg" alt="">
+                    <span>Cart :</span>
+                </div>
 
-            @if (User.Identity.IsAuthenticated)
-            {
                 <span class="cart-item-container">
                     @{
                         ViewData["ItemsInCart"]?.ToString();
                     } items in cart
                 </span>
-            }
-
-        </a>
+            </a>
+        }
     </div>
 </header>

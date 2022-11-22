@@ -55,6 +55,7 @@
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> AddToCart([FromBody] AddToCartInputModel inputModel)
         {
             if (!this.User.Identity.IsAuthenticated)

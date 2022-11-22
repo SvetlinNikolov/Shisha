@@ -11,5 +11,7 @@
         public const int RelatedFlavoursCount = 5;
 
         public static readonly string[] AvailableLanguages = new string[] { "bg", "en" };
+
+        public const int DefaultItemsPerPage = 10;
     }
 }

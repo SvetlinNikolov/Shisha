@@ -186,7 +186,7 @@
             if (this.UserLoggedIn())
             {
                 var user = await this.GetLoggedInUserAsync();
-                this.shishaCache.RemoveFromCache<UserDto>(user.Email); //this will only work if we only let users login with their email
+                this.shishaCache.RemoveFromCache<UserDto>(user.Email);
 
                 await this.httpContextAccessor.HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             }

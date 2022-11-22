@@ -15,5 +15,7 @@
         public string Filters { get; set; }
 
         public string GetRelatedFlavours { get; set; }
+
+        public string Search { get; set; }
     }
 }
