@@ -26,12 +26,44 @@ function incrementOrDecrementQuantity(buttonElement, buttonAction) {
     let quantityInputValue = Number(quantityInput.value);
 
     if (buttonAction === 'decrement') {
-        quantityInput.value = quantityInputValue - 1;
+        if (quantityInputValue - 1 > 1) {
+            quantityInput.value = quantityInputValue - 1;
+        }
+        else {
+            quantityInput.value = 1;
+        }
     }
 
     if (buttonAction === 'increment') {
-        quantityInput.value = quantityInputValue + 1;
+        if (quantityInputValue + 1 < 99) {
+            quantityInput.value = quantityInputValue + 1;
+        }
+        else {
+            quantityInput.value = 99;
+        }
     }
+
+    // Product number related code
+    let productParentNode = buttonElement.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode;
+    let productParent = productParentNode.attributes;
+    let productAttributeObject = {};
+    for (let attribute of productParent) {
+        productAttributeObject[attribute.name] = attribute.value;
+    }
+    let productNumber = productAttributeObject['data-product-id'];
+    let variationId = productAttributeObject['data-product-variation-id'];
+
+    let data = {
+        'flavour_id': productNumber,
+        'quantity': quantityInput.value,
+        'flavour_variation_id': variationId
+    };
+
+    console.log('Svetlio', data)
+    postRequest('Cart/AddToCart', data)
+        .then(data => {
+            console.log(data);
+        });
 }
 
 // Add event listeners

@@ -36,9 +36,7 @@
                     <div class="quantity">
                         <label for="quantity">Quantity</label>
                         <br>
-                        <button type="button" class="quantity-decrement">-</button>
-                        <input type="text" name="quantity" id="quantity" value="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');">
-                        <button type="button" class="quantity-increment">+</button>
+                        <input type="text" name="quantity" id="quantity" value="1">
                     </div>
 
                     <div class="price-variants">
@@ -58,7 +56,26 @@
             </div>
         </div>
 
-        <button type="button" class="product-add-to-cart-button">ADD TO CART</button>
+        <div class="product-add-to-cart-container">
+            <div class="product-add-to-cart-popup">
+                <div class="product-add-to-cart-popup__arrow"></div>
+                <button class="product-add-to-cart-popup-close" type="button">
+                    <img src="../assets/icons/remove-light.svg" alt="Remove">
+                </button>
+
+                <p class="product-add-to-cart-popup-title">Test Title</p>
+
+                <p class="product-add-to-cart-popup-text">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur, ea.
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur, ea.
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur, ea.
+                </p>
+
+                <a class="product-add-to-cart-popup-link" href="/register">Register</a>
+            </div>
+
+            <button type="button" class="product-add-to-cart-button product-add-to-cart-button-disabled">ADD TO CART</button>
+        </div>
     </div>
 }
 @await Html.PartialAsync("_Pagination", Model.PaginationData)

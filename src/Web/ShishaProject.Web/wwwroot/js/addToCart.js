@@ -4,8 +4,13 @@ let addToCartButtons = document.querySelectorAll('.product-add-to-cart-button');
 
 // Function definitions
 function addProductToCart() {
+    // Do not execute if the button is disabled
+    if (this.classList.contains('product-add-to-cart-button-disabled')) {
+        return;
+    }
+
     // Define variables
-    let productParentNode = this.parentNode;
+    let productParentNode = this.parentNode.parentNode;
     let packaging = null;
     let variationId;
     let quantity = 1;
@@ -24,7 +29,7 @@ function addProductToCart() {
 
     if (!this.classList.contains('product-page')) {
         // Set packaging on products page
-        let packagingChoicesContainer = productParentNode.childNodes[1].childNodes[3].childNodes[1].childNodes[5].childNodes;
+        let packagingChoicesContainer = productParentNode.querySelectorAll('.packaging-choices-container .packaging-choice');
         for (let packagingChoice of packagingChoicesContainer) {
             if (packagingChoice.classList) {
                 if (packagingChoice.classList.contains('active')) {
@@ -36,7 +41,7 @@ function addProductToCart() {
         }
 
         // Set quantity on products page
-        let getQuantity = productParentNode.childNodes[1].childNodes[3].childNodes[3].childNodes[1].childNodes[5].value;
+        let getQuantity = productParentNode.querySelector('.quantity input').value;
         quantity = getQuantity;
 
         if (quantity < 1) {
@@ -52,12 +57,14 @@ function addProductToCart() {
 
     let productNumber = productAttributeObject['data-product-number'];
 
+
     let data = {
         'flavour_id': productNumber,
-         quantity,
+        quantity,
         'flavour_variation_id': variationId
     };
-    console.log('Svetlio',data)
+
+    console.log('Svetlio', data)
     postRequest('Cart/AddToCart', data)
         .then(data => {
             console.log(data);

@@ -6,6 +6,8 @@ let filterMenuIcon = document.getElementById('filter-menu-button');
 let customPriceFilterBtn = document.getElementById('filter-price-custom-button');
 let checkBoxFilterPrice = document.querySelectorAll('.filter-left-container input[name="filter-price"]');
 let checkBoxFilterStock = document.querySelectorAll('.filter-left-container input[name="filter-stock"]');
+let allAddToCartDisabledButtons = document.querySelectorAll('.product-add-to-cart-container .product-add-to-cart-button-disabled');
+let allAddToCartPopupCloseButtons = document.querySelectorAll('.product-add-to-cart-container .product-add-to-cart-popup-close');
 let language = document.getElementById("page_language").innerText;
 
 // Function definitions
@@ -217,6 +219,21 @@ function changePackaging() {
     newPackaging.classList.add('active');
 }
 
+function showAddToCartButtonPopup() {
+    let parentContainer = this.parentNode;
+    let popupContainer = parentContainer.querySelector('.product-add-to-cart-popup');
+
+    // Remove the hidden class
+    popupContainer.classList.remove('product-add-to-cart-popup-hidden');
+}
+
+function hideAddToCartButtonPopup() {
+    let parentContainer = this.parentNode;
+
+    // Remove the hidden class
+    parentContainer.classList.add('product-add-to-cart-popup-hidden');
+}
+
 // Add event listeners
 // On input (checkbox) click
 for (let input of allInputs) {
@@ -240,6 +257,16 @@ for (let checkBox of checkBoxFilterPrice) {
 // Stock filter checkboxes
 for (let checkBox of checkBoxFilterStock) {
     checkBox.addEventListener('click', (event) => checkBoxToRadio(event, checkBoxFilterStock));
+}
+
+// Show the popup on button hover
+for (let button of allAddToCartDisabledButtons) {
+    button.addEventListener('mouseover', showAddToCartButtonPopup);
+}
+
+// Hide the popup on button hover
+for (let button of allAddToCartPopupCloseButtons) {
+    button.addEventListener('click', hideAddToCartButtonPopup);
 }
 
 // Reusable combined functions - definition and event listener

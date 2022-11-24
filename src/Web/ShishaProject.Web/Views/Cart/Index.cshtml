@@ -67,8 +67,8 @@
                                             <label for="quantity">Quantity</label>
                                             <br>
                                             <button type="button" class="quantity-decrement">-</button>
-                                            <input type="text" name="quantity" id="quantity" value="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');">
-                                            <button type="button" class="quantity-increment">+</button>
+                                            <input type="text" maxlength="99" min="1" name="quantity" id="quantity" value="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');">
+                                            <button type="button"class="quantity-increment">+</button>
                                         </div>
                                         <div class="price-variants">
                                             <div class="price">
