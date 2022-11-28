@@ -57,24 +57,31 @@
         </div>
 
         <div class="product-add-to-cart-container">
-            <div class="product-add-to-cart-popup">
-                <div class="product-add-to-cart-popup__arrow"></div>
-                <button class="product-add-to-cart-popup-close" type="button">
-                    <img src="../assets/icons/remove-light.svg" alt="Remove">
-                </button>
 
-                <p class="product-add-to-cart-popup-title">Test Title</p>
 
-                <p class="product-add-to-cart-popup-text">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur, ea.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur, ea.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur, ea.
-                </p>
+            @if (!this.User.Identity.IsAuthenticated)
+            {
+                <div class="product-add-to-cart-popup">
 
-                <a class="product-add-to-cart-popup-link" href="/register">Register</a>
-            </div>
+                    <div class="product-add-to-cart-popup__arrow"></div>
+                    <button class="product-add-to-cart-popup-close" type="button">
+                        <img src="../assets/icons/remove-light.svg" alt="Remove">
+                    </button>
 
-            <button type="button" class="product-add-to-cart-button product-add-to-cart-button-disabled">ADD TO CART</button>
+                    <p class="product-add-to-cart-popup-title">Please login to continue</p>
+
+                    <p class="product-add-to-cart-popup-text">
+                        In order to add to cart, you must login first.
+                    </p>
+                    <a asp-controller="Users" asp-action="LoginUser" class="product-add-to-cart-popup-link">Login</a>
+                </div>
+            }
+
+            @{
+                string addToCartEnabled = !this.User.Identity.IsAuthenticated ? "disabled" : "enabled";
+            }
+
+            <button type="button" class="product-add-to-cart-button product-add-to-cart-button-@addToCartEnabled">ADD TO CART</button>
         </div>
     </div>
 }
