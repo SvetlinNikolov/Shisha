@@ -11,9 +11,6 @@
     {
         public (string HashedPassword, string Salt) EncryptPassword(string inputString, string inputSalt = null)
         {
-            //pasword reset token-a ще е рандом за всеки усер и ще се пази в базата
-            // и като иска пас ресет му пращаме тоя в базата и като я ресетне и генерираме нов токен и трием стария от базата
-
             var salt = inputSalt ?? Guid.NewGuid().ToString();
             var sha512 = SHA512.Create();
 

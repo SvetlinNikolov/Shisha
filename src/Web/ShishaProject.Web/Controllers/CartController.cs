@@ -41,7 +41,6 @@
 
         public async Task<int> GetProductsInCartCount()
         {
-            // TODO JS THAT CALLS THIS METHOD
             var count = this.shishaCache.Get<int>(CacheConstants.PRODUCTS_IN_CART_COUNT_CACHE_KEY);
 
             if (count.Equals(CacheConstants.PRODUCTS_IN_CART_INVALID_CACHE_COUNT))
@@ -65,7 +64,7 @@
 
             if (!this.ModelState.IsValid)
             {
-                return this.Json("Something went wrong"); //TODO translation error goes here<<<
+                return this.Json("Something went wrong"); //TODO translation error goes here
             }
 
             await this.cartService.AddToCartAsync(inputModel);

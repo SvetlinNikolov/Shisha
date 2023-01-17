@@ -11,7 +11,6 @@
         public string LastName { get; set; }
 
         [JsonProperty("city")]
-        //city must be enum also we need oblast like emag
         public string City { get; set; }
 
         [JsonProperty("address")]

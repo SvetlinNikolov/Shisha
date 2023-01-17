@@ -133,7 +133,6 @@
 
         private long CalculatePrice(ProductsFlavoursDto cartProducts)
         {
-            // if price total is 20bgn we sum by 100 because stripe understands money as stotinki
             return (long)cartProducts.Flavours.Select(x => x.Price).Sum() * 100;
         }
     }

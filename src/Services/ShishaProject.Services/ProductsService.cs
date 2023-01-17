@@ -129,7 +129,6 @@
                     this.endpointConfig.Value.Filters,
                     filtersJson);
 
-            //  api returns last filter not current filters
             if (dto.Flavours.IsNullOrEmpty())
             {
                 return dto;

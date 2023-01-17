@@ -31,8 +31,6 @@
 
         public async Task<IActionResult> Search(SearchFlavourRequest request)
         {
-            // JS needs to send this request
-
             if (string.IsNullOrEmpty(request?.SearchQuery))
             {
                 return this.RedirectToAction(this.RemoveController(nameof(ProductsController)), nameof(ProductsController.Index));

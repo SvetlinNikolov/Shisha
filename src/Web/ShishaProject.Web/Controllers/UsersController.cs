@@ -40,7 +40,7 @@
             {
                 if (!await this.usersService.UpdateUserConfirmedEmailAsync(confirmEmailToken))
                 {
-                    throw new InvalidOperationException("User has already confirmed email"); // FIX this maybe
+                    throw new InvalidOperationException("User has already confirmed email"); 
                 }
 
                 return this.RedirectToAction(nameof(this.LoginUser));
